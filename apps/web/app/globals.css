@@ -206,3 +206,30 @@
     stroke-dashoffset: -1000;
   }
 }
+
+/* Flow drop-off connector line */
+.cf-flow-line {
+  position: relative;
+}
+.cf-flow-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 32px;
+  height: 1.5px;
+  background: #454653;
+  transform: translateY(-50%);
+}
+.cf-flow-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 28px);
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid #454653;
+  transform: translateY(-50%);
+}
