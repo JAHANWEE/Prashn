@@ -7,22 +7,19 @@ const TABS = [
   { label: "Analytics", active: false },
 ] as const;
 
-export function BuilderHeader() {
+export function BuilderHeader({ formTitle }: { formTitle?: string }) {
   return (
     <header className="fixed top-0 right-0 left-0 h-16 bg-[#121319] border-b border-[#454653] flex items-center justify-between px-6 z-50">
       {/* Left: Logo + Breadcrumb */}
       <div className="flex items-center gap-4">
         <div className="flex flex-col">
-          <span
-            className="text-lg font-bold text-[#bdc2ff]"
-            style={{ fontFamily: "var(--font-geist-sans)" }}
-          >
+          <a href="/dashboard" className="text-lg font-bold text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
             CanvasForms
-          </span>
+          </a>
           <nav className="flex items-center gap-1 text-[12px] text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
-            <span>Forms</span>
+            <a href="/dashboard" className="hover:text-[#bdc2ff]">Forms</a>
             <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-            <span className="text-[#e4e1eb] font-medium">Startup Feedback Flow</span>
+            <span className="text-[#e4e1eb] font-medium">{formTitle ?? "Loading..."}</span>
           </nav>
         </div>
       </div>

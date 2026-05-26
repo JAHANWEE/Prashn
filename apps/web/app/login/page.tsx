@@ -1,4 +1,4 @@
-import { LoginForm, DemoCredentials } from "~/components/auth";
+import { SignIn } from "@clerk/nextjs";
 
 export default function LoginPage() {
   return (
@@ -11,29 +11,39 @@ export default function LoginPage() {
         backgroundSize: "24px 24px",
       }}
     >
-      <main className="w-full max-w-[420px] flex flex-col items-center gap-5">
-        <LoginForm />
-        <DemoCredentials />
+      <div className="w-full max-w-[420px] flex flex-col items-center gap-5">
+        <SignIn
+          appearance={{
+            elements: {
+              rootBox: "w-full",
+              card: "bg-[#1b1b22] border border-[#454653]/80 shadow-[0_12px_48px_rgba(0,0,0,0.4)] rounded-2xl",
+              headerTitle: "text-[#e4e1eb]",
+              headerSubtitle: "text-[#908f9e]",
+              formFieldLabel: "text-[#908f9e]",
+              formFieldInput: "bg-[#121319] border-[#353540] text-[#e4e1eb] rounded-xl",
+              formButtonPrimary: "bg-[#818cf8] hover:bg-[#9ba3ff] text-[#0d0e14] rounded-xl",
+              footerActionLink: "text-[#bdc2ff]",
+              socialButtonsBlockButton: "bg-[#1f1f26] border-[#353540] text-[#e4e1eb] hover:bg-[#292930]",
+              dividerLine: "bg-[#353540]",
+              dividerText: "text-[#5a5a6e]",
+            },
+          }}
+          forceRedirectUrl="/dashboard"
+          signUpUrl="/register"
+        />
 
-        {/* System Footer */}
         <footer className="flex items-center justify-center gap-6 pt-3 w-full">
-          <a
-            href="#"
-            className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors"
-          >
+          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors">
             Privacy Policy
           </a>
           <span className="text-[11px] text-[#454653]">·</span>
-          <a
-            href="#"
-            className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors"
-          >
+          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors">
             Support
           </a>
           <span className="text-[11px] text-[#454653]">·</span>
           <span className="text-[11px] text-[#454653]">v2.4.0</span>
         </footer>
-      </main>
+      </div>
     </div>
   );
 }

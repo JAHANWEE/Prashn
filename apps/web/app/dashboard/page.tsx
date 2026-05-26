@@ -1,3 +1,7 @@
+"use client";
+
+import { useUser } from "@clerk/nextjs";
+import { trpc } from "~/trpc/client";
 import {
   DashboardHeader,
   DashboardMetrics,
@@ -6,6 +10,8 @@ import {
 } from "~/components/dashboard";
 
 export default function DashboardPage() {
+  const { user } = useUser();
+
   return (
     <>
       <DashboardHeader />
@@ -21,7 +27,7 @@ export default function DashboardPage() {
               letterSpacing: "-0.02em",
             }}
           >
-            Workspace
+            {user ? `Welcome back, ${user.firstName ?? "Creator"}` : "Workspace"}
           </h1>
           <p
             className="text-base text-[#c6c5d5] mt-1"

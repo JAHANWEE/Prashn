@@ -1,6 +1,10 @@
 import { cn } from "~/lib/utils";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
-export function LandingNav() {
+export async function LandingNav() {
+  const { userId } = await auth();
+
   return (
     <header
       className={cn(
@@ -49,20 +53,45 @@ export function LandingNav() {
           ))}
         </div>
 
-        {/* CTA buttons */}
+        {/* Auth buttons */}
         <div className="flex items-center gap-4">
-          <button
-            className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
-            style={{ fontFamily: "var(--font-geist-mono)" }}
-          >
-            LOG IN
-          </button>
-          <button
-            className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8] transition-all active:scale-95 shadow-sm"
-            style={{ fontFamily: "var(--font-geist-mono)" }}
-          >
-            START BUILDING
-          </button>
+          {userId ? (
+            <>
+              <a
+                href="/dashboard"
+                className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+                style={{ fontFamily: "var(--font-geist-mono)" }}
+              >
+                DASHBOARD
+              </a>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-8 h-8",
+                  },
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <SignInButton mode="redirect">
+                <button
+                  className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+                  style={{ fontFamily: "var(--font-geist-mono)" }}
+                >
+                  LOG IN
+                </button>
+              </SignInButton>
+              <SignUpButton mode="redirect">
+                <button
+                  className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8] transition-all active:scale-95 shadow-sm"
+                  style={{ fontFamily: "var(--font-geist-mono)" }}
+                >
+                  START BUILDING
+                </button>
+              </SignUpButton>
+            </>
+          )}
         </div>
       </nav>
     </header>

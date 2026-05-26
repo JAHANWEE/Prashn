@@ -1,37 +1,56 @@
-const METRICS = [
-  {
-    label: "Total Forms",
-    value: "24",
-    indicator: { type: "trend" as const, text: "+12% this month", color: "text-green-400", icon: "trending_up" },
-  },
-  {
-    label: "Published Forms",
-    value: "18",
-    indicator: { type: "progress" as const, percent: 75 },
-  },
-  {
-    label: "Total Responses",
-    value: "1.2k",
-    indicator: { type: "trend" as const, text: "8k total views", color: "text-[#bdc2ff]", icon: "visibility" },
-  },
-  {
-    label: "Completion Rate",
-    value: "64%",
-    indicator: { type: "trend" as const, text: "Average time 2:14", color: "text-[#f7bd3e]", icon: "bolt" },
-  },
-] as const;
+"use client";
+
+import { trpc } from "~/trpc/client";
+import { useAuth } from "@clerk/nextjs";
 
 export function DashboardMetrics() {
+  const { isSignedIn } = useAuth();
+  const { data: formsList } = trpc.forms.list.useQuery(
+    { page: 1, limit: 100 },
+    { enabled: !!isSignedIn },
+  );
+
+  const totalForms = formsList?.total ?? 0;
+  const publishedForms = formsList?.forms.filter((f) => f.status === "published").length ?? 0;
+  const publishedPercent = totalForms > 0 ? Math.round((publishedForms / totalForms) * 100) : 0;
+
+  const metrics = [
+    {
+      label: "Total Forms",
+      value: String(totalForms),
+      indicator: { type: "trend" as const, text: "All your forms", color: "text-[#bdc2ff]", icon: "description" },
+    },
+    {
+      label: "Published",
+      value: String(publishedForms),
+      indicator: { type: "progress" as const, percent: publishedPercent },
+    },
+    {
+      label: "Total Responses",
+      value: "—",
+      indicator: { type: "trend" as const, text: "Across all forms", color: "text-[#bdc2ff]", icon: "chat_bubble_outline" },
+    },
+    {
+      label: "Completion Rate",
+      value: "—",
+      indicator: { type: "trend" as const, text: "Average", color: "text-[#f7bd3e]", icon: "bolt" },
+    },
+  ];
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
-      {METRICS.map((metric) => (
+      {metrics.map((metric) => (
         <MetricCard key={metric.label} metric={metric} />
       ))}
     </section>
   );
 }
 
-type Metric = (typeof METRICS)[number];
+type Metric = {
+  label: string;
+  value: string;
+  indicator: { type: "trend"; text: string; color: string; icon: string } | { type: "progress"; percent: number };
+};
 
 function MetricCard({ metric }: { metric: Metric }) {
   return (
@@ -61,7 +80,7 @@ function MetricCard({ metric }: { metric: Metric }) {
         {metric.indicator.type === "progress" && (
           <div className="w-full bg-[#292930] h-1 rounded-full overflow-hidden">
             <div
-              className="bg-[#bdc2ff] h-full rounded-full"
+              className="bg-[#bdc2ff] h-full rounded-full transition-all"
               style={{ width: `${metric.indicator.percent}%` }}
             />
           </div>

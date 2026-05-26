@@ -1,164 +1,268 @@
-import { cn } from "~/lib/utils";
+"use client";
 
-const FORMS = [
-  {
-    title: "Startup Feedback Flow",
-    status: "Published" as const,
-    responses: 432,
-    lastEdited: "2d ago",
-    preview: "horizontal" as const,
-  },
-  {
-    title: "Event RSVP Flow",
-    status: "Draft" as const,
-    responses: 0,
-    lastEdited: "5h ago",
-    preview: "vertical" as const,
-  },
-  {
-    title: "Hiring Application Flow",
-    status: "Published" as const,
-    responses: 89,
-    lastEdited: "1w ago",
-    preview: "circular" as const,
-  },
-];
+import { useState } from "react";
+import { cn } from "~/lib/utils";
+import { trpc } from "~/trpc/client";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export function DashboardFormCards() {
+  const { isSignedIn } = useAuth();
+  const { data, isLoading } = trpc.forms.list.useQuery(
+    { page: 1, limit: 6 },
+    { enabled: !!isSignedIn },
+  );
+  const createForm = trpc.forms.create.useMutation();
+  const router = useRouter();
+  const utils = trpc.useUtils();
+
+  const handleCreateForm = async () => {
+    const form = await createForm.mutateAsync({ title: "Untitled Form" });
+    utils.forms.list.invalidate();
+    router.push(`/builder?formId=${form.id}`);
+  };
+
   return (
     <section className="flex-grow space-y-6">
       <div className="flex items-center justify-between">
-        <h2
-          className="text-lg font-semibold text-[#e4e1eb]"
-          style={{ fontFamily: "var(--font-geist-sans)" }}
-        >
-          Recent Forms
+        <h2 className="text-lg font-semibold text-[#e4e1eb]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+          Your Forms
         </h2>
-        <a
-          href="#"
-          className="text-[13px] font-medium text-[#bdc2ff] flex items-center gap-1 hover:underline"
-        >
-          View All Forms
-          <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {FORMS.map((form) => (
-          <FormCard key={form.title} form={form} />
+        {isLoading && (
+          <>
+            <FormCardSkeleton />
+            <FormCardSkeleton />
+          </>
+        )}
+        {data?.forms.map((form) => (
+          <FormCard key={form.id} form={form} />
         ))}
-        <CreateNewCard />
+        <CreateNewCard onClick={handleCreateForm} loading={createForm.isPending} />
       </div>
     </section>
   );
 }
 
-type Form = (typeof FORMS)[number];
+function FormCard({ form }: { form: any }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const utils = trpc.useUtils();
+  const publishForm = trpc.forms.publish.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const unpublishForm = trpc.forms.unpublish.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const archiveForm = trpc.forms.archive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const unarchiveForm = trpc.forms.unarchive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const deleteForm = trpc.forms.delete.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
 
-function FormCard({ form }: { form: Form }) {
-  const isPublished = form.status === "Published";
+  const isPublished = form.status === "published";
+  const isDraft = form.status === "draft";
+  const isArchived = form.status === "archived";
+  const formUrl = `${window.location.origin}/form/${form.slug}`;
+
+  const updatedAt = new Date(form.updatedAt);
+  const now = new Date();
+  const diffMs = now.getTime() - updatedAt.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  const timeAgo = diffDays > 0 ? `${diffDays}d ago` : diffHours > 0 ? `${diffHours}h ago` : `${diffMins}m ago`;
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(formUrl);
+    setMenuOpen(false);
+  };
 
   return (
     <div
-      className="group bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden hover:border-[#bdc2ff] transition-all"
+      className="group bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden hover:border-[#bdc2ff] transition-all relative"
       style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}
     >
       {/* Canvas preview area */}
-      <div className="h-40 bg-[#1b1b22] cf-canvas-grid-bg p-4 relative flex items-center justify-center overflow-hidden">
-        <CanvasPreview type={form.preview} />
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <button className="bg-[#bdc2ff] text-[#131e8c] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
-            Open Canvas
-          </button>
+      <a href={`/builder?formId=${form.id}`} className="block">
+        <div className="h-32 bg-[#1b1b22] cf-canvas-grid-bg p-4 relative flex items-center justify-center overflow-hidden">
+          <CanvasPreviewGeneric />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span className="bg-[#bdc2ff] text-[#131e8c] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
+              Open Canvas
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
 
       {/* Card content */}
       <div className="p-4">
-        <div className="flex justify-between items-start mb-1">
-          <h4
-            className="text-lg font-semibold text-[#e4e1eb]"
-            style={{ fontFamily: "var(--font-geist-sans)" }}
-          >
+        <div className="flex justify-between items-start mb-2">
+          <h4 className="text-base font-semibold text-[#e4e1eb] truncate" style={{ fontFamily: "var(--font-geist-sans)" }}>
             {form.title}
           </h4>
-          <span
-            className={cn(
-              "px-4 py-1 text-[11px] font-medium rounded-full border",
-              isPublished
-                ? "bg-green-900/30 text-green-300 border-green-800"
-                : "bg-[#292930] text-[#c6c5d5] border-[#454653]",
-            )}
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <span
+              className={cn(
+                "px-2 py-0.5 text-[10px] font-medium rounded-full border",
+                isPublished
+                  ? "bg-green-900/30 text-green-300 border-green-800"
+                  : isArchived
+                    ? "bg-red-900/30 text-red-300 border-red-800"
+                    : isDraft
+                      ? "bg-[#292930] text-[#c6c5d5] border-[#454653]"
+                      : "bg-amber-900/30 text-amber-300 border-amber-800",
+              )}
+            >
+              {form.status}
+            </span>
+            {/* Menu button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-[#908f9e] hover:text-[#bdc2ff] transition-colors p-0.5"
+            >
+              <span className="material-symbols-outlined text-[18px]">more_vert</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Meta info */}
+        <div className="flex items-center gap-3 text-[#c6c5d5] text-[11px] font-medium mb-3">
+          <span className="flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px]">link</span>
+            /{form.slug}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px]">history</span>
+            {timeAgo}
+          </span>
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex items-center gap-2">
+          {isArchived ? (
+            <>
+              <button
+                onClick={() => unarchiveForm.mutate({ formId: form.id })}
+                disabled={unarchiveForm.isPending}
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#bdc2ff] text-[#131e8c] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[14px]">unarchive</span>
+                Unarchive
+              </button>
+              <button
+                onClick={() => { if (confirm("Permanently delete?")) deleteForm.mutate({ formId: form.id }); }}
+                disabled={deleteForm.isPending}
+                className="flex items-center justify-center px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#ffb4ab] hover:border-[#ffb4ab] transition-all disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[14px]">delete</span>
+              </button>
+            </>
+          ) : isPublished ? (
+            <>
+              <button
+                onClick={handleCopyLink}
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#c6c5d5] hover:border-[#bdc2ff] hover:text-[#bdc2ff] transition-all"
+              >
+                <span className="material-symbols-outlined text-[14px]">content_copy</span>
+                Copy Link
+              </button>
+              <button
+                onClick={() => unpublishForm.mutate({ formId: form.id })}
+                disabled={unpublishForm.isPending}
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#f7bd3e] hover:border-[#f7bd3e] transition-all disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[14px]">unpublished</span>
+                Unpublish
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => publishForm.mutate({ formId: form.id })}
+                disabled={publishForm.isPending}
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#bdc2ff] text-[#131e8c] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[14px]">publish</span>
+                Publish
+              </button>
+              <button
+                onClick={() => { if (confirm("Delete this form?")) deleteForm.mutate({ formId: form.id }); }}
+                disabled={deleteForm.isPending}
+                className="flex items-center justify-center px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#ffb4ab] hover:border-[#ffb4ab] transition-all disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[14px]">delete</span>
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Dropdown menu */}
+      {menuOpen && (
+        <div className="absolute top-12 right-4 bg-[#1f1f26] border border-[#454653] rounded-lg shadow-xl z-50 py-1 min-w-[160px]">
+          <button onClick={handleCopyLink} className="w-full text-left px-4 py-2 text-[12px] text-[#e4e1eb] hover:bg-[#292930] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[16px]">content_copy</span> Copy Link
+          </button>
+          {isPublished && (
+            <a href={formUrl} target="_blank" className="w-full text-left px-4 py-2 text-[12px] text-[#e4e1eb] hover:bg-[#292930] flex items-center gap-2">
+              <span className="material-symbols-outlined text-[16px]">open_in_new</span> View Live
+            </a>
+          )}
+          <button
+            onClick={() => { archiveForm.mutate({ formId: form.id }); setMenuOpen(false); }}
+            className="w-full text-left px-4 py-2 text-[12px] text-[#f7bd3e] hover:bg-[#292930] flex items-center gap-2"
           >
-            {form.status}
-          </span>
+            <span className="material-symbols-outlined text-[16px]">archive</span> Archive
+          </button>
+          <button
+            onClick={() => { if (confirm("Permanently delete?")) { deleteForm.mutate({ formId: form.id }); setMenuOpen(false); } }}
+            className="w-full text-left px-4 py-2 text-[12px] text-[#ffb4ab] hover:bg-[#292930] flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[16px]">delete_forever</span> Delete
+          </button>
         </div>
-        <div className="flex items-center gap-4 text-[#c6c5d5] text-[11px] font-medium">
-          <span className="flex items-center gap-1">
-            <span className="material-symbols-outlined text-[16px]">chat_bubble_outline</span>
-            {form.responses} Responses
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="material-symbols-outlined text-[16px]">history</span>
-            {form.lastEdited}
-          </span>
-        </div>
+      )}
+    </div>
+  );
+}
+
+function CanvasPreviewGeneric() {
+  return (
+    <div className="flex gap-4 items-center z-10">
+      <div className="w-14 h-9 bg-[#0d0e14] border border-[#454653] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
+        <div className="w-8 h-1 bg-[#454653] rounded-full" />
+      </div>
+      <div className="w-3 h-[1.5px] bg-[#454653]" />
+      <div className="w-14 h-9 bg-[#0d0e14] border border-[#bdc2ff] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
+        <div className="w-8 h-1 bg-[#bdc2ff]/20 rounded-full" />
       </div>
     </div>
   );
 }
 
-function CanvasPreview({ type }: { type: "horizontal" | "vertical" | "circular" }) {
-  if (type === "horizontal") {
-    return (
-      <div className="flex gap-4 items-center z-10">
-        <div className="w-16 h-10 bg-[#0d0e14] border border-[#454653] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-          <div className="w-10 h-1 bg-[#454653] rounded-full" />
-        </div>
-        <div className="w-4 h-[1.5px] bg-[#454653]" />
-        <div className="w-16 h-10 bg-[#0d0e14] border border-[#bdc2ff] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-          <div className="w-10 h-1 bg-[#bdc2ff]/20 rounded-full" />
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "vertical") {
-    return (
-      <div className="flex flex-col gap-2 items-center z-10">
-        <div className="w-20 h-8 bg-[#0d0e14] border border-[#454653] rounded-sm" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }} />
-        <div className="h-4 w-[1.5px] bg-[#454653]" />
-        <div className="flex gap-2">
-          <div className="w-10 h-8 bg-[#0d0e14] border border-[#454653] rounded-sm" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }} />
-          <div className="w-10 h-8 bg-[#0d0e14] border border-[#454653] rounded-sm" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }} />
-        </div>
-      </div>
-    );
-  }
-
+function CreateNewCard({ onClick, loading }: { onClick: () => void; loading: boolean }) {
   return (
-    <div className="flex gap-2 items-center z-10">
-      <div className="w-12 h-12 rounded-full bg-[#0d0e14] border border-[#454653] flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-        <span className="material-symbols-outlined text-[#bdc2ff]">start</span>
-      </div>
-      <div className="w-6 h-[1.5px] bg-[#454653]" />
-      <div className="w-20 h-10 bg-[#0d0e14] border border-[#454653] rounded-sm" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }} />
-    </div>
-  );
-}
-
-function CreateNewCard() {
-  return (
-    <button className="group border-2 border-dashed border-[#454653] rounded-xl flex flex-col items-center justify-center p-8 hover:border-[#bdc2ff] hover:bg-[#bdc2ff]/5 transition-all text-[#c6c5d5] hover:text-[#bdc2ff]">
-      <span className="material-symbols-outlined text-[48px] mb-4">add_circle</span>
-      <p
-        className="text-lg font-semibold"
-        style={{ fontFamily: "var(--font-geist-sans)" }}
-      >
-        Create New Flow
+    <button
+      onClick={onClick}
+      disabled={loading}
+      className="group border-2 border-dashed border-[#454653] rounded-xl flex flex-col items-center justify-center p-8 hover:border-[#bdc2ff] hover:bg-[#bdc2ff]/5 transition-all text-[#c6c5d5] hover:text-[#bdc2ff] disabled:opacity-50"
+    >
+      <span className="material-symbols-outlined text-[48px] mb-4">
+        {loading ? "hourglass_empty" : "add_circle"}
+      </span>
+      <p className="text-lg font-semibold" style={{ fontFamily: "var(--font-geist-sans)" }}>
+        {loading ? "Creating..." : "Create New Flow"}
       </p>
       <p className="text-[11px] opacity-70">Start with a blank canvas</p>
     </button>
+  );
+}
+
+function FormCardSkeleton() {
+  return (
+    <div className="bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden animate-pulse">
+      <div className="h-32 bg-[#1b1b22]" />
+      <div className="p-4 space-y-2">
+        <div className="h-5 bg-[#292930] rounded w-2/3" />
+        <div className="h-3 bg-[#292930] rounded w-1/3" />
+        <div className="h-8 bg-[#292930] rounded mt-3" />
+      </div>
+    </div>
   );
 }

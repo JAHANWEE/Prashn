@@ -1,13 +1,15 @@
 import { cn } from "~/lib/utils";
+import { UserButton } from "@clerk/nextjs";
+import { CreateFormButton } from "./create-form-button";
 
 const NAV_ITEMS = [
-  { icon: "dashboard", label: "Dashboard", active: true },
-  { icon: "description", label: "Forms", active: false },
-  { icon: "style", label: "Templates", active: false },
-  { icon: "analytics", label: "Responses", active: false },
-  { icon: "query_stats", label: "Analytics", active: false },
-  { icon: "api", label: "API Docs", active: false },
-  { icon: "settings", label: "Settings", active: false },
+  { icon: "dashboard", label: "Dashboard", href: "/dashboard", active: true },
+  { icon: "description", label: "Forms", href: "/dashboard", active: false },
+  { icon: "style", label: "Templates", href: "/dashboard/templates", active: false },
+  { icon: "analytics", label: "Responses", href: "/dashboard/responses", active: false },
+  { icon: "query_stats", label: "Analytics", href: "/dashboard/analytics", active: false },
+  { icon: "api", label: "API Docs", href: "/dashboard/api-docs", active: false },
+  { icon: "settings", label: "Settings", href: "/dashboard", active: false },
 ] as const;
 
 export function DashboardSidebar() {
@@ -47,17 +49,14 @@ export function DashboardSidebar() {
       </div>
 
       {/* New Form button */}
-      <button className="w-full bg-[#818cf8] text-[#101b8a] text-[13px] font-medium py-4 rounded-lg flex items-center justify-center gap-1 mb-8 hover:opacity-90 transition-opacity active:scale-95 duration-75">
-        <span className="material-symbols-outlined text-[18px]">add</span>
-        New Form
-      </button>
+      <CreateFormButton />
 
       {/* Navigation */}
       <nav className="flex-grow space-y-1">
-        {NAV_ITEMS.map(({ icon, label, active }) => (
+        {NAV_ITEMS.map(({ icon, label, href, active }) => (
           <a
             key={label}
-            href="#"
+            href={href}
             className={cn(
               "flex items-center gap-4 pl-4 py-2 transition-colors text-sm",
               active
@@ -72,14 +71,15 @@ export function DashboardSidebar() {
       </nav>
 
       {/* User profile */}
-      <div className="mt-auto pt-6 border-t border-[#454653] flex items-center gap-2">
-        <div className="w-10 h-10 rounded-full bg-[#818cf8] flex items-center justify-center text-[#101b8a] font-bold text-sm">
-          JD
-        </div>
-        <div className="overflow-hidden">
-          <p className="text-[13px] font-medium text-[#e4e1eb] truncate">Jane Doe</p>
-          <p className="text-[11px] text-[#c6c5d5] truncate">jane@canvasforms.io</p>
-        </div>
+      <div className="mt-auto pt-6 border-t border-[#454653] flex items-center gap-3 px-2">
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "w-10 h-10",
+            },
+          }}
+          showName
+        />
       </div>
     </aside>
   );
