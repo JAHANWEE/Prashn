@@ -13,8 +13,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Streamyst",
-  description: "Media Forwarding",
+  title: "CanvasForms — Design forms like flows",
+  description:
+    "Build dynamic forms on an infinite canvas, then publish them as clean finite screens your users can actually complete.",
 };
 
 export default function RootLayout({
@@ -23,7 +24,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
+      <head>
+        {/* Material Symbols Outlined — used by the CanvasForms design system */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+        />
+        <style>{`
+          .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-family: 'Material Symbols Outlined';
+            font-style: normal;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            user-select: none;
+          }
+        `}</style>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <GlobalProviders>{children}</GlobalProviders>
       </body>

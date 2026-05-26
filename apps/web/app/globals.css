@@ -42,6 +42,36 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* CanvasForms design system tokens (dark theme) */
+  --color-cf-background: var(--cf-background);
+  --color-cf-surface: var(--cf-surface);
+  --color-cf-surface-dim: var(--cf-surface-dim);
+  --color-cf-surface-bright: var(--cf-surface-bright);
+  --color-cf-surface-container-lowest: var(--cf-surface-container-lowest);
+  --color-cf-surface-container-low: var(--cf-surface-container-low);
+  --color-cf-surface-container: var(--cf-surface-container);
+  --color-cf-surface-container-high: var(--cf-surface-container-high);
+  --color-cf-surface-container-highest: var(--cf-surface-container-highest);
+  --color-cf-on-surface: var(--cf-on-surface);
+  --color-cf-on-surface-variant: var(--cf-on-surface-variant);
+  --color-cf-outline: var(--cf-outline);
+  --color-cf-outline-variant: var(--cf-outline-variant);
+  --color-cf-primary: var(--cf-primary);
+  --color-cf-on-primary: var(--cf-on-primary);
+  --color-cf-primary-container: var(--cf-primary-container);
+  --color-cf-on-primary-container: var(--cf-on-primary-container);
+  --color-cf-secondary: var(--cf-secondary);
+  --color-cf-on-secondary: var(--cf-on-secondary);
+  --color-cf-secondary-container: var(--cf-secondary-container);
+  --color-cf-on-secondary-container: var(--cf-on-secondary-container);
+  --color-cf-tertiary: var(--cf-tertiary);
+  --color-cf-on-tertiary: var(--cf-on-tertiary);
+  --color-cf-tertiary-container: var(--cf-tertiary-container);
+  --color-cf-error: var(--cf-error);
+  --color-cf-inverse-surface: var(--cf-inverse-surface);
+  --color-cf-inverse-on-surface: var(--cf-inverse-on-surface);
+  --color-cf-surface-tint: var(--cf-surface-tint);
 }
 
 :root {
@@ -113,11 +143,66 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* CanvasForms dark design system — exact tokens from Stitch */
+:root {
+  --cf-background: #121319;
+  --cf-surface: #121319;
+  --cf-surface-dim: #121319;
+  --cf-surface-bright: #393840;
+  --cf-surface-container-lowest: #0d0e14;
+  --cf-surface-container-low: #1b1b22;
+  --cf-surface-container: #1f1f26;
+  --cf-surface-container-high: #292930;
+  --cf-surface-container-highest: #34343b;
+  --cf-on-surface: #e4e1eb;
+  --cf-on-surface-variant: #c6c5d5;
+  --cf-outline: #908f9e;
+  --cf-outline-variant: #454653;
+  --cf-primary: #bdc2ff;
+  --cf-on-primary: #131e8c;
+  --cf-primary-container: #818cf8;
+  --cf-on-primary-container: #101b8a;
+  --cf-secondary: #b9c7e0;
+  --cf-on-secondary: #233144;
+  --cf-secondary-container: #3c4a5e;
+  --cf-on-secondary-container: #abb9d2;
+  --cf-tertiary: #f7bd3e;
+  --cf-on-tertiary: #402d00;
+  --cf-tertiary-container: #c08d00;
+  --cf-error: #ffb4ab;
+  --cf-inverse-surface: #e4e1eb;
+  --cf-inverse-on-surface: #303037;
+  --cf-surface-tint: #bdc2ff;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* CanvasForms canvas grid background */
+.cf-canvas-grid-bg {
+  background-image: radial-gradient(rgba(144, 143, 158, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* CanvasForms node shadow */
+.cf-node-shadow {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* CanvasForms animated connector line */
+.cf-connector-line {
+  stroke-dasharray: 4;
+  animation: cf-dash 20s linear infinite;
+}
+
+@keyframes cf-dash {
+  to {
+    stroke-dashoffset: -1000;
   }
 }
