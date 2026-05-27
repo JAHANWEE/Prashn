@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { trpc } from "~/trpc/client";
 import { useAuth } from "@clerk/nextjs";
 
-export function BuilderHeader({ formTitle }: { formTitle?: string }) {
+export function BuilderHeader({ formTitle, onPreview }: { formTitle?: string; onPreview?: () => void }) {
   const searchParams = useSearchParams();
   const formId = searchParams.get("formId");
   const { isSignedIn } = useAuth();
@@ -61,16 +61,13 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
         <span className="text-[12px] font-medium text-[#fca9d4] border-b-2 border-[#fca9d4] pb-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
           Builder
         </span>
-        {isPublished && slug && (
-          <a
-            href={`/form/${slug}`}
-            target="_blank"
-            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all"
-            style={{ fontFamily: "var(--font-geist-mono)" }}
-          >
-            Preview
-          </a>
-        )}
+        <button
+          onClick={onPreview}
+          className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all"
+          style={{ fontFamily: "var(--font-geist-mono)" }}
+        >
+          Preview
+        </button>
         {formId && (
           <a
             href="/dashboard/responses"
