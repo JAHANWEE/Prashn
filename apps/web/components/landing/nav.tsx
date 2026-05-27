@@ -16,7 +16,7 @@ export async function LandingNav() {
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded flex items-center justify-center bg-[#818cf8]">
+          <div className="w-8 h-8 rounded flex items-center justify-center bg-[#fca9d4]">
             <svg
               width="18"
               height="18"
@@ -25,14 +25,14 @@ export async function LandingNav() {
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              <rect x="2" y="2" width="6" height="6" rx="1" fill="#131e8c" />
-              <rect x="10" y="2" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="2" y="10" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="10" y="10" width="6" height="6" rx="1" fill="#131e8c" />
+              <rect x="2" y="2" width="6" height="6" rx="1" fill="#ffffff" />
+              <rect x="10" y="2" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="2" y="10" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="10" y="10" width="6" height="6" rx="1" fill="#ffffff" />
             </svg>
           </div>
           <span
-            className="text-lg font-bold tracking-tight text-[#bdc2ff]"
+            className="text-lg font-bold tracking-tight text-[#fca9d4]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
             CanvasForms
@@ -45,7 +45,7 @@ export async function LandingNav() {
             <a
               key={label}
               href={`#${label.toLowerCase()}`}
-              className="text-xs font-medium tracking-widest text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+              className="text-xs font-medium tracking-widest text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             >
               {label}
@@ -59,7 +59,7 @@ export async function LandingNav() {
             <>
               <a
                 href="/dashboard"
-                className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+                className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
                 style={{ fontFamily: "var(--font-geist-mono)" }}
               >
                 DASHBOARD
@@ -76,7 +76,7 @@ export async function LandingNav() {
             <>
               <SignInButton mode="redirect">
                 <button
-                  className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+                  className="text-xs font-medium tracking-widest px-4 py-2 text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   LOG IN
@@ -84,7 +84,7 @@ export async function LandingNav() {
               </SignInButton>
               <SignUpButton mode="redirect">
                 <button
-                  className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8] transition-all active:scale-95 shadow-sm"
+                  className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#fca9d4] text-[#ffffff] hover:bg-[#fca9d4] transition-all active:scale-95 shadow-sm"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   START BUILDING

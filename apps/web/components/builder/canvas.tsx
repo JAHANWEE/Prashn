@@ -9,7 +9,7 @@ function ConnectorLayer() {
           <polygon fill="#454653" points="0 0, 10 3.5, 0 7" />
         </marker>
         <marker id="arrowhead-active" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon fill="#818cf8" points="0 0, 10 3.5, 0 7" />
+          <polygon fill="#fca9d4" points="0 0, 10 3.5, 0 7" />
         </marker>
       </defs>
       {/* Row 1 connectors */}
@@ -19,7 +19,7 @@ function ConnectorLayer() {
       <path className="fill-none stroke-[#454653]" strokeWidth="1.5" d="M260,380 C340,380 340,380 420,380" markerEnd="url(#arrowhead)" />
       <path className="fill-none stroke-[#454653]" strokeWidth="1.5" d="M580,380 C660,380 660,380 740,380" markerEnd="url(#arrowhead)" />
       {/* Active branch connector */}
-      <path className="fill-none stroke-[#818cf8]" strokeWidth="1.5" d="M900,380 C950,380 950,500 900,500" markerEnd="url(#arrowhead-active)" />
+      <path className="fill-none stroke-[#fca9d4]" strokeWidth="1.5" d="M900,380 C950,380 950,500 900,500" markerEnd="url(#arrowhead-active)" />
       {/* Default branch */}
       <path className="fill-none stroke-[#454653]" strokeWidth="1.5" d="M900,380 C1000,380 1000,380 1060,380" markerEnd="url(#arrowhead)" />
     </svg>
@@ -61,7 +61,7 @@ function CanvasNode({
         left,
         top,
         backgroundColor: "#1f1f26",
-        borderColor: selected ? (selectedBorderColor ?? "#818cf8") : "#454653",
+        borderColor: selected ? (selectedBorderColor ?? "#fca9d4") : "#454653",
       }}
     >
       {/* Node header */}
@@ -69,7 +69,7 @@ function CanvasNode({
         className="px-2 py-1 flex items-center justify-between border-b"
         style={{
           backgroundColor: headerBg ?? "#1f1f26",
-          borderColor: selected ? (selectedBorderColor ? `${selectedBorderColor}30` : "#818cf830") : "#454653",
+          borderColor: selected ? (selectedBorderColor ? `${selectedBorderColor}30` : "#fca9d430") : "#454653",
         }}
       >
         <div className="flex items-center gap-1">
@@ -82,7 +82,7 @@ function CanvasNode({
           </span>
         </div>
         {selected ? (
-          <span className="material-symbols-outlined text-[16px] text-[#bdc2ff]">settings</span>
+          <span className="material-symbols-outlined text-[16px] text-[#fca9d4]">settings</span>
         ) : (
           <span className="material-symbols-outlined text-[16px] text-[#908f9e]">more_horiz</span>
         )}
@@ -106,7 +106,7 @@ export function BuilderCanvas() {
       <ConnectorLayer />
 
       {/* Node 1: Welcome */}
-      <CanvasNode left="16px" top="16px" width="w-60" icon="waving_hand" iconColor="text-[#bdc2ff]" label="Welcome">
+      <CanvasNode left="16px" top="16px" width="w-60" icon="waving_hand" iconColor="text-[#fca9d4]" label="Welcome">
         <p className="text-sm font-medium text-[#e4e1eb]">Help us improve</p>
         <p className="text-[12px] text-[#c6c5d5] mt-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
           Startup Feedback Flow
@@ -114,7 +114,7 @@ export function BuilderCanvas() {
       </CanvasNode>
 
       {/* Node 2: Name */}
-      <CanvasNode left="420px" top="16px" icon="short_text" iconColor="text-[#bdc2ff]" label="Name">
+      <CanvasNode left="420px" top="16px" icon="short_text" iconColor="text-[#fca9d4]" label="Name">
         <div className="h-6 w-full bg-[#1b1b22] rounded" />
       </CanvasNode>
 
@@ -129,10 +129,10 @@ export function BuilderCanvas() {
         top="340px"
         width="w-60"
         icon="check_circle"
-        iconColor="text-[#bdc2ff]"
+        iconColor="text-[#fca9d4]"
         label="Role"
         selected
-        selectedBorderColor="#818cf8"
+        selectedBorderColor="#fca9d4"
         headerBg="rgba(129, 140, 248, 0.2)"
       >
         <p className="text-sm font-medium text-[#e4e1eb]">What is your role?</p>
@@ -166,7 +166,7 @@ export function BuilderCanvas() {
       </CanvasNode>
 
       {/* Node 7: Thank You */}
-      <CanvasNode left="1060px" top="340px" icon="done_all" iconColor="text-[#bdc2ff]" label="Success">
+      <CanvasNode left="1060px" top="340px" icon="done_all" iconColor="text-[#fca9d4]" label="Success">
         <p className="text-[12px] font-bold text-[#e4e1eb] text-center" style={{ fontFamily: "var(--font-geist-mono)" }}>
           Thank You!
         </p>
@@ -187,7 +187,7 @@ function ZoomControls() {
       className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center bg-[#1f1f26] border border-[#454653] rounded-full px-4 py-1 gap-4 shadow-lg z-50"
     >
       <div className="flex items-center gap-2">
-        <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors">
+        <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">
           remove
         </button>
         <span
@@ -196,19 +196,19 @@ function ZoomControls() {
         >
           80%
         </span>
-        <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors">
+        <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">
           add
         </button>
       </div>
       <div className="w-[1px] h-4 bg-[#454653]" />
       <button
-        className="text-[12px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+        className="text-[12px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
         style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}
       >
         Fit View
       </button>
       <div className="w-[1px] h-4 bg-[#454653]" />
-      <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors" title="Minimap">
+      <button className="material-symbols-outlined text-[20px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors" title="Minimap">
         map
       </button>
     </div>
@@ -221,7 +221,7 @@ function LivePreview() {
       {/* Preview header */}
       <div className="p-4 bg-[#292930] border-b border-[#454653] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-[#818cf8] rounded-full animate-pulse" />
+          <span className="w-3 h-3 bg-[#fca9d4] rounded-full animate-pulse" />
           <span
             className="text-[12px] font-bold uppercase tracking-wide text-[#e4e1eb]"
             style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}
@@ -246,10 +246,10 @@ function LivePreview() {
           {["Founder", "Engineer", "Product"].map((option) => (
             <button
               key={option}
-              className="w-full text-left p-4 border border-[#454653] rounded-lg text-sm bg-[#1b1b22] text-[#e4e1eb] hover:border-[#818cf8] hover:bg-[#818cf8]/10 transition-all flex items-center justify-between group"
+              className="w-full text-left p-4 border border-[#454653] rounded-lg text-sm bg-[#1b1b22] text-[#e4e1eb] hover:border-[#fca9d4] hover:bg-[#fca9d4]/10 transition-all flex items-center justify-between group"
             >
               {option}
-              <span className="material-symbols-outlined text-[18px] text-[#908f9e] group-hover:text-[#818cf8]">
+              <span className="material-symbols-outlined text-[18px] text-[#908f9e] group-hover:text-[#fca9d4]">
                 chevron_right
               </span>
             </button>

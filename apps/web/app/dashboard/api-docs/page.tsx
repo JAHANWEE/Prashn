@@ -4,11 +4,11 @@ export default function ApiDocsPage() {
       {/* Top header */}
       <header className="sticky top-0 bg-[#121319]/80 backdrop-blur-md border-b border-[#454653] z-40 h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          <span className="text-lg font-bold text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+          <span className="text-lg font-bold text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>
             API Documentation
           </span>
         </div>
-        <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#818cf8] text-[#101b8a] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#fca9d4] text-[#0a0a0f] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
           <span className="material-symbols-outlined text-sm">open_in_new</span>
           Interactive Docs
         </a>
@@ -37,27 +37,27 @@ export default function ApiDocsPage() {
                   API Reference Overview
                 </h3>
               </div>
-              <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#818cf8] text-[#101b8a] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
+              <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#fca9d4] text-[#0a0a0f] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 <span className="material-symbols-outlined text-sm">description</span>
                 Open Scalar Docs
               </a>
             </div>
             <div className="space-y-4">
               {/* GET endpoint */}
-              <div className="p-4 bg-[#1f1f26] border border-[#454653] rounded-lg flex items-center justify-between group cursor-pointer hover:border-[#bdc2ff] transition-colors">
+              <div className="p-4 bg-[#1f1f26] border border-[#454653] rounded-lg flex items-center justify-between group cursor-pointer hover:border-[#fca9d4] transition-colors">
                 <div className="flex items-center gap-4">
                   <span className="bg-green-800 text-green-100 px-4 py-1 rounded-lg text-xs font-bold" style={{ fontFamily: "var(--font-geist-mono)" }}>GET</span>
                   <span className="text-sm text-[#e4e1eb]" style={{ fontFamily: "var(--font-geist-mono)" }}>/public/forms</span>
                 </div>
-                <span className="text-[12px] text-[#c6c5d5] group-hover:text-[#bdc2ff] transition-colors" style={{ fontFamily: "var(--font-geist-mono)" }}>List all published forms</span>
+                <span className="text-[12px] text-[#c6c5d5] group-hover:text-[#fca9d4] transition-colors" style={{ fontFamily: "var(--font-geist-mono)" }}>List all published forms</span>
               </div>
               {/* POST endpoint */}
-              <div className="p-4 bg-[#1f1f26] border border-[#454653] rounded-lg flex items-center justify-between group cursor-pointer hover:border-[#bdc2ff] transition-colors">
+              <div className="p-4 bg-[#1f1f26] border border-[#454653] rounded-lg flex items-center justify-between group cursor-pointer hover:border-[#fca9d4] transition-colors">
                 <div className="flex items-center gap-4">
                   <span className="bg-blue-800 text-blue-100 px-4 py-1 rounded-lg text-xs font-bold" style={{ fontFamily: "var(--font-geist-mono)" }}>POST</span>
                   <span className="text-sm text-[#e4e1eb]" style={{ fontFamily: "var(--font-geist-mono)" }}>/public/forms/:slug/responses</span>
                 </div>
-                <span className="text-[12px] text-[#c6c5d5] group-hover:text-[#bdc2ff] transition-colors" style={{ fontFamily: "var(--font-geist-mono)" }}>Submit a new response</span>
+                <span className="text-[12px] text-[#c6c5d5] group-hover:text-[#fca9d4] transition-colors" style={{ fontFamily: "var(--font-geist-mono)" }}>Submit a new response</span>
               </div>
             </div>
           </div>
@@ -65,9 +65,9 @@ export default function ApiDocsPage() {
           {/* Authentication Card */}
           <div className="col-span-12 lg:col-span-4 bg-[#0d0e14] border border-[#454653] rounded-xl p-6 flex flex-col justify-between overflow-hidden">
             <div>
-              <div className="flex items-center gap-2 text-[#bdc2ff] mb-4">
+              <div className="flex items-center gap-2 text-[#fca9d4] mb-4">
                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>key</span>
-                <h4 className="text-[12px] uppercase tracking-wider font-medium text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
+                <h4 className="text-[12px] uppercase tracking-wider font-medium text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
                   Authentication
                 </h4>
               </div>
@@ -78,11 +78,11 @@ export default function ApiDocsPage() {
             <div className="bg-[#1b1b22] p-4 rounded-lg border border-dashed border-[#454653]">
               <div className="flex justify-between items-center mb-1">
                 <span className="text-[10px] uppercase tracking-widest text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-mono)" }}>Active Key</span>
-                <span className="text-[10px] text-[#bdc2ff] font-bold cursor-pointer hover:underline uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>Revoke</span>
+                <span className="text-[10px] text-[#fca9d4] font-bold cursor-pointer hover:underline uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>Revoke</span>
               </div>
               <div className="bg-[#0d0e14] p-2 border border-[#454653] rounded flex justify-between items-center" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 <span className="text-xs text-[#e4e1eb] truncate opacity-80">sk_live_51M8X...93kL</span>
-                <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#bdc2ff] text-[#908f9e]">content_copy</span>
+                <span className="material-symbols-outlined text-sm cursor-pointer hover:text-[#fca9d4] text-[#908f9e]">content_copy</span>
               </div>
             </div>
           </div>
@@ -97,35 +97,35 @@ export default function ApiDocsPage() {
                 </h3>
               </div>
               <div className="flex items-center gap-2">
-                <select className="bg-[#0d0e14] border border-[#454653] text-[#c6c5d5] rounded py-1 px-2 text-xs focus:ring-[#bdc2ff] focus:border-[#bdc2ff] outline-none" style={{ fontFamily: "var(--font-geist-mono)" }}>
+                <select className="bg-[#0d0e14] border border-[#454653] text-[#c6c5d5] rounded py-1 px-2 text-xs focus:ring-[#fca9d4] focus:border-[#fca9d4] outline-none" style={{ fontFamily: "var(--font-geist-mono)" }}>
                   <option>cURL</option>
                   <option>JavaScript</option>
                   <option>Python</option>
                 </select>
-                <button className="material-symbols-outlined text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors p-1 text-[18px]">content_copy</button>
+                <button className="material-symbols-outlined text-[#c6c5d5] hover:text-[#fca9d4] transition-colors p-1 text-[18px]">content_copy</button>
               </div>
             </div>
             <div className="p-6 bg-[#0d0e14] overflow-x-auto">
               <pre className="text-sm text-[#e4e1eb]" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                <code>{`"`}<span className="text-[#bdc2ff]">payload</span>{`": {
-  "`}<span className="text-[#bdc2ff]">form_id</span>{`": "`}<span className="text-[#b9c7e0]">f_90210_alpha</span>{`",
-  "`}<span className="text-[#bdc2ff]">responses</span>{`": [
+                <code>{`"`}<span className="text-[#fca9d4]">payload</span>{`": {
+  "`}<span className="text-[#fca9d4]">form_id</span>{`": "`}<span className="text-[#b9c7e0]">f_90210_alpha</span>{`",
+  "`}<span className="text-[#fca9d4]">responses</span>{`": [
     {
-      "`}<span className="text-[#bdc2ff]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_1</span>{`",
-      "`}<span className="text-[#bdc2ff]">value</span>{`": "`}<span className="text-[#b9c7e0]">Engineering-Grade Minimalism</span>{`"
+      "`}<span className="text-[#fca9d4]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_1</span>{`",
+      "`}<span className="text-[#fca9d4]">value</span>{`": "`}<span className="text-[#b9c7e0]">Engineering-Grade Minimalism</span>{`"
     },
     {
-      "`}<span className="text-[#bdc2ff]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_2</span>{`",
-      "`}<span className="text-[#bdc2ff]">value</span>{`": `}<span className="text-[#f7bd3e]">5</span>{`
+      "`}<span className="text-[#fca9d4]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_2</span>{`",
+      "`}<span className="text-[#fca9d4]">value</span>{`": `}<span className="text-[#f7bd3e]">5</span>{`
     },
     {
-      "`}<span className="text-[#bdc2ff]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_3</span>{`",
-      "`}<span className="text-[#bdc2ff]">value</span>{`": `}<span className="text-[#ffb4ab]">true</span>{`
+      "`}<span className="text-[#fca9d4]">field_id</span>{`": "`}<span className="text-[#b9c7e0]">q_3</span>{`",
+      "`}<span className="text-[#fca9d4]">value</span>{`": `}<span className="text-[#ffb4ab]">true</span>{`
     }
   ],
-  "`}<span className="text-[#bdc2ff]">metadata</span>{`": {
-    "`}<span className="text-[#bdc2ff]">source</span>{`": "`}<span className="text-[#b9c7e0]">api_v1</span>{`",
-    "`}<span className="text-[#bdc2ff]">timestamp</span>{`": "`}<span className="text-[#b9c7e0]">2023-11-21T14:48:00Z</span>{`"
+  "`}<span className="text-[#fca9d4]">metadata</span>{`": {
+    "`}<span className="text-[#fca9d4]">source</span>{`": "`}<span className="text-[#b9c7e0]">api_v1</span>{`",
+    "`}<span className="text-[#fca9d4]">timestamp</span>{`": "`}<span className="text-[#b9c7e0]">2023-11-21T14:48:00Z</span>{`"
   }
 }`}</code>
               </pre>
@@ -138,14 +138,14 @@ export default function ApiDocsPage() {
 
           {/* Rate Limiting Card */}
           <div className="col-span-12 md:col-span-6 bg-[#0d0e14] border border-[#454653] rounded-xl p-6 flex items-start gap-6 hover:bg-[#1b1b22] transition-colors cursor-pointer">
-            <div className="p-2 bg-[#bdc2ff]/10 text-[#bdc2ff] rounded-lg shrink-0">
+            <div className="p-2 bg-[#fca9d4]/10 text-[#fca9d4] rounded-lg shrink-0">
               <span className="material-symbols-outlined">speed</span>
             </div>
             <div>
               <h4 className="text-[12px] font-bold text-[#e4e1eb] mb-1" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>Rate Limiting</h4>
               <p className="text-sm text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-sans)" }}>
                 10,000 requests per hour on the Developer Plan. Header{" "}
-                <code className="bg-[#34343b] px-1 rounded text-[#bdc2ff] text-xs" style={{ fontFamily: "var(--font-geist-mono)" }}>X-RateLimit-Remaining</code>{" "}
+                <code className="bg-[#34343b] px-1 rounded text-[#fca9d4] text-xs" style={{ fontFamily: "var(--font-geist-mono)" }}>X-RateLimit-Remaining</code>{" "}
                 tracking available.
               </p>
             </div>

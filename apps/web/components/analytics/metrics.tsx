@@ -2,7 +2,7 @@ const METRICS = [
   {
     label: "Total Responses",
     value: "1,284",
-    trend: { direction: "up" as const, text: "+12%", color: "text-[#bdc2ff]" },
+    trend: { direction: "up" as const, text: "+12%", color: "text-[#fca9d4]" },
   },
   {
     label: "Completion Rate",

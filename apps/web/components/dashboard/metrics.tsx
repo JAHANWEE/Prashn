@@ -18,7 +18,7 @@ export function DashboardMetrics() {
     {
       label: "Total Forms",
       value: String(totalForms),
-      indicator: { type: "trend" as const, text: "All your forms", color: "text-[#bdc2ff]", icon: "description" },
+      indicator: { type: "trend" as const, text: "All your forms", color: "text-[#fca9d4]", icon: "description" },
     },
     {
       label: "Published",
@@ -28,7 +28,7 @@ export function DashboardMetrics() {
     {
       label: "Total Responses",
       value: "—",
-      indicator: { type: "trend" as const, text: "Across all forms", color: "text-[#bdc2ff]", icon: "chat_bubble_outline" },
+      indicator: { type: "trend" as const, text: "Across all forms", color: "text-[#fca9d4]", icon: "chat_bubble_outline" },
     },
     {
       label: "Completion Rate",
@@ -80,7 +80,7 @@ function MetricCard({ metric }: { metric: Metric }) {
         {metric.indicator.type === "progress" && (
           <div className="w-full bg-[#292930] h-1 rounded-full overflow-hidden">
             <div
-              className="bg-[#bdc2ff] h-full rounded-full transition-all"
+              className="bg-[#fca9d4] h-full rounded-full transition-all"
               style={{ width: `${metric.indicator.percent}%` }}
             />
           </div>

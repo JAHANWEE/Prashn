@@ -79,7 +79,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[13px] text-[#e4e1eb] focus:ring-2 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[13px] text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
       </Section>
@@ -91,7 +91,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
           placeholder="Optional description..."
-          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none resize-none"
+          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none resize-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
       </Section>
@@ -104,7 +104,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           </div>
           <button
             onClick={() => navigator.clipboard.writeText(formUrl)}
-            className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#454653] text-[#908f9e] hover:text-[#bdc2ff] hover:border-[#bdc2ff] transition-colors"
+            className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#454653] text-[#908f9e] hover:text-[#fca9d4] hover:border-[#fca9d4] transition-colors"
             title="Copy link"
           >
             <span className="material-symbols-outlined text-[14px]">content_copy</span>
@@ -144,7 +144,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
                 style={{
                   background: theme.primaryColor,
                   borderColor: form.themeId === theme.id ? "#e4e1eb" : "transparent",
-                  boxShadow: form.themeId === theme.id ? "0 0 0 2px rgba(129,140,248,0.3)" : "none",
+                  boxShadow: form.themeId === theme.id ? "0 0 0 2px rgba(252,169,212,0.3)" : "none",
                 }}
                 title={theme.name}
               />
@@ -161,7 +161,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           onChange={(e) => setResponseLimit(e.target.value)}
           placeholder="Unlimited"
           min={1}
-          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         />
       </Section>
@@ -172,7 +172,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           type="date"
           value={expiresAt}
           onChange={(e) => setExpiresAt(e.target.value)}
-          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-2 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         />
       </Section>
@@ -197,7 +197,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
       <button
         onClick={handleSave}
         disabled={updateForm.isPending}
-        className="w-full bg-[#bdc2ff] text-[#131e8c] text-[12px] font-semibold py-2.5 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        className="w-full bg-[#fca9d4] text-[#ffffff] text-[12px] font-semibold py-2.5 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
       >
         {updateForm.isPending ? "Saving..." : "Save Settings"}
       </button>
@@ -237,13 +237,13 @@ function VisibilityOption({
       onClick={onClick}
       className="flex-1 p-2.5 rounded-lg border text-left transition-all"
       style={{
-        background: active ? "rgba(129, 140, 248, 0.06)" : "#0d0e14",
-        borderColor: active ? "rgba(129, 140, 248, 0.4)" : "#454653",
+        background: active ? "rgba(235, 54, 120, 0.06)" : "#0d0e14",
+        borderColor: active ? "rgba(235, 54, 120, 0.4)" : "#454653",
       }}
     >
       <span
         className="material-symbols-outlined text-[16px] block mb-1"
-        style={{ color: active ? "#818cf8" : "#908f9e" }}
+        style={{ color: active ? "#fca9d4" : "#908f9e" }}
       >
         {icon}
       </span>

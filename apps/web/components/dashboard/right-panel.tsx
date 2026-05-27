@@ -33,7 +33,7 @@ function QuickActions() {
           disabled={createForm.isPending}
           className="w-full text-left p-4 border border-[#454653] rounded-lg flex items-center gap-4 hover:bg-[#1b1b22] transition-colors group disabled:opacity-50"
         >
-          <span className="material-symbols-outlined text-[#bdc2ff] bg-[#bdc2ff]/10 p-2 rounded-lg group-hover:scale-110 transition-transform">
+          <span className="material-symbols-outlined text-[#fca9d4] bg-[#fca9d4]/10 p-2 rounded-lg group-hover:scale-110 transition-transform">
             account_tree
           </span>
           <div>

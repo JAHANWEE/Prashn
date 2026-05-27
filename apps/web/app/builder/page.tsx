@@ -15,8 +15,8 @@ import { useUndoRedo } from "~/components/builder/use-undo-redo";
 import { useKeyboardShortcuts } from "~/components/builder/use-keyboard-shortcuts";
 
 const FIELD_TYPES = [
-  { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#bdc2ff]" },
-  { type: "long_text", label: "Long Text", icon: "notes", color: "text-[#bdc2ff]" },
+  { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#fca9d4]" },
+  { type: "long_text", label: "Long Text", icon: "notes", color: "text-[#fca9d4]" },
   { type: "email", label: "Email", icon: "mail", color: "text-[#b9c7e0]" },
   { type: "number", label: "Number", icon: "tag", color: "text-[#b9c7e0]" },
   { type: "single_select", label: "Single Select", icon: "check_circle", color: "text-[#f7bd3e]" },
@@ -154,7 +154,7 @@ export default function BuilderPage() {
               <div className="flex flex-col items-center justify-center h-full text-center">
                 <div
                   className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center"
-                  style={{ background: "rgba(129, 140, 248, 0.06)", border: "1px solid rgba(53, 53, 64, 0.4)" }}
+                  style={{ background: "rgba(235, 54, 120, 0.06)", border: "1px solid rgba(53, 53, 64, 0.4)" }}
                 >
                   <span className="material-symbols-outlined text-[28px] text-[#4a4a5a]">add_circle</span>
                 </div>
@@ -191,7 +191,7 @@ export default function BuilderPage() {
         {/* Inspector Panel */}
         <aside className="w-[280px] h-full bg-[#121319] border-l border-[#454653] flex flex-col z-30" style={{ opacity: builderView === "flow" ? 0.85 : 1, transition: "opacity 0.2s ease" }}>
           <div className="p-4 border-b border-[#454653] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[16px] text-[#818cf8]">
+            <span className="material-symbols-outlined text-[16px] text-[#fca9d4]">
               {selectedField ? "edit_note" : "tune"}
             </span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
@@ -277,10 +277,10 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
     <div className="space-y-4">
       {/* Field type badge */}
       <div className="flex items-center gap-2 pb-2 border-b border-[#1f1f26]">
-        <span className="material-symbols-outlined text-[14px] text-[#818cf8]">
+        <span className="material-symbols-outlined text-[14px] text-[#fca9d4]">
           {getFieldTypeIcon(field.fieldType)}
         </span>
-        <span className="text-[11px] text-[#bdc2ff] uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        <span className="text-[11px] text-[#fca9d4] uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>
           {field.fieldType.replace(/_/g, " ")}
         </span>
       </div>
@@ -291,7 +291,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
           type="text"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-1 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
       </InspectorField>
@@ -303,7 +303,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Optional helper text..."
-          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
       </InspectorField>
@@ -315,7 +315,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
           value={placeholder}
           onChange={(e) => setPlaceholder(e.target.value)}
           placeholder="Input placeholder..."
-          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
       </InspectorField>
@@ -330,7 +330,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
                   type="text"
                   value={opt.label}
                   onChange={(e) => handleOptionChange(idx, e.target.value)}
-                  className="flex-1 bg-[#0d0e14] border border-[#353540] rounded-md px-2.5 py-1.5 text-[11px] text-[#e4e1eb] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+                  className="flex-1 bg-[#0d0e14] border border-[#353540] rounded-md px-2.5 py-1.5 text-[11px] text-[#e4e1eb] focus:ring-1 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
                 />
                 <button onClick={() => handleRemoveOption(idx)} className="text-[#5a5a6e] hover:text-[#ffb4ab] transition-colors p-0.5">
                   <span className="material-symbols-outlined text-[14px]">close</span>
@@ -339,7 +339,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
             ))}
             <button
               onClick={handleAddOption}
-              className="w-full py-1.5 text-[10px] text-[#818cf8] hover:text-[#bdc2ff] border border-dashed border-[#353540] rounded-md hover:border-[#818cf8] transition-colors"
+              className="w-full py-1.5 text-[10px] text-[#fca9d4] hover:text-[#fca9d4] border border-dashed border-[#353540] rounded-md hover:border-[#fca9d4] transition-colors"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             >
               + Add Option
@@ -354,7 +354,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
         <button
           onClick={() => setRequired(!required)}
           className="w-9 h-5 rounded-full relative transition-colors"
-          style={{ background: required ? "#818cf8" : "rgba(53, 53, 64, 0.8)" }}
+          style={{ background: required ? "#fca9d4" : "rgba(53, 53, 64, 0.8)" }}
         >
           <div
             className="absolute top-[3px] w-3.5 h-3.5 bg-white rounded-full transition-all"
@@ -367,7 +367,7 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
       <button
         onClick={handleSave}
         disabled={updateField.isPending}
-        className="w-full bg-[#bdc2ff] text-[#131e8c] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        className="w-full bg-[#fca9d4] text-[#ffffff] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
       >
         {updateField.isPending ? "Saving..." : "Save Changes"}
       </button>

@@ -33,7 +33,7 @@ export function RoleDistribution() {
             </div>
             <div className="h-1.5 w-full bg-[#292930] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#bdc2ff] rounded-full"
+                className="h-full bg-[#fca9d4] rounded-full"
                 style={{ width: `${role.percent}%` }}
               />
             </div>

@@ -298,7 +298,7 @@ export function FlowCanvas({
       className="flex-1 relative overflow-hidden"
       style={{
         backgroundColor: "#0a0a0f",
-        backgroundImage: "radial-gradient(circle, #2d2d3a 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, #3a3a4d 1px, transparent 1px)",
         backgroundSize: `${gridSize}px ${gridSize}px`,
         backgroundPosition: `${cam.x % gridSize}px ${cam.y % gridSize}px`,
         cursor: isPanning ? "grabbing" : connectingFrom ? "crosshair" : dragId ? "grabbing" : "grab",
@@ -325,7 +325,7 @@ export function FlowCanvas({
             const isStretched = dist > SNAP_DIST * 2;
             return (
               <g key={`${conn.from}-${conn.to}`}>
-                <path d={path} fill="none" stroke={color} strokeWidth={isStretched ? 1.5 : 2} strokeDasharray={isStretched ? "8 6" : "none"} opacity={isStretched ? 0.35 : 0.7} />
+                <path d={path} fill="none" stroke={color} strokeWidth={isStretched ? 1.5 : 2.5} strokeDasharray={isStretched ? "8 6" : "none"} opacity={isStretched ? 0.5 : 0.85} />
                 {!isStretched && <circle cx={(x1+x2)/2} cy={(y1+y2)/2} r={4} fill={color} opacity={0.8}><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/></circle>}
               </g>
             );
@@ -335,7 +335,7 @@ export function FlowCanvas({
             const fromPos = positions.get(connectingFrom);
             if (!fromPos) return null;
             const x1 = fromPos.x + CARD_W / 2; const y1 = fromPos.y + CARD_H;
-            return <line x1={x1} y1={y1} x2={connectingMouse.x} y2={connectingMouse.y} stroke="#6366f1" strokeWidth={2} strokeDasharray="6 4" opacity={0.8} />;
+            return <line x1={x1} y1={y1} x2={connectingMouse.x} y2={connectingMouse.y} stroke="#EB3678" strokeWidth={2} strokeDasharray="6 4" opacity={0.8} />;
           })()}
         </svg>
 
@@ -349,7 +349,7 @@ export function FlowCanvas({
           return (
             <div key={node.id} className="absolute pointer-events-auto" style={{ left: pos.x, top: pos.y, width: CARD_W, zIndex: isDragging ? 100 : isSelected ? 50 : 10, transform: isDragging ? "scale(1.03) rotate(0.8deg)" : "none", filter: isDragging ? "drop-shadow(0 16px 40px rgba(0,0,0,0.6))" : "none", transition: isDragging ? "none" : "transform 0.15s ease, filter 0.15s ease" }}>
               <div
-                className={`rounded-xl p-4 shadow-2xl relative cursor-grab active:cursor-grabbing ${isSelected ? "ring-2 ring-indigo-500 ring-offset-1 ring-offset-[#0a0a0f]" : ""}`}
+                className={`rounded-xl p-4 shadow-2xl relative cursor-grab active:cursor-grabbing ${isSelected ? "ring-2 ring-#EB3678 ring-offset-1 ring-offset-[#0a0a0f]" : ""}`}
                 style={{ background: getNodeBg(node), border: `1px solid ${getNodeBorder(node)}` }}
                 onClick={(e) => { e.stopPropagation(); if (!isSynthetic) onSelectField(node.id); }}
                 onPointerDown={(e) => startDrag(node.id, e)}
@@ -359,7 +359,7 @@ export function FlowCanvas({
               {/* Bottom port — drag to connect */}
               <div
                 className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 cursor-crosshair pointer-events-auto z-50 transition-all hover:scale-125"
-                style={{ borderColor: getNodeBorder(node), background: "#0a0a0f", boxShadow: `0 0 6px ${getLineColor(node)}` }}
+                style={{ borderColor: getNodeBorder(node), background: "#0a0a0f", boxShadow: `0 0 10px ${getLineColor(node)}` }}
                 onPointerDown={(e) => startConnect(node.id, e)}
               />
               {/* Top port — visual only */}
@@ -389,17 +389,17 @@ export function FlowCanvas({
 // ─── Node Content ────────────────────────────────────────────────────────────
 
 function NodeContent({ node, onDelete }: { node: FlowNode; onDelete?: () => void }) {
-  if (node.type === "welcome") return (<div className="flex items-center space-x-4"><div className="w-12 h-12 rounded-lg bg-indigo-600/20 flex items-center justify-center text-2xl">👋</div><div><h3 className="font-medium text-sm">{node.label}</h3><p className="text-xs text-gray-500">Start of the form</p></div></div>);
-  if (node.type === "success") return (<div className="flex items-center space-x-4"><div className="w-12 h-12 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/30"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg></div><div className="flex-1"><h3 className="font-medium text-sm text-white">{node.label}</h3><p className="text-xs text-gray-500">End of the form</p></div><span className="text-3xl">🎉</span></div>);
+  if (node.type === "welcome") return (<div className="flex items-center space-x-4"><div className="w-12 h-12 rounded-lg bg-#EB3678/30 flex items-center justify-center text-2xl">👋</div><div><h3 className="font-medium text-sm">{node.label}</h3><p className="text-xs text-gray-400">Start of the form</p></div></div>);
+  if (node.type === "success") return (<div className="flex items-center space-x-4"><div className="w-12 h-12 rounded-full bg-green-600/30 flex items-center justify-center text-green-400 border border-green-500/40"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/></svg></div><div className="flex-1"><h3 className="font-medium text-sm text-white">{node.label}</h3><p className="text-xs text-gray-400">End of the form</p></div><span className="text-3xl">🎉</span></div>);
   if (node.type === "choice") {
     const field = node.fields[0]; if (!field) return null;
     const opts = field.options ?? [];
-    return (<div><div className="flex items-center space-x-4 mb-3"><div className="w-12 h-12 rounded-lg bg-orange-600/20 flex items-center justify-center text-orange-400"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7"/></svg></div><div className="flex-1"><div className="flex items-center justify-between"><h3 className="font-medium text-sm">{field.label}</h3>{onDelete && <Dots onDelete={onDelete}/>}</div><p className="text-[11px] text-gray-500">{getDesc(field.fieldType)}</p></div></div><div className="flex space-x-2">{opts.slice(0,3).map((o,i)=>(<div key={i} className="flex-1 px-3 py-2 bg-black/40 border border-white/5 rounded-md flex items-center space-x-2 text-[10px] text-gray-400"><div className="w-3 h-3 rounded-full border border-orange-500/50"/><span>{o.label}</span></div>))}</div></div>);
+    return (<div><div className="flex items-center space-x-4 mb-3"><div className="w-12 h-12 rounded-lg bg-orange-600/30 flex items-center justify-center text-orange-300"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7"/></svg></div><div className="flex-1"><div className="flex items-center justify-between"><h3 className="font-medium text-sm">{field.label}</h3>{onDelete && <Dots onDelete={onDelete}/>}</div><p className="text-[11px] text-gray-400">{getDesc(field.fieldType)}</p></div></div><div className="flex space-x-2">{opts.slice(0,3).map((o,i)=>(<div key={i} className="flex-1 px-3 py-2 bg-black/40 border border-white/10 rounded-md flex items-center space-x-2 text-[10px] text-gray-300"><div className="w-3 h-3 rounded-full border border-orange-500/60"/><span>{o.label}</span></div>))}</div></div>);
   }
   // question
   const field = node.fields[0]; if (!field) return null;
   const icon = getFieldIcon(field.fieldType);
-  return (<div className="flex items-center space-x-4"><div className={`w-12 h-12 rounded-lg ${icon.bg} flex items-center justify-center ${icon.text} font-bold text-lg`}>{icon.content}</div><div className="flex-1"><div className="flex items-center justify-between"><h3 className="font-medium text-sm">{field.label}</h3>{onDelete && <Dots onDelete={onDelete}/>}</div><p className="text-[11px] text-gray-500">{getDesc(field.fieldType)}</p></div></div>);
+  return (<div className="flex items-center space-x-4"><div className={`w-12 h-12 rounded-lg ${icon.bg} flex items-center justify-center ${icon.text} font-bold text-lg`}>{icon.content}</div><div className="flex-1"><div className="flex items-center justify-between"><h3 className="font-medium text-sm">{field.label}</h3>{onDelete && <Dots onDelete={onDelete}/>}</div><p className="text-[11px] text-gray-400">{getDesc(field.fieldType)}</p></div></div>);
 }
 
 function Dots({ onDelete }: { onDelete: () => void }) {
@@ -407,8 +407,8 @@ function Dots({ onDelete }: { onDelete: () => void }) {
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-function getNodeBg(n: FlowNode) { switch(n.type){case"welcome":return"#14151f";case"success":return"#0d1a14";case"choice":return"#1a140d";default:return"#0d1421";} }
-function getNodeBorder(n: FlowNode) { switch(n.type){case"welcome":return"rgba(99,102,241,0.4)";case"success":return"rgba(34,197,94,0.4)";case"choice":return"rgba(249,115,22,0.4)";default:return"rgba(59,130,246,0.4)";} }
-function getLineColor(n?: FlowNode) { if(!n) return "#6366f1"; switch(n.type){case"welcome":return"#6366f1";case"success":return"#22c55e";case"choice":return"#f97316";default:return"#3b82f6";} }
-function getFieldIcon(ft:string){switch(ft){case"short_text":return{bg:"bg-indigo-500/20",text:"text-indigo-400",content:"T"};case"long_text":return{bg:"bg-purple-500/20",text:"text-purple-400",content:"¶"};case"email":return{bg:"bg-blue-500/20",text:"text-blue-400",content:"✉"};case"number":return{bg:"bg-orange-500/20",text:"text-orange-400",content:"123"};case"rating":return{bg:"bg-blue-600/20",text:"text-blue-400",content:"★"};case"checkbox":return{bg:"bg-green-500/20",text:"text-green-400",content:"☑"};case"date":return{bg:"bg-pink-500/20",text:"text-pink-400",content:"📅"};default:return{bg:"bg-indigo-500/20",text:"text-indigo-400",content:"T"};}}
+function getNodeBg(n: FlowNode) { switch(n.type){case"welcome":return"#181930";case"success":return"#0f2218";case"choice":return"#211a0f";default:return"#0f1828";} }
+function getNodeBorder(n: FlowNode) { switch(n.type){case"welcome":return"rgba(99,102,241,0.55)";case"success":return"rgba(34,197,94,0.55)";case"choice":return"rgba(249,115,22,0.55)";default:return"rgba(59,130,246,0.55)";} }
+function getLineColor(n?: FlowNode) { if(!n) return "#EB3678"; switch(n.type){case"welcome":return"#EB3678";case"success":return"#34d399";case"choice":return"#fb923c";default:return"#60a5fa";} }
+function getFieldIcon(ft:string){switch(ft){case"short_text":return{bg:"bg-#EB3678/30",text:"text-indigo-300",content:"T"};case"long_text":return{bg:"bg-purple-500/30",text:"text-purple-300",content:"¶"};case"email":return{bg:"bg-blue-500/30",text:"text-blue-300",content:"✉"};case"number":return{bg:"bg-orange-500/30",text:"text-orange-300",content:"123"};case"rating":return{bg:"bg-blue-600/30",text:"text-blue-300",content:"★"};case"checkbox":return{bg:"bg-green-500/30",text:"text-green-300",content:"☑"};case"date":return{bg:"bg-pink-500/30",text:"text-pink-300",content:"📅"};default:return{bg:"bg-#EB3678/30",text:"text-indigo-300",content:"T"};}}
 function getDesc(ft:string){switch(ft){case"short_text":return"Short text response";case"long_text":return"Paragraph response";case"email":return"Email address";case"number":return"Numeric value";case"rating":return"Star rating";case"single_select":return"Select one option";case"multi_select":return"Select multiple";case"checkbox":return"Yes or no";case"date":return"Date picker";default:return"";}}

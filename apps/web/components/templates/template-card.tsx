@@ -12,7 +12,7 @@ export type TemplateData = {
 const CATEGORY_STYLES = {
   secondary: "bg-[#3c4a5e] text-[#abb9d2]",
   tertiary: "bg-[#c08d00] text-[#3e2b00]",
-  primary: "bg-[#818cf8] text-[#101b8a]",
+  primary: "bg-[#fca9d4] text-[#0a0a0f]",
   neutral: "bg-[#34343b] text-[#c6c5d5]",
 } as const;
 
@@ -29,7 +29,7 @@ export function TemplateCard({ template }: { template: TemplateData }) {
       <div className="p-4 flex-1 flex flex-col">
         <div className="flex justify-between items-start mb-1">
           <h3
-            className="text-lg font-semibold text-[#e4e1eb] group-hover:text-[#bdc2ff] transition-colors"
+            className="text-lg font-semibold text-[#e4e1eb] group-hover:text-[#fca9d4] transition-colors"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
             {template.title}
@@ -51,7 +51,7 @@ export function TemplateCard({ template }: { template: TemplateData }) {
             <span className="material-symbols-outlined text-[18px]">list_alt</span>
             <span className="text-[13px] font-medium">{template.questionCount} Questions</span>
           </div>
-          <button className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#bdc2ff] hover:text-[#131e8c] transition-all duration-200 active:scale-95">
+          <button className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#fca9d4] hover:text-[#ffffff] transition-all duration-200 active:scale-95">
             Use Template
           </button>
         </div>
@@ -65,7 +65,7 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
     return (
       <div className="flex flex-col gap-2 h-full">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-[#bdc2ff] animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-[#fca9d4] animate-pulse" />
           <div className="h-4 w-24 bg-[#292930] rounded-full" />
         </div>
         <div className="flex-1 flex flex-col gap-2 mt-2">
@@ -91,11 +91,11 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
       <div className="flex items-center justify-center h-full">
         <div className="flex items-center gap-4">
           <div className="w-12 h-16 bg-[#34343b] border border-[#454653] rounded flex items-center justify-center shadow-sm -rotate-6">
-            <span className="material-symbols-outlined text-[#bdc2ff]">description</span>
+            <span className="material-symbols-outlined text-[#fca9d4]">description</span>
           </div>
           <div className="w-1.5 h-1.5 rounded-full bg-[#454653]" />
           <div className="w-12 h-16 bg-[#34343b] border border-[#454653] rounded flex items-center justify-center shadow-sm rotate-6">
-            <span className="material-symbols-outlined text-[#bdc2ff]">task_alt</span>
+            <span className="material-symbols-outlined text-[#fca9d4]">task_alt</span>
           </div>
         </div>
       </div>
@@ -108,12 +108,12 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
         <div className="bg-[#34343b] rounded border border-[#454653] flex flex-col p-2 gap-1">
           <div className="h-1.5 w-1/2 bg-[#454653] rounded" />
           <div className="h-1 w-full bg-[#1b1b22] rounded" />
-          <div className="mt-auto h-4 bg-[#bdc2ff]/20 rounded" />
+          <div className="mt-auto h-4 bg-[#fca9d4]/20 rounded" />
         </div>
         <div className="bg-[#34343b] rounded border border-[#454653] flex flex-col p-2 gap-1 translate-y-4">
           <div className="h-1.5 w-2/3 bg-[#454653] rounded" />
           <div className="h-1 w-full bg-[#1b1b22] rounded" />
-          <div className="mt-auto h-4 bg-[#bdc2ff]/20 rounded" />
+          <div className="mt-auto h-4 bg-[#fca9d4]/20 rounded" />
         </div>
       </div>
     );
@@ -125,10 +125,10 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
       <div className="relative">
         <div className="w-32 h-20 bg-[#34343b] border border-[#454653] rounded-lg shadow-sm flex items-center justify-center gap-2">
           <div className="w-3 h-3 bg-[#ffb4ab] rounded-full" />
-          <div className="w-3 h-3 bg-[#bdc2ff] rounded-full" />
+          <div className="w-3 h-3 bg-[#fca9d4] rounded-full" />
           <div className="w-3 h-3 bg-[#c08d00] rounded-full" />
         </div>
-        <div className="absolute -bottom-2 -right-2 bg-[#bdc2ff] text-[#131e8c] rounded-full p-1">
+        <div className="absolute -bottom-2 -right-2 bg-[#fca9d4] text-[#ffffff] rounded-full p-1">
           <span className="material-symbols-outlined text-[16px]">hub</span>
         </div>
       </div>
@@ -139,8 +139,8 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
 /** Empty state / suggest template card */
 export function TemplateSuggestCard() {
   return (
-    <div className="border-2 border-dashed border-[#454653] rounded-xl p-8 flex flex-col items-center justify-center text-center group cursor-pointer hover:border-[#bdc2ff] transition-all duration-300 bg-[#1b1b22]/50">
-      <div className="w-12 h-12 rounded-full bg-[#34343b] flex items-center justify-center text-[#908f9e] group-hover:bg-[#e0e0ff] group-hover:text-[#bdc2ff] transition-all">
+    <div className="border-2 border-dashed border-[#454653] rounded-xl p-8 flex flex-col items-center justify-center text-center group cursor-pointer hover:border-[#fca9d4] transition-all duration-300 bg-[#1b1b22]/50">
+      <div className="w-12 h-12 rounded-full bg-[#34343b] flex items-center justify-center text-[#908f9e] group-hover:bg-[#e0e0ff] group-hover:text-[#fca9d4] transition-all">
         <span className="material-symbols-outlined text-[32px]">lightbulb</span>
       </div>
       <h4
@@ -152,7 +152,7 @@ export function TemplateSuggestCard() {
       <p className="text-sm text-[#c6c5d5] mt-2 mb-4">
         Suggest a flow or request a custom build from our experts.
       </p>
-      <button className="text-[#bdc2ff] font-bold text-sm hover:underline">Request Template</button>
+      <button className="text-[#fca9d4] font-bold text-sm hover:underline">Request Template</button>
     </div>
   );
 }

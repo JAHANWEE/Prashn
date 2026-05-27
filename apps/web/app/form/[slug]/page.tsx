@@ -53,7 +53,7 @@ export default function RespondentFormPage() {
     return (
       <FormShell progress={100}>
         <div className="w-full max-w-[560px] bg-[#1b1b22] border border-[#454653] rounded-lg p-12 text-center">
-          <span className="material-symbols-outlined text-[64px] text-[#bdc2ff] mb-4 block">task_alt</span>
+          <span className="material-symbols-outlined text-[64px] text-[#fca9d4] mb-4 block">task_alt</span>
           <h2 className="text-2xl font-semibold text-[#e4e1eb] mb-2" style={{ fontFamily: "var(--font-geist-sans)" }}>
             Thank you!
           </h2>
@@ -63,7 +63,7 @@ export default function RespondentFormPage() {
           <a
             href={`/form/${slug}`}
             onClick={() => { setSubmitted(false); setCurrentStep(0); setAnswers({}); }}
-            className="text-[13px] text-[#bdc2ff] hover:underline"
+            className="text-[13px] text-[#fca9d4] hover:underline"
           >
             Submit another response
           </a>
@@ -147,7 +147,7 @@ export default function RespondentFormPage() {
           <button
             onClick={handleNext}
             disabled={submitResponse.isPending}
-            className="flex items-center gap-1 px-8 py-3 text-[13px] font-medium text-[#131e8c] bg-[#bdc2ff] rounded-lg shadow-sm hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-1 px-8 py-3 text-[13px] font-medium text-[#ffffff] bg-[#fca9d4] rounded-lg shadow-sm hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
           >
             {submitResponse.isPending ? "Submitting..." : isLastStep ? "Submit" : "Next"}
             <span className="material-symbols-outlined text-[18px]">
@@ -195,7 +195,7 @@ function FieldRenderer({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={field.placeholder ?? `Enter your ${field.fieldType === "email" ? "email" : "answer"}...`}
-                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none transition-all"
+                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all"
                 style={{ fontFamily: "var(--font-geist-sans)" }}
               />
             );
@@ -207,7 +207,7 @@ function FieldRenderer({
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={field.placeholder ?? "Type your answer here..."}
                 rows={4}
-                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none transition-all resize-none"
+                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all resize-none"
                 style={{ fontFamily: "var(--font-geist-sans)" }}
               />
             );
@@ -222,7 +222,7 @@ function FieldRenderer({
                     key={opt.value}
                     className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all ${
                       value === opt.value
-                        ? "border-[#bdc2ff] bg-[#bdc2ff]/10"
+                        ? "border-[#fca9d4] bg-[#fca9d4]/10"
                         : "border-[#454653] hover:bg-[#1b1b22]"
                     }`}
                   >
@@ -232,7 +232,7 @@ function FieldRenderer({
                       value={opt.value}
                       checked={value === opt.value}
                       onChange={() => onChange(opt.value)}
-                      className="w-4 h-4 text-[#bdc2ff] bg-[#0d0e14] border-[#454653] focus:ring-[#bdc2ff]"
+                      className="w-4 h-4 text-[#fca9d4] bg-[#0d0e14] border-[#454653] focus:ring-[#fca9d4]"
                     />
                     <span className="ml-3 text-[15px] text-[#e4e1eb]">{opt.label}</span>
                   </label>
@@ -253,7 +253,7 @@ function FieldRenderer({
                       key={opt.value}
                       className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all ${
                         isChecked
-                          ? "border-[#bdc2ff] bg-[#bdc2ff]/10"
+                          ? "border-[#fca9d4] bg-[#fca9d4]/10"
                           : "border-[#454653] hover:bg-[#1b1b22]"
                       }`}
                     >
@@ -266,7 +266,7 @@ function FieldRenderer({
                             : [...selected, opt.value];
                           onChange(newSelected.join(","));
                         }}
-                        className="w-4 h-4 text-[#bdc2ff] bg-[#0d0e14] border-[#454653] rounded focus:ring-[#bdc2ff]"
+                        className="w-4 h-4 text-[#fca9d4] bg-[#0d0e14] border-[#454653] rounded focus:ring-[#fca9d4]"
                       />
                       <span className="ml-3 text-[15px] text-[#e4e1eb]">{opt.label}</span>
                     </label>
@@ -288,8 +288,8 @@ function FieldRenderer({
                     onClick={() => onChange(String(i + 1))}
                     className={`w-12 h-12 rounded-full border text-lg font-semibold transition-all ${
                       i < currentRating
-                        ? "bg-[#bdc2ff] text-[#131e8c] border-[#bdc2ff]"
-                        : "bg-[#0d0e14] text-[#908f9e] border-[#454653] hover:border-[#bdc2ff]"
+                        ? "bg-[#fca9d4] text-[#ffffff] border-[#fca9d4]"
+                        : "bg-[#0d0e14] text-[#908f9e] border-[#454653] hover:border-[#fca9d4]"
                     }`}
                   >
                     {i + 1}
@@ -306,7 +306,7 @@ function FieldRenderer({
                   type="checkbox"
                   checked={value === "true"}
                   onChange={(e) => onChange(e.target.checked ? "true" : "false")}
-                  className="w-5 h-5 text-[#bdc2ff] bg-[#0d0e14] border-[#454653] rounded focus:ring-[#bdc2ff]"
+                  className="w-5 h-5 text-[#fca9d4] bg-[#0d0e14] border-[#454653] rounded focus:ring-[#fca9d4]"
                 />
                 <span className="text-[15px] text-[#e4e1eb]">Yes</span>
               </label>
@@ -318,7 +318,7 @@ function FieldRenderer({
                 type="date"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none transition-all"
+                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all"
               />
             );
 
@@ -329,7 +329,7 @@ function FieldRenderer({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Enter your answer..."
-                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none transition-all"
+                className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3.5 text-[15px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all"
               />
             );
         }

@@ -20,7 +20,7 @@ export function DashboardSidebar() {
     <aside className="fixed left-0 top-0 h-full w-[280px] bg-[#0d0e14] border-r border-[#454653] shadow-sm z-50 flex flex-col py-6 px-4">
       {/* Logo */}
       <a href="/" className="flex items-center gap-2 mb-8">
-        <div className="w-8 h-8 rounded flex items-center justify-center bg-[#818cf8]">
+        <div className="w-8 h-8 rounded flex items-center justify-center bg-[#fca9d4]">
           <svg
             width="18"
             height="18"
@@ -29,15 +29,15 @@ export function DashboardSidebar() {
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <rect x="2" y="2" width="6" height="6" rx="1" fill="#131e8c" />
-            <rect x="10" y="2" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-            <rect x="2" y="10" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-            <rect x="10" y="10" width="6" height="6" rx="1" fill="#131e8c" />
+            <rect x="2" y="2" width="6" height="6" rx="1" fill="#ffffff" />
+            <rect x="10" y="2" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+            <rect x="2" y="10" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+            <rect x="10" y="10" width="6" height="6" rx="1" fill="#ffffff" />
           </svg>
         </div>
         <div>
           <h1
-            className="text-lg font-bold tracking-tight text-[#bdc2ff]"
+            className="text-lg font-bold tracking-tight text-[#fca9d4]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
             CanvasForms
@@ -65,7 +65,7 @@ export function DashboardSidebar() {
               className={cn(
                 "flex items-center gap-4 pl-4 py-2 transition-colors text-sm",
                 isActive
-                  ? "text-[#bdc2ff] border-l-2 border-[#bdc2ff] font-bold bg-[#1b1b22]"
+                  ? "text-[#fca9d4] border-l-2 border-[#fca9d4] font-bold bg-[#1b1b22]"
                   : "text-[#c6c5d5] hover:bg-[#1b1b22]",
               )}
             >

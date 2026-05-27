@@ -4,9 +4,9 @@
 export function DemoCredentials() {
   return (
     <div className="w-full bg-[#161620] border border-[#353540] rounded-xl px-5 py-4 flex items-center gap-3">
-      <div className="p-1.5 bg-[#818cf8]/10 rounded-lg shrink-0">
+      <div className="p-1.5 bg-[#fca9d4]/10 rounded-lg shrink-0">
         <span
-          className="material-symbols-outlined text-[18px] text-[#818cf8]"
+          className="material-symbols-outlined text-[18px] text-[#fca9d4]"
           style={{ fontVariationSettings: "'FILL' 1" }}
         >
           info

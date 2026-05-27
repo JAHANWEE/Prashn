@@ -3,7 +3,7 @@ export function BuilderInspector() {
     <aside className="w-[280px] h-full bg-[#121319] border-l border-[#454653] flex flex-col z-30">
       {/* Header */}
       <div className="p-4 border-b border-[#454653] flex items-center gap-2">
-        <span className="material-symbols-outlined text-[#bdc2ff]">settings</span>
+        <span className="material-symbols-outlined text-[#fca9d4]">settings</span>
         <span
           className="text-[12px] font-bold uppercase tracking-widest text-[#e4e1eb]"
           style={{ fontFamily: "var(--font-geist-mono)" }}
@@ -26,7 +26,7 @@ export function BuilderInspector() {
             <input
               type="text"
               defaultValue="Role Selection"
-              className="w-full bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-sm text-[#e4e1eb] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:outline-none"
+              className="w-full bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-sm text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:outline-none"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             />
           </div>
@@ -39,7 +39,7 @@ export function BuilderInspector() {
             </label>
             <textarea
               defaultValue="What is your role?"
-              className="w-full bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-sm text-[#e4e1eb] h-20 focus:ring-2 focus:ring-[#bdc2ff]/20 focus:outline-none resize-none"
+              className="w-full bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-sm text-[#e4e1eb] h-20 focus:ring-2 focus:ring-[#fca9d4]/20 focus:outline-none resize-none"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             />
           </div>
@@ -50,7 +50,7 @@ export function BuilderInspector() {
             >
               Required field
             </span>
-            <div className="w-10 h-5 bg-[#818cf8] rounded-full relative cursor-pointer shadow-inner">
+            <div className="w-10 h-5 bg-[#fca9d4] rounded-full relative cursor-pointer shadow-inner">
               <div className="absolute right-1 top-1 w-3 h-3 bg-white rounded-full" />
             </div>
           </div>
@@ -67,7 +67,7 @@ export function BuilderInspector() {
             >
               Options
             </label>
-            <button className="material-symbols-outlined text-[18px] text-[#bdc2ff]">add</button>
+            <button className="material-symbols-outlined text-[18px] text-[#fca9d4]">add</button>
           </div>
           <div className="space-y-2">
             {["Founder", "Engineer", "Product"].map((option) => (
@@ -78,7 +78,7 @@ export function BuilderInspector() {
                 <input
                   type="text"
                   defaultValue={option}
-                  className="flex-1 bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-[12px] text-[#e4e1eb] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:outline-none"
+                  className="flex-1 bg-[#1b1b22] border border-[#454653] rounded px-2 py-1 text-[12px] text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:outline-none"
                   style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}
                 />
                 <span className="material-symbols-outlined text-[16px] text-[#454653] hover:text-[#ffb4ab] cursor-pointer">
@@ -125,7 +125,7 @@ export function BuilderInspector() {
           Delete Node
         </button>
         <button
-          className="text-[12px] font-bold text-[#bdc2ff]"
+          className="text-[12px] font-bold text-[#fca9d4]"
           style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}
         >
           Apply Changes

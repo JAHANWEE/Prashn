@@ -75,7 +75,7 @@ function FormCard({ form }: { form: any }) {
 
   return (
     <div
-      className="group bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden hover:border-[#bdc2ff] transition-all relative"
+      className="group bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden hover:border-[#fca9d4] transition-all relative"
       style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}
     >
       {/* Canvas preview area */}
@@ -83,7 +83,7 @@ function FormCard({ form }: { form: any }) {
         <div className="h-32 bg-[#1b1b22] cf-canvas-grid-bg p-4 relative flex items-center justify-center overflow-hidden">
           <CanvasPreviewGeneric />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span className="bg-[#bdc2ff] text-[#131e8c] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
+            <span className="bg-[#fca9d4] text-[#ffffff] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
               Open Canvas
             </span>
           </div>
@@ -114,7 +114,7 @@ function FormCard({ form }: { form: any }) {
             {/* Menu button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-[#908f9e] hover:text-[#bdc2ff] transition-colors p-0.5"
+              className="text-[#908f9e] hover:text-[#fca9d4] transition-colors p-0.5"
             >
               <span className="material-symbols-outlined text-[18px]">more_vert</span>
             </button>
@@ -140,7 +140,7 @@ function FormCard({ form }: { form: any }) {
               <button
                 onClick={() => unarchiveForm.mutate({ formId: form.id })}
                 disabled={unarchiveForm.isPending}
-                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#bdc2ff] text-[#131e8c] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#ffffff] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[14px]">unarchive</span>
                 Unarchive
@@ -157,7 +157,7 @@ function FormCard({ form }: { form: any }) {
             <>
               <button
                 onClick={handleCopyLink}
-                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#c6c5d5] hover:border-[#bdc2ff] hover:text-[#bdc2ff] transition-all"
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#c6c5d5] hover:border-[#fca9d4] hover:text-[#fca9d4] transition-all"
               >
                 <span className="material-symbols-outlined text-[14px]">content_copy</span>
                 Copy Link
@@ -176,7 +176,7 @@ function FormCard({ form }: { form: any }) {
               <button
                 onClick={() => publishForm.mutate({ formId: form.id })}
                 disabled={publishForm.isPending}
-                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#bdc2ff] text-[#131e8c] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#ffffff] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[14px]">publish</span>
                 Publish
@@ -229,8 +229,8 @@ function CanvasPreviewGeneric() {
         <div className="w-8 h-1 bg-[#454653] rounded-full" />
       </div>
       <div className="w-3 h-[1.5px] bg-[#454653]" />
-      <div className="w-14 h-9 bg-[#0d0e14] border border-[#bdc2ff] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-        <div className="w-8 h-1 bg-[#bdc2ff]/20 rounded-full" />
+      <div className="w-14 h-9 bg-[#0d0e14] border border-[#fca9d4] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
+        <div className="w-8 h-1 bg-[#fca9d4]/20 rounded-full" />
       </div>
     </div>
   );
@@ -241,7 +241,7 @@ function CreateNewCard({ onClick, loading }: { onClick: () => void; loading: boo
     <button
       onClick={onClick}
       disabled={loading}
-      className="group border-2 border-dashed border-[#454653] rounded-xl flex flex-col items-center justify-center p-8 hover:border-[#bdc2ff] hover:bg-[#bdc2ff]/5 transition-all text-[#c6c5d5] hover:text-[#bdc2ff] disabled:opacity-50"
+      className="group border-2 border-dashed border-[#454653] rounded-xl flex flex-col items-center justify-center p-8 hover:border-[#fca9d4] hover:bg-[#fca9d4]/5 transition-all text-[#c6c5d5] hover:text-[#fca9d4] disabled:opacity-50"
     >
       <span className="material-symbols-outlined text-[48px] mb-4">
         {loading ? "hourglass_empty" : "add_circle"}

@@ -81,7 +81,7 @@ export default function PricingPage() {
               key={plan.name}
               className={`rounded-2xl p-8 flex flex-col h-full relative ${
                 plan.highlighted
-                  ? "bg-[#bdc2ff] text-[#131e8c] shadow-2xl scale-105 z-10"
+                  ? "bg-[#fca9d4] text-[#ffffff] shadow-2xl scale-105 z-10"
                   : "bg-[#1b1b22] border border-[#454653]"
               }`}
             >
@@ -113,7 +113,7 @@ export default function PricingPage() {
               <ul className="flex flex-col gap-3 mb-8 flex-1">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm">
-                    <span className={`material-symbols-outlined text-[16px] ${plan.highlighted ? "" : "text-[#bdc2ff]"}`}>check</span>
+                    <span className={`material-symbols-outlined text-[16px] ${plan.highlighted ? "" : "text-[#fca9d4]"}`}>check</span>
                     {f}
                   </li>
                 ))}
@@ -122,7 +122,7 @@ export default function PricingPage() {
               <button
                 className={`w-full py-3 rounded-xl text-[13px] font-semibold transition-all ${
                   plan.highlighted
-                    ? "bg-white text-[#131e8c] hover:opacity-90 shadow-sm"
+                    ? "bg-white text-[#ffffff] hover:opacity-90 shadow-sm"
                     : "border border-[#454653] text-[#c6c5d5] hover:bg-[#292930]"
                 }`}
                 style={{ fontFamily: "var(--font-geist-sans)" }}
@@ -147,9 +147,9 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-4">
           <span className="text-sm font-semibold text-[#e4e1eb] opacity-50">CanvasForms</span>
           <div className="flex gap-6">
-            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors">Privacy</a>
-            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors">Terms</a>
-            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors">Support</a>
+            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Privacy</a>
+            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Terms</a>
+            <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Support</a>
           </div>
           <p className="text-[11px] text-[#454653]">© {new Date().getFullYear()} CanvasForms. All rights reserved.</p>
         </div>

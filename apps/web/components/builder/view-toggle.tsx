@@ -66,7 +66,7 @@ function ToggleButton({
       style={{
         fontFamily: "var(--font-geist-mono)",
         background: active ? "rgba(31, 31, 38, 0.9)" : "transparent",
-        color: active ? "#bdc2ff" : "rgba(144, 143, 158, 0.7)",
+        color: active ? "#fca9d4" : "rgba(144, 143, 158, 0.7)",
         border: active ? "1px solid rgba(69, 70, 83, 0.6)" : "1px solid transparent",
         boxShadow: active ? "0 1px 4px rgba(0, 0, 0, 0.2)" : "none",
         transition: "all 0.15s ease",

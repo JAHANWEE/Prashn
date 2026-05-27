@@ -21,8 +21,8 @@ export default function LoginPage() {
               headerSubtitle: "text-[#908f9e]",
               formFieldLabel: "text-[#908f9e]",
               formFieldInput: "bg-[#121319] border-[#353540] text-[#e4e1eb] rounded-xl",
-              formButtonPrimary: "bg-[#818cf8] hover:bg-[#9ba3ff] text-[#0d0e14] rounded-xl",
-              footerActionLink: "text-[#bdc2ff]",
+              formButtonPrimary: "bg-[#fca9d4] hover:bg-[#fca9d4] text-[#ffffff] rounded-xl",
+              footerActionLink: "text-[#fca9d4]",
               socialButtonsBlockButton: "bg-[#1f1f26] border-[#353540] text-[#e4e1eb] hover:bg-[#292930]",
               dividerLine: "bg-[#353540]",
               dividerText: "text-[#5a5a6e]",
@@ -33,11 +33,11 @@ export default function LoginPage() {
         />
 
         <footer className="flex items-center justify-center gap-6 pt-3 w-full">
-          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors">
+          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#fca9d4] transition-colors">
             Privacy Policy
           </a>
           <span className="text-[11px] text-[#454653]">·</span>
-          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors">
+          <a href="#" className="text-[11px] text-[#908f9e] hover:text-[#fca9d4] transition-colors">
             Support
           </a>
           <span className="text-[11px] text-[#454653]">·</span>

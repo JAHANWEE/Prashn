@@ -76,7 +76,7 @@ function PricingCard({ plan }: { plan: Plan }) {
 
   if (highlighted) {
     return (
-      <div className="rounded-2xl p-8 flex flex-col shadow-2xl scale-105 relative z-10 bg-[#bdc2ff] text-[#131e8c]">
+      <div className="rounded-2xl p-8 flex flex-col shadow-2xl scale-105 relative z-10 bg-[#fca9d4] text-[#ffffff]">
         {badge && (
           <div
             className="absolute top-0 right-4 -translate-y-1/2 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest bg-[#f7bd3e] text-[#402d00]"
@@ -119,7 +119,7 @@ function PricingCard({ plan }: { plan: Plan }) {
         </ul>
         <a
           href="/register"
-          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white text-[#bdc2ff] hover:opacity-90 transition-opacity shadow-sm text-center block"
+          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white text-[#fca9d4] hover:opacity-90 transition-opacity shadow-sm text-center block"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
           {cta}
@@ -157,7 +157,7 @@ function PricingCard({ plan }: { plan: Plan }) {
             className="flex items-center gap-3 text-sm text-[#c6c5d5]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            <span className="material-symbols-outlined text-[18px] text-[#bdc2ff]">check</span>
+            <span className="material-symbols-outlined text-[18px] text-[#fca9d4]">check</span>
             {f}
           </li>
         ))}

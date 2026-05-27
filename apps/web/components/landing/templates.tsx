@@ -46,7 +46,7 @@ export function LandingTemplates() {
           </div>
           <a
             href="/dashboard/templates"
-            className="text-xs font-medium tracking-widest flex items-center gap-1 text-[#bdc2ff] hover:gap-2 transition-all"
+            className="text-xs font-medium tracking-widest flex items-center gap-1 text-[#fca9d4] hover:gap-2 transition-all"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             VIEW LIBRARY{" "}
@@ -76,8 +76,8 @@ function TemplateCard({
 }) {
   return (
     <div className="group cursor-pointer">
-      <div className="aspect-[4/3] border border-[#454653] rounded-xl overflow-hidden mb-4 flex items-center justify-center transition-colors bg-[#1f1f26] group-hover:border-[#bdc2ff]">
-        <span className="material-symbols-outlined text-[48px] text-[#908f9e] group-hover:text-[#bdc2ff] transition-colors">
+      <div className="aspect-[4/3] border border-[#454653] rounded-xl overflow-hidden mb-4 flex items-center justify-center transition-colors bg-[#1f1f26] group-hover:border-[#fca9d4]">
+        <span className="material-symbols-outlined text-[48px] text-[#908f9e] group-hover:text-[#fca9d4] transition-colors">
           {icon}
         </span>
       </div>

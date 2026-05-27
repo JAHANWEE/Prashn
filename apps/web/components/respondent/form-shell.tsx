@@ -22,10 +22,10 @@ export function FormShell({
       {/* Progress bar */}
       <header className="fixed top-0 left-0 w-full h-1 bg-[#0d0e14] z-50">
         <div
-          className="h-full bg-[#bdc2ff] transition-all duration-500"
+          className="h-full bg-[#fca9d4] transition-all duration-500"
           style={{
             width: `${progress}%`,
-            boxShadow: "0 0 10px rgba(189,194,255,0.5)",
+            boxShadow: "0 0 10px rgba(252,169,212,0.5)",
           }}
         />
       </header>

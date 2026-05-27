@@ -62,7 +62,7 @@ export function BuilderToolbar({
       <div className="flex flex-col items-center gap-0.5">
         <span
           className="material-symbols-outlined text-[16px]"
-          style={{ color: view === "flow" ? "#818cf8" : "#5a5a6e" }}
+          style={{ color: view === "flow" ? "#fca9d4" : "#5a5a6e" }}
         >
           {view === "flow" ? "account_tree" : "view_list"}
         </span>

@@ -67,7 +67,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-[#1f1f26]">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[16px] text-[#818cf8]">visibility</span>
+            <span className="material-symbols-outlined text-[16px] text-[#fca9d4]">visibility</span>
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
               Preview
             </span>
@@ -75,7 +75,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
           <div className="flex items-center gap-2">
             <button
               onClick={handleReset}
-              className="text-[10px] text-[#908f9e] hover:text-[#bdc2ff] transition-colors px-2 py-1 rounded"
+              className="text-[10px] text-[#908f9e] hover:text-[#fca9d4] transition-colors px-2 py-1 rounded"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             >
               Reset
@@ -92,7 +92,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
         {/* Progress bar */}
         <div className="h-[2px] bg-[#1f1f26]">
           <div
-            className="h-full bg-[#818cf8] transition-all duration-300 ease-out"
+            className="h-full bg-[#fca9d4] transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -156,7 +156,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
             <button
               onClick={handleNext}
               disabled={currentStep >= totalSteps - 1}
-              className="flex items-center gap-1 px-5 py-2 text-[11px] font-medium text-[#131e8c] bg-[#bdc2ff] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+              className="flex items-center gap-1 px-5 py-2 text-[11px] font-medium text-[#ffffff] bg-[#fca9d4] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
             >
               Next
               <span className="material-symbols-outlined text-[14px]">arrow_forward</span>

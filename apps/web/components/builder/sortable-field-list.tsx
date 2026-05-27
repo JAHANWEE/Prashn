@@ -195,8 +195,8 @@ function SortableFieldCard({
       onClick={onSelect}
       className={`bg-[#1f1f26] border rounded-xl p-4 cursor-pointer transition-all group ${
         isSelected
-          ? "border-[#818cf8] shadow-[0_0_0_2px_rgba(129,140,248,0.2)]"
-          : "border-[#454653] hover:border-[#bdc2ff]"
+          ? "border-[#fca9d4] shadow-[0_0_0_2px_rgba(252,169,212,0.2)]"
+          : "border-[#454653] hover:border-[#fca9d4]"
       } ${isSorting ? "transition-transform" : ""}`}
     >
       <div className="flex items-center justify-between mb-2">
@@ -205,7 +205,7 @@ function SortableFieldCard({
           <button
             {...attributes}
             {...listeners}
-            className="cursor-grab active:cursor-grabbing text-[#908f9e] hover:text-[#bdc2ff] transition-colors p-0.5 -ml-1 touch-none"
+            className="cursor-grab active:cursor-grabbing text-[#908f9e] hover:text-[#fca9d4] transition-colors p-0.5 -ml-1 touch-none"
             onClick={(e) => e.stopPropagation()}
             aria-label="Drag to reorder"
           >
@@ -218,7 +218,7 @@ function SortableFieldCard({
             {index + 1}
           </span>
           <span
-            className="text-[12px] text-[#bdc2ff] uppercase"
+            className="text-[12px] text-[#fca9d4] uppercase"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             {field.fieldType.replace("_", " ")}
@@ -250,12 +250,12 @@ function SortableFieldCard({
 function FieldCardOverlay({ field, index }: { field: Field; index: number }) {
   return (
     <div
-      className="bg-[#1f1f26] border border-[#818cf8] rounded-xl p-4 shadow-2xl shadow-[#818cf8]/10 rotate-[1.5deg] scale-[1.02]"
+      className="bg-[#1f1f26] border border-[#fca9d4] rounded-xl p-4 shadow-2xl shadow-[#fca9d4]/10 rotate-[1.5deg] scale-[1.02]"
       style={{ width: "100%", maxWidth: "672px" }}
     >
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span className="text-[#bdc2ff] p-0.5 -ml-1">
+          <span className="text-[#fca9d4] p-0.5 -ml-1">
             <span className="material-symbols-outlined text-[18px]">drag_indicator</span>
           </span>
           <span
@@ -265,7 +265,7 @@ function FieldCardOverlay({ field, index }: { field: Field; index: number }) {
             {index + 1}
           </span>
           <span
-            className="text-[12px] text-[#bdc2ff] uppercase"
+            className="text-[12px] text-[#fca9d4] uppercase"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             {field.fieldType.replace("_", " ")}

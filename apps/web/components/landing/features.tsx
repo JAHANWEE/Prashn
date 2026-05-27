@@ -8,7 +8,7 @@ export function LandingFeatures() {
           <div className="md:col-span-8 border border-[#454653] rounded-2xl p-8 flex flex-col justify-between overflow-hidden relative group bg-[#1f1f26]">
             <div className="relative z-10">
               <span
-                className="text-xs font-medium tracking-widest px-4 py-1 rounded-full mb-4 inline-block bg-[#bdc2ff]/10 text-[#bdc2ff]"
+                className="text-xs font-medium tracking-widest px-4 py-1 rounded-full mb-4 inline-block bg-[#fca9d4]/10 text-[#fca9d4]"
                 style={{ fontFamily: "var(--font-geist-mono)" }}
               >
                 LOGIC ENGINE
@@ -35,7 +35,7 @@ export function LandingFeatures() {
             <div className="mt-8 translate-y-8 group-hover:translate-y-4 transition-transform duration-500">
               <div className="border border-[#454653] rounded-t-xl shadow-lg p-4 flex flex-col gap-3 bg-[#292930]">
                 <div className="flex items-center gap-3 border-b border-[#454653] pb-3">
-                  <span className="material-symbols-outlined text-[#bdc2ff]">account_tree</span>
+                  <span className="material-symbols-outlined text-[#fca9d4]">account_tree</span>
                   <span
                     className="text-xs font-medium text-[#e4e1eb]"
                     style={{ fontFamily: "var(--font-geist-mono)" }}
@@ -57,7 +57,7 @@ export function LandingFeatures() {
           </div>
 
           {/* Small Feature: Analytics (4 cols) */}
-          <div className="md:col-span-4 rounded-2xl p-8 flex flex-col justify-between shadow-lg bg-[#bdc2ff] text-[#131e8c]">
+          <div className="md:col-span-4 rounded-2xl p-8 flex flex-col justify-between shadow-lg bg-[#fca9d4] text-[#ffffff]">
             <div>
               <span className="material-symbols-outlined text-[48px] mb-4 block opacity-80">
                 analytics
@@ -77,7 +77,7 @@ export function LandingFeatures() {
               </p>
             </div>
             <div
-              className="mt-4 text-xs font-medium tracking-widest p-3 rounded border bg-[#131e8c]/10 border-[#131e8c]/20"
+              className="mt-4 text-xs font-medium tracking-widest p-3 rounded border bg-[#ffffff]/10 border-[#ffffff]/20"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             >
               84% COMPLETION RATE
@@ -102,7 +102,7 @@ export function LandingFeatures() {
             </div>
             <div className="rounded-lg shadow-sm p-1 border border-[#454653] mt-4 bg-[#292930]">
               <div className="flex items-center gap-1 mb-1 px-1 pt-1">
-                <div className="h-1 flex-1 rounded bg-[#bdc2ff]" />
+                <div className="h-1 flex-1 rounded bg-[#fca9d4]" />
                 <div className="h-1 flex-1 rounded bg-[#454653]/30" />
                 <div className="h-1 flex-1 rounded bg-[#454653]/30" />
               </div>
@@ -128,7 +128,7 @@ export function LandingFeatures() {
               </p>
               <div className="flex gap-3">
                 {["link", "code", "public"].map((icon) => (
-                  <span key={icon} className="material-symbols-outlined text-[#bdc2ff]">
+                  <span key={icon} className="material-symbols-outlined text-[#fca9d4]">
                     {icon}
                   </span>
                 ))}
@@ -153,12 +153,12 @@ export function LandingFeatures() {
                     </span>
                     <div
                       className="w-7 h-4 rounded-full flex items-center px-0.5"
-                      style={{ backgroundColor: on ? "#bdc2ff" : "#454653" }}
+                      style={{ backgroundColor: on ? "#fca9d4" : "#454653" }}
                     >
                       <div
                         className="w-3 h-3 rounded-full transition-transform"
                         style={{
-                          backgroundColor: on ? "#131e8c" : "#1f1f26",
+                          backgroundColor: on ? "#ffffff" : "#1f1f26",
                           transform: on ? "translateX(12px)" : "translateX(0)",
                         }}
                       />

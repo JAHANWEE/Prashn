@@ -18,7 +18,7 @@ export function TimelineChart() {
               key={period}
               className={`px-2 py-1 text-[11px] font-medium rounded transition-colors ${
                 i === 0
-                  ? "bg-[#292930] text-[#bdc2ff]"
+                  ? "bg-[#292930] text-[#fca9d4]"
                   : "text-[#c6c5d5] hover:bg-[#292930]"
               }`}
               style={{ fontFamily: "var(--font-geist-mono)" }}
@@ -36,7 +36,7 @@ export function TimelineChart() {
             <div
               key={i}
               className={`w-12 rounded-t cursor-pointer transition-all hover:opacity-80 ${
-                height === 85 ? "bg-[#bdc2ff]" : "bg-[#bdc2ff]/20 hover:bg-[#bdc2ff]/40"
+                height === 85 ? "bg-[#fca9d4]" : "bg-[#fca9d4]/20 hover:bg-[#fca9d4]/40"
               }`}
               style={{ height: `${height}%` }}
             />

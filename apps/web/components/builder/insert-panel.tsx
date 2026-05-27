@@ -2,8 +2,8 @@ const BLOCK_GROUPS = [
   {
     title: "Common",
     blocks: [
-      { icon: "waving_hand", label: "Welcome", color: "text-[#bdc2ff]" },
-      { icon: "short_text", label: "Short Text", color: "text-[#bdc2ff]" },
+      { icon: "waving_hand", label: "Welcome", color: "text-[#fca9d4]" },
+      { icon: "short_text", label: "Short Text", color: "text-[#fca9d4]" },
     ],
   },
   {
@@ -52,7 +52,7 @@ export function BuilderInsertPanel() {
               {group.blocks.map((block) => (
                 <div
                   key={block.label}
-                  className="p-2 bg-[#1b1b22] border border-[#454653] rounded hover:border-[#bdc2ff] cursor-grab flex flex-col gap-1 transition-colors"
+                  className="p-2 bg-[#1b1b22] border border-[#454653] rounded hover:border-[#fca9d4] cursor-grab flex flex-col gap-1 transition-colors"
                 >
                   <span className={`material-symbols-outlined ${block.color}`}>
                     {block.icon}

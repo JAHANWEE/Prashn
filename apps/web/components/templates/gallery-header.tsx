@@ -30,7 +30,7 @@ export function TemplateGalleryHeader() {
             <input
               type="text"
               placeholder="Search templates..."
-              className="pl-8 pr-4 py-2 bg-[#0d0e14] border border-[#454653] rounded-lg w-64 text-[13px] text-[#e4e1eb] placeholder:text-[#908f9e] focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none transition-all"
+              className="pl-8 pr-4 py-2 bg-[#0d0e14] border border-[#454653] rounded-lg w-64 text-[13px] text-[#e4e1eb] placeholder:text-[#908f9e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all"
               style={{ fontFamily: "var(--font-geist-sans)" }}
             />
           </div>
@@ -48,8 +48,8 @@ export function TemplateGalleryHeader() {
             key={label}
             className={
               active
-                ? "px-4 py-1 bg-[#bdc2ff] text-[#131e8c] rounded-full text-[13px] font-medium"
-                : "px-4 py-1 bg-[#1b1b22] text-[#c6c5d5] border border-[#454653]/50 rounded-full text-[13px] font-medium hover:border-[#bdc2ff] hover:text-[#bdc2ff] transition-all"
+                ? "px-4 py-1 bg-[#fca9d4] text-[#ffffff] rounded-full text-[13px] font-medium"
+                : "px-4 py-1 bg-[#1b1b22] text-[#c6c5d5] border border-[#454653]/50 rounded-full text-[13px] font-medium hover:border-[#fca9d4] hover:text-[#fca9d4] transition-all"
             }
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >

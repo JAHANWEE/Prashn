@@ -64,7 +64,7 @@ export default function AnalyticsPage() {
     <>
       {/* Header */}
       <div className="sticky top-0 bg-[#0d0e14] border-b border-[#454653] z-40 h-16 flex items-center justify-between px-6">
-        <span className="text-lg font-bold text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+        <span className="text-lg font-bold text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>
           Analytics
         </span>
       </div>
@@ -82,7 +82,7 @@ export default function AnalyticsPage() {
             <select
               value={activeFormId ?? ""}
               onChange={(e) => setSelectedFormId(e.target.value)}
-              className="bg-[#1b1b22] border border-[#454653] text-[#e4e1eb] rounded-lg py-2 pl-4 pr-10 text-[13px] font-medium focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none appearance-none"
+              className="bg-[#1b1b22] border border-[#454653] text-[#e4e1eb] rounded-lg py-2 pl-4 pr-10 text-[13px] font-medium focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none appearance-none"
               style={{ fontFamily: "var(--font-geist-sans)" }}
             >
               {formsList.forms.map((f) => (
@@ -108,7 +108,7 @@ export default function AnalyticsPage() {
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <MetricCard label="Total Responses" value={String(overview.totalResponses)} sub={`${overview.totalViews} views`} color="text-[#bdc2ff]" icon="chat_bubble_outline" />
+              <MetricCard label="Total Responses" value={String(overview.totalResponses)} sub={`${overview.totalViews} views`} color="text-[#fca9d4]" icon="chat_bubble_outline" />
               <MetricCard label="Completion Rate" value={`${overview.completionRate}%`} sub={`${overview.totalStarts} starts`} color="text-[#f7bd3e]" icon="percent" />
               <MetricCard label="Avg Duration" value={`${Math.floor(overview.avgDurationSeconds / 60)}m ${overview.avgDurationSeconds % 60}s`} sub="per response" color="text-[#b9c7e0]" icon="timer" />
             </div>
@@ -128,7 +128,7 @@ export default function AnalyticsPage() {
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1">
                     <div
-                      className="w-full bg-[#bdc2ff]/20 hover:bg-[#bdc2ff]/40 rounded-t transition-all cursor-pointer"
+                      className="w-full bg-[#fca9d4]/20 hover:bg-[#fca9d4]/40 rounded-t transition-all cursor-pointer"
                       style={{ height: `${Math.max(height, 4)}%` }}
                       title={`${day.completions} completions`}
                     />
@@ -155,11 +155,11 @@ export default function AnalyticsPage() {
                     <span className="text-[#e4e1eb] font-medium" style={{ fontFamily: "var(--font-geist-mono)" }}>
                       {field.position}. {field.label}
                     </span>
-                    <span className="text-[#bdc2ff]">{field.retentionPercent}%</span>
+                    <span className="text-[#fca9d4]">{field.retentionPercent}%</span>
                   </div>
                   <div className="h-1.5 w-full bg-[#292930] rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-[#bdc2ff] rounded-full transition-all"
+                      className="h-full bg-[#fca9d4] rounded-full transition-all"
                       style={{ width: `${field.retentionPercent}%` }}
                     />
                   </div>

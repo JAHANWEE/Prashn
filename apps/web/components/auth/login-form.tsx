@@ -10,7 +10,7 @@ export function LoginForm() {
       {/* Node Header */}
       <div className="bg-[#161620] border-b border-[#454653]/60 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#818cf8] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-[#fca9d4] flex items-center justify-center">
             <svg
               width="16"
               height="16"
@@ -19,10 +19,10 @@ export function LoginForm() {
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              <rect x="2" y="2" width="6" height="6" rx="1" fill="#131e8c" />
-              <rect x="10" y="2" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="2" y="10" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="10" y="10" width="6" height="6" rx="1" fill="#131e8c" />
+              <rect x="2" y="2" width="6" height="6" rx="1" fill="#ffffff" />
+              <rect x="10" y="2" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="2" y="10" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="10" y="10" width="6" height="6" rx="1" fill="#ffffff" />
             </svg>
           </div>
           <span
@@ -66,7 +66,7 @@ export function LoginForm() {
               Email
             </label>
             <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5a6e] text-[18px] group-focus-within:text-[#818cf8] transition-colors">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5a6e] text-[18px] group-focus-within:text-[#fca9d4] transition-colors">
                 mail
               </span>
               <input
@@ -75,7 +75,7 @@ export function LoginForm() {
                 type="email"
                 placeholder="name@company.com"
                 autoComplete="email"
-                className="w-full pl-10 pr-4 py-3 bg-[#121319] border border-[#353540] rounded-xl text-[14px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#818cf8]/25 focus:border-[#818cf8]/60 transition-all outline-none"
+                className="w-full pl-10 pr-4 py-3 bg-[#121319] border border-[#353540] rounded-xl text-[14px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/25 focus:border-[#fca9d4]/60 transition-all outline-none"
                 style={{ fontFamily: "var(--font-geist-sans)" }}
               />
             </div>
@@ -93,13 +93,13 @@ export function LoginForm() {
               </label>
               <a
                 href="#"
-                className="text-[11px] font-medium text-[#818cf8] hover:text-[#bdc2ff] transition-colors"
+                className="text-[11px] font-medium text-[#fca9d4] hover:text-[#fca9d4] transition-colors"
               >
                 Forgot?
               </a>
             </div>
             <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5a6e] text-[18px] group-focus-within:text-[#818cf8] transition-colors">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5a6e] text-[18px] group-focus-within:text-[#fca9d4] transition-colors">
                 lock
               </span>
               <input
@@ -108,7 +108,7 @@ export function LoginForm() {
                 type="password"
                 placeholder="••••••••"
                 autoComplete="current-password"
-                className="w-full pl-10 pr-4 py-3 bg-[#121319] border border-[#353540] rounded-xl text-[14px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#818cf8]/25 focus:border-[#818cf8]/60 transition-all outline-none"
+                className="w-full pl-10 pr-4 py-3 bg-[#121319] border border-[#353540] rounded-xl text-[14px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/25 focus:border-[#fca9d4]/60 transition-all outline-none"
                 style={{ fontFamily: "var(--font-geist-sans)" }}
               />
             </div>
@@ -117,8 +117,8 @@ export function LoginForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-[#818cf8] text-[#0d0e14] text-[13px] font-semibold py-3 rounded-xl hover:bg-[#9ba3ff] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1"
-            style={{ fontFamily: "var(--font-geist-sans)", boxShadow: "0 2px 12px rgba(129,140,248,0.3)" }}
+            className="w-full bg-[#fca9d4] text-[#ffffff] text-[13px] font-semibold py-3 rounded-xl hover:bg-[#fca9d4] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1"
+            style={{ fontFamily: "var(--font-geist-sans)", boxShadow: "0 2px 12px rgba(252,169,212,0.3)" }}
           >
             <span>Sign In</span>
             <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -140,7 +140,7 @@ export function LoginForm() {
         {/* Register link */}
         <p className="text-center text-[13px] text-[#908f9e]">
           Don&apos;t have an account?{" "}
-          <a href="#" className="text-[#bdc2ff] font-semibold hover:text-white transition-colors">
+          <a href="#" className="text-[#fca9d4] font-semibold hover:text-white transition-colors">
             Create one
           </a>
         </p>

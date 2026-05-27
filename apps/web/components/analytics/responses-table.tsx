@@ -17,7 +17,7 @@ export function ResponsesTable() {
           Latest Responses
         </h3>
         <button className="flex items-center gap-1 px-4 py-2 border border-[#454653] rounded-lg text-[12px] font-medium text-[#e4e1eb] hover:bg-[#292930] transition-all active:scale-95 group">
-          <span className="material-symbols-outlined text-[#908f9e] group-hover:text-[#bdc2ff] text-[18px]">
+          <span className="material-symbols-outlined text-[#908f9e] group-hover:text-[#fca9d4] text-[18px]">
             download
           </span>
           <span style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>

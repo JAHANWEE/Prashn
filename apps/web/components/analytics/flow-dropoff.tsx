@@ -1,5 +1,5 @@
 const NODES = [
-  { label: "Welcome", percent: 100, color: "text-[#bdc2ff]" },
+  { label: "Welcome", percent: 100, color: "text-[#fca9d4]" },
   { label: "Role Selection", percent: 74, color: "text-[#f7bd3e]" },
   { label: "Rating Step", percent: 68, color: "text-[#f7bd3e]" },
 ] as const;
@@ -29,7 +29,7 @@ export function FlowDropoff() {
               </span>
               <div className="h-2 w-full bg-[#292930] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#bdc2ff] rounded-full"
+                  className="h-full bg-[#fca9d4] rounded-full"
                   style={{ width: `${node.percent}%` }}
                 />
               </div>

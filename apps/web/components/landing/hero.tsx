@@ -61,7 +61,7 @@ function CanvasNode({
       className={cn(
         "w-48 rounded cf-node-shadow flex flex-col pointer-events-auto",
         active
-          ? "border-2 border-[#bdc2ff] bg-[#292930]"
+          ? "border-2 border-[#fca9d4] bg-[#292930]"
           : "border border-[#454653] bg-[#292930]",
       )}
       style={{ transform: `translateY(${offsetY}px)` }}
@@ -71,14 +71,14 @@ function CanvasNode({
         className={cn(
           "px-2 py-1 border-b flex items-center justify-between",
           active
-            ? "bg-[#bdc2ff]/10 border-[#bdc2ff]/20"
+            ? "bg-[#fca9d4]/10 border-[#fca9d4]/20"
             : "bg-[#1f1f26] border-[#454653]",
         )}
       >
         <span
           className={cn(
             "text-[10px] uppercase tracking-wider font-medium",
-            active ? "text-[#bdc2ff]" : "text-[#c6c5d5]",
+            active ? "text-[#fca9d4]" : "text-[#c6c5d5]",
           )}
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
@@ -87,7 +87,7 @@ function CanvasNode({
         <span
           className={cn(
             "material-symbols-outlined text-[14px]",
-            active ? "text-[#bdc2ff]" : "text-[#908f9e]",
+            active ? "text-[#fca9d4]" : "text-[#908f9e]",
           )}
         >
           {icon}
@@ -113,7 +113,7 @@ export function LandingHero() {
           }}
         >
           Design forms like{" "}
-          <span className="italic text-[#bdc2ff]">flows</span>.
+          <span className="italic text-[#fca9d4]">flows</span>.
         </h1>
         <p
           className="text-base leading-relaxed max-w-2xl mx-auto mb-8 text-[#c6c5d5]"
@@ -125,7 +125,7 @@ export function LandingHero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/register"
-            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8] text-center"
+            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#fca9d4] text-[#ffffff] hover:bg-[#fca9d4] text-center"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             GET STARTED
@@ -159,15 +159,15 @@ export function LandingHero() {
                   className={cn(
                     "w-8 h-8 flex items-center justify-center rounded transition-colors",
                     active
-                      ? "text-[#bdc2ff] bg-[#bdc2ff]/10"
-                      : "text-[#c6c5d5] hover:bg-[#1f1f26] hover:text-[#bdc2ff]",
+                      ? "text-[#fca9d4] bg-[#fca9d4]/10"
+                      : "text-[#c6c5d5] hover:bg-[#1f1f26] hover:text-[#fca9d4]",
                   )}
                 >
                   <span className="material-symbols-outlined text-[20px]">{icon}</span>
                 </button>
               ))}
               <div className="h-px mx-1 bg-[#454653]" />
-              <button className="w-8 h-8 flex items-center justify-center rounded transition-colors text-[#c6c5d5] hover:bg-[#1f1f26] hover:text-[#bdc2ff]">
+              <button className="w-8 h-8 flex items-center justify-center rounded transition-colors text-[#c6c5d5] hover:bg-[#1f1f26] hover:text-[#fca9d4]">
                 <span className="material-symbols-outlined text-[20px]">zoom_in</span>
               </button>
             </div>
@@ -205,14 +205,14 @@ export function LandingHero() {
 
             {/* Node 3 — Plans */}
             <CanvasNode label="Plans" icon="list" offsetY={40}>
-              <div className="h-4 w-full rounded bg-[#bdc2ff]/20" />
+              <div className="h-4 w-full rounded bg-[#fca9d4]/20" />
               <div className="h-4 w-full rounded bg-[#1b1b22]" />
             </CanvasNode>
 
             {/* Node 4 — Success */}
             <CanvasNode label="Success" icon="celebration">
               <div className="text-center py-1">
-                <span className="material-symbols-outlined text-[32px] text-[#bdc2ff]">
+                <span className="material-symbols-outlined text-[32px] text-[#fca9d4]">
                   task_alt
                 </span>
               </div>
@@ -222,8 +222,8 @@ export function LandingHero() {
 
         {/* Floating "Live Preview" badge */}
         <div className="absolute -bottom-6 -right-6 border border-[#454653] p-4 rounded-xl shadow-2xl flex items-center gap-4 max-w-xs animate-pulse md:animate-none bg-[#292930]">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-[#818cf8]">
-            <span className="material-symbols-outlined text-[#101b8a]">publish</span>
+          <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-[#fca9d4]">
+            <span className="material-symbols-outlined text-[#0a0a0f]">publish</span>
           </div>
           <div>
             <p

@@ -27,8 +27,8 @@ export function FormCard({
             {formTitle}
           </h1>
         </div>
-        <div className="w-10 h-10 rounded-full bg-[#818cf8] flex items-center justify-center">
-          <span className="material-symbols-outlined text-[#101b8a]">description</span>
+        <div className="w-10 h-10 rounded-full bg-[#fca9d4] flex items-center justify-center">
+          <span className="material-symbols-outlined text-[#ffffff]">description</span>
         </div>
       </div>
 

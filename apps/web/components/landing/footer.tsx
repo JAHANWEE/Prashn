@@ -12,7 +12,7 @@ export function LandingFooter() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-8">
         {/* Logo */}
         <div className="flex items-center gap-2 opacity-50">
-          <div className="w-6 h-6 rounded flex items-center justify-center grayscale bg-[#818cf8]">
+          <div className="w-6 h-6 rounded flex items-center justify-center grayscale bg-[#fca9d4]">
             <svg
               width="14"
               height="14"
@@ -21,10 +21,10 @@ export function LandingFooter() {
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              <rect x="2" y="2" width="6" height="6" rx="1" fill="#131e8c" />
-              <rect x="10" y="2" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="2" y="10" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="10" y="10" width="6" height="6" rx="1" fill="#131e8c" />
+              <rect x="2" y="2" width="6" height="6" rx="1" fill="#ffffff" />
+              <rect x="10" y="2" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="2" y="10" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="10" y="10" width="6" height="6" rx="1" fill="#ffffff" />
             </svg>
           </div>
           <span
@@ -41,7 +41,7 @@ export function LandingFooter() {
             <a
               key={label}
               href={href}
-              className="text-[11px] font-medium tracking-widest text-[#c6c5d5] hover:text-[#bdc2ff] transition-colors"
+              className="text-[11px] font-medium tracking-widest text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
               style={{ fontFamily: "var(--font-geist-mono)" }}
             >
               {label}

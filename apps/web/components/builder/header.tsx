@@ -38,15 +38,15 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
       {/* Left: Logo + Breadcrumb */}
       <div className="flex items-center gap-4">
         <a href="/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded flex items-center justify-center bg-[#818cf8]">
+          <div className="w-8 h-8 rounded flex items-center justify-center bg-[#fca9d4]">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="2" y="2" width="6" height="6" rx="1" fill="#131e8c" />
-              <rect x="10" y="2" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="2" y="10" width="6" height="6" rx="1" fill="#131e8c" opacity="0.6" />
-              <rect x="10" y="10" width="6" height="6" rx="1" fill="#131e8c" />
+              <rect x="2" y="2" width="6" height="6" rx="1" fill="#ffffff" />
+              <rect x="10" y="2" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="2" y="10" width="6" height="6" rx="1" fill="#ffffff" opacity="0.6" />
+              <rect x="10" y="10" width="6" height="6" rx="1" fill="#ffffff" />
             </svg>
           </div>
-          <span className="text-lg font-bold tracking-tight text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+          <span className="text-lg font-bold tracking-tight text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>
             CanvasForms
           </span>
         </a>
@@ -58,14 +58,14 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
 
       {/* Center: Tabs */}
       <div className="flex items-center gap-6">
-        <span className="text-[12px] font-medium text-[#bdc2ff] border-b-2 border-[#bdc2ff] pb-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        <span className="text-[12px] font-medium text-[#fca9d4] border-b-2 border-[#fca9d4] pb-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
           Builder
         </span>
         {isPublished && slug && (
           <a
             href={`/form/${slug}`}
             target="_blank"
-            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#bdc2ff] pb-1 transition-all"
+            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             Preview
@@ -74,7 +74,7 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
         {formId && (
           <a
             href="/dashboard/responses"
-            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#bdc2ff] pb-1 transition-all"
+            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             Responses
@@ -103,7 +103,7 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
           <button
             onClick={handlePublish}
             disabled={publishForm.isPending}
-            className="px-4 py-1.5 bg-[#bdc2ff] text-[#131e8c] text-[12px] font-medium rounded hover:opacity-90 transition-all active:scale-95 disabled:opacity-50"
+            className="px-4 py-1.5 bg-[#fca9d4] text-[#ffffff] text-[12px] font-medium rounded hover:opacity-90 transition-all active:scale-95 disabled:opacity-50"
             style={{ fontFamily: "var(--font-geist-mono)", boxShadow: "0px 1px 3px rgba(0,0,0,0.3)" }}
           >
             {publishForm.isPending ? "Publishing..." : "Publish"}

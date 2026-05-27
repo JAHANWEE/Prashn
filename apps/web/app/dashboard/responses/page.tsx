@@ -22,7 +22,7 @@ export default function ResponsesPage() {
   return (
     <>
       <div className="sticky top-0 bg-[#0d0e14] border-b border-[#454653] z-40 h-16 flex items-center px-6">
-        <span className="text-lg font-bold text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+        <span className="text-lg font-bold text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>
           Responses
         </span>
       </div>
@@ -37,7 +37,7 @@ export default function ResponsesPage() {
             <select
               value={activeFormId ?? ""}
               onChange={(e) => setSelectedFormId(e.target.value)}
-              className="bg-[#1b1b22] border border-[#454653] text-[#e4e1eb] rounded-lg py-2 pl-4 pr-10 text-[13px] font-medium focus:ring-2 focus:ring-[#bdc2ff]/20 focus:border-[#bdc2ff] outline-none appearance-none"
+              className="bg-[#1b1b22] border border-[#454653] text-[#e4e1eb] rounded-lg py-2 pl-4 pr-10 text-[13px] font-medium focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none appearance-none"
             >
               {formsList.forms.map((f) => (
                 <option key={f.id} value={f.id}>{f.title}</option>
