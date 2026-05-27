@@ -16,6 +16,7 @@ export default function RespondentFormPage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [respondentEmail, setRespondentEmail] = useState("");
 
   if (isLoading) {
     return (
@@ -87,6 +88,11 @@ export default function RespondentFormPage() {
     setErrorMsg(null);
 
     if (isLastStep) {
+      // Validate email
+      if (!respondentEmail.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(respondentEmail)) {
+        setErrorMsg("Please enter a valid email address.");
+        return;
+      }
       // Submit
       try {
         await submitResponse.mutateAsync({
@@ -95,6 +101,7 @@ export default function RespondentFormPage() {
             fieldId,
             value: value || null,
           })),
+          respondentEmail: respondentEmail.trim(),
         });
         setSubmitted(true);
         import("canvas-confetti").then(m => m.default({ particleCount: 100, spread: 70, origin: { y: 0.6 } }));
@@ -133,6 +140,22 @@ export default function RespondentFormPage() {
             value={answers[currentField.id] ?? ""}
             onChange={(val) => handleAnswerChange(currentField.id, val)}
           />
+          </div>
+        )}
+
+        {/* Email collection on last step */}
+        {isLastStep && (
+          <div className="mt-4">
+            <label className="text-[12px] text-[#c6c5d5] mb-1.5 block font-medium">Your email <span className="text-[#ff6b6b]">*</span></label>
+            <input
+              type="email"
+              value={respondentEmail}
+              onChange={(e) => setRespondentEmail(e.target.value)}
+              placeholder="you@email.com"
+              className="w-full bg-[#0d0e14] border border-[#454653] rounded-xl px-4 py-3 text-[14px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none transition-all"
+              style={{ fontFamily: "var(--font-geist-sans)" }}
+            />
+            <p className="text-[10px] text-[#908f9e] mt-1">We'll send you a copy of your response.</p>
           </div>
         )}
 

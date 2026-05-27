@@ -13,7 +13,7 @@ export function FormCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full max-w-[560px] bg-[#1b1b22] border border-[#454653] shadow-2xl rounded-lg overflow-hidden">
+    <div className="w-full max-w-[640px] bg-[#1b1b22] border border-[#454653] shadow-2xl rounded-lg overflow-hidden">
       {/* Node Header */}
       <div className="bg-[#292930] px-6 py-4 border-b border-[#454653] flex justify-between items-center">
         <div className="flex flex-col">

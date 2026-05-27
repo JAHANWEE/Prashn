@@ -21,6 +21,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
   const updateForm = trpc.forms.update.useMutation({
     onSuccess: () => {
       utils.forms.getById.invalidate();
+      utils.forms.list.invalidate();
       toast.success("Settings saved");
     },
   });
@@ -119,8 +120,8 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
         </div>
       </Section>
 
-      {/* QR Code (only for published forms) */}
-      {form.status === "published" && formUrl && (
+      {/* QR Code */}
+      {formUrl && (
         <Section label="QR Code">
           <div className="flex flex-col items-center gap-2 p-3 bg-white rounded-xl">
             <QRCodeSVG
@@ -133,7 +134,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
             />
           </div>
           <p className="text-[9px] text-[#5a5a6e] text-center mt-1.5" style={{ fontFamily: "var(--font-geist-mono)" }}>
-            Scan to open form
+            {form.status === "published" ? "Scan to open form" : "Publish form to activate this link"}
           </p>
         </Section>
       )}

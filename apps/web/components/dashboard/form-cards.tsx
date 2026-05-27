@@ -276,6 +276,14 @@ const CAT_IMAGES = [
   "/cat_4_canvas.jpeg",
   "/cat_5_canvas.jpeg",
   "/cat_6_canvas.jpeg",
+  "/cat_7_canvas.jpeg",
+  "/cat_8_canvas.jpeg",
+  "/cat_9_canvas.jpeg",
+  "/cat_10_canvas.jpeg",
+  "/cat_11_canvas.jpeg",
+  "/cat_12_canvas.jpeg",
+  "/cat_13.jpeg",
+  "/cat_14.jpeg",
 ];
 
 function CreateNewCard({ onClick, loading }: { onClick: () => void; loading: boolean }) {

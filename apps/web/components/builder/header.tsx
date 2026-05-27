@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { trpc } from "~/trpc/client";
 import { useAuth } from "@clerk/nextjs";
 
-export function BuilderHeader({ formTitle, onPreview }: { formTitle?: string; onPreview?: () => void }) {
+export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave }: { formTitle?: string; onPreview?: () => void; autoSave?: boolean; onToggleAutoSave?: () => void }) {
   const searchParams = useSearchParams();
   const formId = searchParams.get("formId");
   const { isSignedIn } = useAuth();
@@ -96,6 +96,21 @@ export function BuilderHeader({ formTitle, onPreview }: { formTitle?: string; on
         >
           {isPublished ? "Copy Link" : "Share"}
         </button>
+        {/* Auto-save toggle */}
+        <div className="flex items-center gap-2 px-2 border-r border-[#454653]">
+          <span className="text-[10px] text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>Auto-save</span>
+          <button
+            onClick={onToggleAutoSave}
+            className="w-8 h-[18px] rounded-full relative transition-colors"
+            style={{ background: autoSave ? "#fca9d4" : "#454653" }}
+            title={autoSave ? "Auto-save ON" : "Auto-save OFF"}
+          >
+            <div
+              className="absolute top-[3px] w-3 h-3 bg-white rounded-full transition-all"
+              style={{ left: autoSave ? "calc(100% - 15px)" : "3px" }}
+            />
+          </button>
+        </div>
         {!isPublished && (
           <button
             onClick={handlePublish}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { trpc } from "~/trpc/client";
 import { BuilderHeader } from "~/components/builder/header";
@@ -39,6 +39,18 @@ export default function BuilderPage() {
   const { isSignedIn } = useAuth();
   const [builderView, setBuilderView] = useBuilderView();
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [autoSave, setAutoSave] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("builder-autosave") === "true";
+  });
+
+  const toggleAutoSave = () => {
+    const next = !autoSave;
+    setAutoSave(next);
+    localStorage.setItem("builder-autosave", String(next));
+    if (next) toast("Auto-save enabled — changes save automatically");
+    else toast("Auto-save disabled");
+  };
 
   // Undo/Redo
   const { pushAction, undo, redo, canUndo, canRedo } = useUndoRedo();
@@ -104,7 +116,7 @@ export default function BuilderPage() {
 
   return (
     <div className="h-screen flex flex-col bg-[#121319] text-[#e4e1eb] overflow-hidden">
-      <BuilderHeader formTitle={form?.title} onPreview={() => setPreviewOpen(true)} />
+      <BuilderHeader formTitle={form?.title} onPreview={() => setPreviewOpen(true)} autoSave={autoSave} onToggleAutoSave={toggleAutoSave} />
       <div className="flex flex-1 pt-16 h-full overflow-hidden">
         {/* Left toolbar */}
         <BuilderToolbar
@@ -209,7 +221,7 @@ export default function BuilderPage() {
           </div>
           <div className="flex-1 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden">
             {selectedField ? (
-              <FieldInspector field={selectedField} formId={formId} allFields={fields} />
+              <FieldInspector field={selectedField} formId={formId} allFields={fields} autoSave={autoSave} />
             ) : (
               <FormSettingsPanel formId={formId} />
             )}
@@ -230,7 +242,7 @@ export default function BuilderPage() {
 
 // ─── Field Inspector ─────────────────────────────────────────────────────────
 
-function FieldInspector({ field, formId, allFields }: { field: any; formId: string; allFields?: any[] }) {
+function FieldInspector({ field, formId, allFields, autoSave }: { field: any; formId: string; allFields?: any[]; autoSave: boolean }) {
   const utils = trpc.useUtils();
   const updateField = trpc.fields.update.useMutation({
     onSuccess: () => {
@@ -268,6 +280,17 @@ function FieldInspector({ field, formId, allFields }: { field: any; formId: stri
 
   const hasOptions = ["single_select", "multi_select", "dropdown"].includes(field.fieldType);
   const otherFields = (allFields ?? []).filter((f: any) => f.id !== field.id);
+
+  // Debounced auto-save effect
+  const autoSaveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    if (!autoSave) return;
+    if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current);
+    autoSaveTimerRef.current = setTimeout(() => {
+      handleSave();
+    }, 1200);
+    return () => { if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current); };
+  }, [autoSave, label, description, required, placeholder, options, condEnabled, condFieldId, condOperator, condValue]);
 
   const handleSave = () => {
     updateField.mutate({
@@ -440,13 +463,20 @@ function FieldInspector({ field, formId, allFields }: { field: any; formId: stri
       </div>
 
       {/* Save */}
-      <button
-        onClick={handleSave}
-        disabled={updateField.isPending}
-        className="w-full bg-[#fca9d4] text-[#0a0a0f] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
-      >
-        {updateField.isPending ? "Saving..." : "Save Changes"}
-      </button>
+      {!autoSave && (
+        <button
+          onClick={handleSave}
+          disabled={updateField.isPending}
+          className="w-full bg-[#fca9d4] text-[#0a0a0f] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        >
+          {updateField.isPending ? "Saving..." : "Save Changes"}
+        </button>
+      )}
+      {autoSave && (
+        <p className="text-[9px] text-center text-[#5a5a6e] py-2" style={{ fontFamily: "var(--font-geist-mono)" }}>
+          {updateField.isPending ? "⟳ Saving..." : "✓ Auto-saving enabled"}
+        </p>
+      )}
     </div>
   );
 }
