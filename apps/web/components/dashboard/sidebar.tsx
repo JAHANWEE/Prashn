@@ -40,7 +40,7 @@ export function DashboardSidebar() {
             className="text-lg font-bold tracking-tight text-[#fca9d4]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            CanvasForms
+            Prashn
           </h1>
           <p
             className="text-[11px] tracking-wider uppercase text-[#c6c5d5] opacity-70"

@@ -49,7 +49,7 @@ export default function DashboardPage() {
 
       {/* Footer */}
       <footer className="w-full py-8 border-t border-[#454653] bg-[#1b1b22] flex flex-col items-center gap-2 mt-8">
-        <div className="text-[13px] font-black text-[#c6c5d5]">CanvasForms</div>
+        <div className="text-[13px] font-black text-[#c6c5d5]">Prashn</div>
         <div className="flex gap-4">
           <a href="#" className="text-[11px] text-[#c6c5d5] opacity-70 hover:opacity-100 underline transition-opacity">
             Privacy
@@ -62,7 +62,7 @@ export default function DashboardPage() {
           </a>
         </div>
         <p className="text-[11px] text-[#c6c5d5] opacity-70">
-          Built with CanvasForms © 2024
+          Built with Prashn © 2024
         </p>
       </footer>
     </>

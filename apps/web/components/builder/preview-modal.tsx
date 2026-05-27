@@ -167,7 +167,7 @@ function DesktopFrame({ children, progress }: { children: React.ReactNode; progr
         {/* URL bar */}
         <div className="flex-1 h-5 bg-[#0d0e14] rounded-md flex items-center px-3 border border-[#2d2d3a]">
           <span className="material-symbols-outlined text-[10px] text-[#5a5a6e] mr-1.5">lock</span>
-          <span className="text-[9px] text-[#5a5a6e]" style={{ fontFamily: "var(--font-geist-mono)" }}>canvasforms.io/form/your-form</span>
+          <span className="text-[9px] text-[#5a5a6e]" style={{ fontFamily: "var(--font-geist-mono)" }}>prashn.io/form/your-form</span>
         </div>
       </div>
       {/* Progress */}

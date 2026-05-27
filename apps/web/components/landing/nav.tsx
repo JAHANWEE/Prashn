@@ -35,7 +35,7 @@ export async function LandingNav() {
             className="text-lg font-bold tracking-tight text-[#fca9d4]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            CanvasForms
+            Prashn
           </span>
         </div>
 

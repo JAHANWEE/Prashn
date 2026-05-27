@@ -1,8 +1,8 @@
 /**
- * CanvasForms — Seed Script
+ * Prashn — Seed Script
  *
  * Creates demo data for judges/reviewers:
- * - 1 demo user (admin@canvasforms.io)
+ * - 1 demo user (admin@prashn.io)
  * - 4 system themes
  * - 3 themed forms with fields
  * - 700+ randomized responses
@@ -10,7 +10,7 @@
  * - 1 API key
  *
  * Usage:
- *   DATABASE_URL="postgresql://canvasforms:canvasforms@localhost:5432/canvasforms" npx tsx seed.ts
+ *   DATABASE_URL="postgresql://prashn:prashn@localhost:5432/prashn" npx tsx seed.ts
  */
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -61,7 +61,7 @@ async function seedUser() {
   console.log("👤 Seeding demo user...");
   await db.execute(sql`
     INSERT INTO users (id, clerk_id, full_name, email, email_verified, plan)
-    VALUES (${DEMO_USER_ID}, 'user_demo_canvasforms', 'Alex Rivera', 'admin@canvasforms.io', true, 'pro')
+    VALUES (${DEMO_USER_ID}, 'user_demo_prashn', 'Alex Rivera', 'admin@prashn.io', true, 'pro')
     ON CONFLICT (clerk_id) DO UPDATE SET full_name = 'Alex Rivera', plan = 'pro'
   `);
 }
@@ -298,7 +298,7 @@ async function seedApiKey() {
 // ─── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log("🌱 CanvasForms Seed Script\n");
+  console.log("🌱 Prashn Seed Script\n");
   console.log("═══════════════════════════════════════\n");
 
   await seedUser();
@@ -312,7 +312,7 @@ async function main() {
   console.log("\n═══════════════════════════════════════");
   console.log("✅ Seed complete!\n");
   console.log("Demo credentials:");
-  console.log("  Email: admin@canvasforms.io");
+  console.log("  Email: admin@prashn.io");
   console.log("  Plan:  Pro");
   console.log("\nForms created:");
   console.log("  • Startup Feedback Flow (public)  → /form/startup-feedback-flow");

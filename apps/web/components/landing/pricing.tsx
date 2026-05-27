@@ -53,7 +53,7 @@ export function LandingPricing() {
             className="text-sm text-[#c6c5d5]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            Scale your data collection with CanvasForms.
+            Scale your data collection with Prashn.
           </p>
         </div>
 

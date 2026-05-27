@@ -20,7 +20,7 @@ export function DemoCredentials() {
           Demo credentials
         </p>
         <p className="text-[11px] text-[#908f9e] truncate" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          admin@canvasforms.io / canvas_demo_2024
+          admin@prashn.io / canvas_demo_2024
         </p>
       </div>
     </div>

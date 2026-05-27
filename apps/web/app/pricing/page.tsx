@@ -70,7 +70,7 @@ export default function PricingPage() {
             Simple, transparent pricing.
           </h1>
           <p className="text-lg text-[#c6c5d5] max-w-xl mx-auto" style={{ fontFamily: "var(--font-geist-sans)" }}>
-            Scale your data collection with CanvasForms. No hidden fees, cancel anytime.
+            Scale your data collection with Prashn. No hidden fees, cancel anytime.
           </p>
         </div>
 
@@ -145,13 +145,13 @@ export default function PricingPage() {
       {/* Footer */}
       <footer className="py-12 border-t border-[#454653] bg-[#0d0e14]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-4">
-          <span className="text-sm font-semibold text-[#e4e1eb] opacity-50">CanvasForms</span>
+          <span className="text-sm font-semibold text-[#e4e1eb] opacity-50">Prashn</span>
           <div className="flex gap-6">
             <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Privacy</a>
             <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Terms</a>
             <a href="#" className="text-[11px] text-[#c6c5d5] hover:text-[#fca9d4] transition-colors">Support</a>
           </div>
-          <p className="text-[11px] text-[#454653]">© {new Date().getFullYear()} CanvasForms. All rights reserved.</p>
+          <p className="text-[11px] text-[#454653]">© {new Date().getFullYear()} Prashn. All rights reserved.</p>
         </div>
       </footer>
     </div>

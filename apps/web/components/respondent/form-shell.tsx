@@ -38,8 +38,8 @@ export function FormShell({
       {/* Footer */}
       <footer className="w-full py-8 flex flex-col items-center gap-2 border-t border-[#454653] bg-[#1b1b22]">
         <div className="flex items-center gap-1">
-          <span className="text-[13px] font-black text-[#e4e1eb]">CanvasForms</span>
-          <span className="text-[11px] text-[#c6c5d5] opacity-70">Built with CanvasForms</span>
+          <span className="text-[13px] font-black text-[#e4e1eb]">Prashn</span>
+          <span className="text-[11px] text-[#c6c5d5] opacity-70">Built with Prashn</span>
         </div>
         <div className="flex gap-4">
           <a href="#" className="text-[11px] text-[#c6c5d5] opacity-70 hover:opacity-100 underline transition-all">

@@ -165,7 +165,7 @@ export function TerminalForm({ formTitle, fields, onSubmit }: TerminalFormProps)
           <div className="w-3 h-3 rounded-full bg-[#28c840]" />
         </div>
         <span className="text-[10px] text-[#908f9e] ml-2" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          canvasforms — {formTitle}
+          prashn — {formTitle}
         </span>
         <div className="ml-auto flex items-center gap-1.5">
           <span className="text-[9px] text-[#5a5a6e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
@@ -227,7 +227,7 @@ export function TerminalForm({ formTitle, fields, onSubmit }: TerminalFormProps)
       {/* Footer */}
       <div className="h-7 flex items-center justify-between px-4 border-t text-[9px] text-[#5a5a6e]" style={{ background: "#0a0a0f", borderColor: "#1e212d", fontFamily: "var(--font-geist-mono)" }}>
         <span>Press Enter to submit</span>
-        <span>canvasforms v1.0.0</span>
+        <span>prashn v1.0.0</span>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CanvasForms — Design forms like flows",
+  title: "Prashn — Design forms like flows",
   description:
     "Build dynamic forms on an infinite canvas, then publish them as clean finite screens your users can actually complete.",
 };

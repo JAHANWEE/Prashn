@@ -35,7 +35,7 @@ export default function TerminalThemePreviewPage() {
     ? fields.map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))
     : !formId ? DEMO_FIELDS : [];
 
-  const title = form?.title ?? (formId ? "Loading..." : "CanvasForms Demo");
+  const title = form?.title ?? (formId ? "Loading..." : "Prashn Demo");
 
   if (isLoading) {
     return (

@@ -35,7 +35,7 @@ app.use("/webhooks", clerkWebhookRouter);
 // Health check
 app.get("/", (req, res) => {
   return res.json({
-    name: "CanvasForms API",
+    name: "Prashn API",
     version: "1.0.0",
     status: "running",
     docs: `${env.BASE_URL}/docs`,
@@ -48,11 +48,11 @@ app.get("/health", (req, res) => {
 
 // OpenAPI spec
 const openApiDocument = generateOpenApiDocument(serverRouter, {
-  title: "CanvasForms API",
+  title: "Prashn API",
   description: `
 ## Overview
 
-CanvasForms is a visual form builder where creators design dynamic forms on an infinite canvas and publish them as clean, finite screens for respondents.
+Prashn is a visual form builder where creators design dynamic forms on an infinite canvas and publish them as clean, finite screens for respondents.
 
 ## Authentication
 
@@ -83,7 +83,7 @@ Rate limit headers are included in every response:
 
 ## Demo Credentials
 
-- **Email:** admin@canvasforms.io
+- **Email:** admin@prashn.io
 - **Plan:** Pro
 - **API Key:** Generated via the dashboard
 
@@ -109,8 +109,8 @@ app.use(
       url: "/openapi.json",
     },
     metaData: {
-      title: "CanvasForms API Docs",
-      description: "Interactive API documentation for CanvasForms",
+      title: "Prashn API Docs",
+      description: "Interactive API documentation for Prashn",
     },
   }),
 );

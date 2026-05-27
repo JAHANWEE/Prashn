@@ -47,7 +47,7 @@ export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave
             </svg>
           </div>
           <span className="text-lg font-bold tracking-tight text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>
-            CanvasForms
+            Prashn
           </span>
         </a>
         <div className="h-5 w-[1px] bg-[#454653]" />
@@ -60,6 +60,17 @@ export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave
 
       {/* Center: Tabs */}
       <div className="flex items-center gap-6">
+        {formId && (
+          <a
+            href={`/terminal-theme-preview?formId=${formId}`}
+            target="_blank"
+            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all flex items-center gap-1"
+            style={{ fontFamily: "var(--font-geist-mono)" }}
+          >
+            <span className="material-symbols-outlined text-[14px]">terminal</span>
+            IDE
+          </a>
+        )}
         <span className="text-[12px] font-medium text-[#fca9d4] border-b-2 border-[#fca9d4] pb-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
           Builder
         </span>
@@ -77,17 +88,6 @@ export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             Responses
-          </a>
-        )}
-        {formId && (
-          <a
-            href={`/terminal-theme-preview?formId=${formId}`}
-            target="_blank"
-            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all flex items-center gap-1"
-            style={{ fontFamily: "var(--font-geist-mono)" }}
-          >
-            <span className="material-symbols-outlined text-[14px]">terminal</span>
-            IDE
           </a>
         )}
         {formId && (

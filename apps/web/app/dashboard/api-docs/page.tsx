@@ -22,7 +22,7 @@ export default function ApiDocsPage() {
             Developer API
           </h2>
           <p className="text-base text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-sans)" }}>
-            Use CanvasForms public APIs to read public forms and submit responses.
+            Use Prashn public APIs to read public forms and submit responses.
           </p>
         </div>
 
@@ -168,13 +168,13 @@ export default function ApiDocsPage() {
 
       {/* Footer */}
       <footer className="mt-auto w-full py-8 bg-[#0d0e14] border-t border-[#454653] flex flex-col items-center gap-2">
-        <span className="text-[10px] font-black text-[#c6c5d5] uppercase tracking-widest" style={{ fontFamily: "var(--font-geist-mono)" }}>CanvasForms</span>
+        <span className="text-[10px] font-black text-[#c6c5d5] uppercase tracking-widest" style={{ fontFamily: "var(--font-geist-mono)" }}>Prashn</span>
         <div className="flex gap-6">
           <a href="#" className="text-[11px] text-[#c6c5d5] opacity-70 hover:opacity-100 underline transition-opacity">Privacy</a>
           <a href="#" className="text-[11px] text-[#c6c5d5] opacity-70 hover:opacity-100 underline transition-opacity">Terms</a>
           <a href="#" className="text-[11px] text-[#c6c5d5] opacity-70 hover:opacity-100 underline transition-opacity">Support</a>
         </div>
-        <p className="text-[10px] text-[#c6c5d5] opacity-50">Built with CanvasForms © 2024</p>
+        <p className="text-[10px] text-[#c6c5d5] opacity-50">Built with Prashn © 2024</p>
       </footer>
     </>
   );

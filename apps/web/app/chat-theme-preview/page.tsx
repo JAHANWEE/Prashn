@@ -33,7 +33,7 @@ export default function ChatThemePreviewPage() {
     ? fields.map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))
     : !formId ? DEMO_FIELDS : [];
 
-  const title = form?.title ?? (formId ? "Loading..." : "CanvasForms");
+  const title = form?.title ?? (formId ? "Loading..." : "Prashn");
 
   if (isLoading) {
     return (

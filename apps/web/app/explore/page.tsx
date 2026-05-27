@@ -26,7 +26,7 @@ export default function ExplorePage() {
             <div className="w-7 h-7 rounded flex items-center justify-center bg-[#fca9d4]">
               <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="6" height="6" rx="1" fill="#0a0a0f"/><rect x="10" y="2" width="6" height="6" rx="1" fill="#0a0a0f" opacity="0.6"/><rect x="2" y="10" width="6" height="6" rx="1" fill="#0a0a0f" opacity="0.6"/><rect x="10" y="10" width="6" height="6" rx="1" fill="#0a0a0f"/></svg>
             </div>
-            <span className="text-base font-bold tracking-tight text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>CanvasForms</span>
+            <span className="text-base font-bold tracking-tight text-[#fca9d4]" style={{ fontFamily: "var(--font-geist-sans)" }}>Prashn</span>
           </a>
           <div className="flex items-center gap-4">
             <a href="/login" className="text-[11px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] transition-colors" style={{ fontFamily: "var(--font-geist-mono)" }}>Sign In</a>
@@ -128,7 +128,7 @@ export default function ExplorePage() {
       {/* Footer */}
       <footer className="border-t border-[#1e212d] py-8">
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-          <span className="text-[11px] text-[#5a5a6e]">© 2024 CanvasForms</span>
+          <span className="text-[11px] text-[#5a5a6e]">© 2024 Prashn</span>
           <div className="flex gap-4">
             <a href="/" className="text-[11px] text-[#5a5a6e] hover:text-[#fca9d4] transition-colors">Home</a>
             <a href="/pricing" className="text-[11px] text-[#5a5a6e] hover:text-[#fca9d4] transition-colors">Pricing</a>

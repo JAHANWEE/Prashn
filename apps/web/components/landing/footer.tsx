@@ -31,7 +31,7 @@ export function LandingFooter() {
             className="text-sm font-semibold text-[#e4e1eb]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            CanvasForms
+            Prashn
           </span>
         </div>
 
@@ -54,7 +54,7 @@ export function LandingFooter() {
           className="text-[11px] text-[#c6c5d5] opacity-50"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
-          © {new Date().getFullYear()} CanvasForms. All rights reserved.
+          © {new Date().getFullYear()} Prashn. All rights reserved.
         </p>
       </div>
     </footer>

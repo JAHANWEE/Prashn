@@ -27,16 +27,18 @@ export function ViewToggle({ value, onChange }: ViewToggleProps) {
       </button>
       <button
         onClick={() => onChange("flow")}
-        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[12px] font-semibold transition-all"
+        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-[12px] font-semibold transition-all relative"
         style={{
           fontFamily: "var(--font-geist-mono)",
-          background: value === "flow" ? "rgba(252,169,212,0.1)" : "transparent",
-          color: value === "flow" ? "#fca9d4" : "#5a5a6e",
-          border: value === "flow" ? "1px solid rgba(252,169,212,0.3)" : "1px solid transparent",
+          background: value === "flow" ? "rgba(252,169,212,0.12)" : "rgba(252,169,212,0.03)",
+          color: value === "flow" ? "#fca9d4" : "#fca9d4",
+          border: value === "flow" ? "1px solid rgba(252,169,212,0.4)" : "1px solid rgba(252,169,212,0.15)",
+          boxShadow: value === "flow" ? "0 0 12px rgba(252,169,212,0.1)" : "none",
         }}
       >
         <span className="material-symbols-outlined text-[16px]">timeline</span>
         Canvas
+        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#fca9d4] animate-pulse" />
       </button>
     </div>
   );

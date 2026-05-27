@@ -29,7 +29,7 @@ export function LoginForm() {
             className="text-[15px] font-semibold tracking-tight text-[#e4e1eb]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            CanvasForms
+            Prashn
           </span>
         </div>
         <div className="flex gap-1.5">

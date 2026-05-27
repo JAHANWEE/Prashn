@@ -66,8 +66,11 @@ export function ChatForm({ formTitle, fields, onSubmit }: ChatFormProps) {
     if (!isTyping && !completed) inputRef.current?.focus();
   }, [isTyping, completed, step]);
 
-  // Boot
+  // Boot (guarded against StrictMode double-fire)
+  const bootedRef = useRef(false);
   useEffect(() => {
+    if (bootedRef.current) return;
+    bootedRef.current = true;
     const boot = async () => {
       await typeAssistant("👋 Hi there! Welcome.", 600);
       await typeAssistant("I'd love to ask you a few quick questions.", 700);

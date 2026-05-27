@@ -1,10 +1,10 @@
-# CanvasForms
+# Prashn
 
 A production-style form builder SaaS where creators design dynamic forms on an infinite canvas, publish shareable links, and collect responses — built with Turborepo, tRPC, Zod, Drizzle ORM, and Scalar.
 
 ## Demo Credentials
 
-- **Email:** admin@canvasforms.io
+- **Email:** admin@prashn.io
 - **Plan:** Pro
 - **API Docs:** http://localhost:8000/docs
 
@@ -84,7 +84,7 @@ pnpm db:seed
 ```
 
 This creates:
-- 1 demo user (admin@canvasforms.io, Pro plan)
+- 1 demo user (admin@prashn.io, Pro plan)
 - 4 system themes
 - 3 themed forms with fields
 - 700+ randomized responses
@@ -229,10 +229,10 @@ Both apps include Dockerfiles for containerized deployment:
 
 ```bash
 # Build API
-docker build -f apps/api/Dockerfile -t canvasforms-api .
+docker build -f apps/api/Dockerfile -t prashn-api .
 
 # Build Web
-docker build -f apps/web/Dockerfile -t canvasforms-web .
+docker build -f apps/web/Dockerfile -t prashn-web .
 ```
 
 ## License

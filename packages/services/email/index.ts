@@ -6,7 +6,7 @@ import { env } from "../env";
 
 class EmailService {
   private get fromEmail(): string {
-    return env.RESEND_FROM_EMAIL ?? "noreply@canvasforms.io";
+    return env.RESEND_FROM_EMAIL ?? "noreply@prashn.io";
   }
 
   /**
@@ -31,8 +31,8 @@ class EmailService {
           <p style="margin: 0; color: #908f9e; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Total Responses</p>
           <p style="margin: 0; color: #bdc2ff; font-size: 24px; font-weight: 700;">${data.responseCount}</p>
         </div>
-        <a href="${env.RESEND_FROM_EMAIL ? "https://canvasforms.io" : "http://localhost:3000"}/dashboard" style="display: inline-block; background: #818cf8; color: #101b8a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Responses</a>
-        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— CanvasForms</p>
+        <a href="${env.RESEND_FROM_EMAIL ? "https://prashn.io" : "http://localhost:3000"}/dashboard" style="display: inline-block; background: #818cf8; color: #101b8a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Responses</a>
+        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— Prashn</p>
       </div>
     `;
 
@@ -57,7 +57,7 @@ class EmailService {
     userId: string;
     formId: string;
   }): Promise<void> {
-    const formUrl = `${env.RESEND_FROM_EMAIL ? "https://canvasforms.io" : "http://localhost:3000"}/form/${data.formSlug}`;
+    const formUrl = `${env.RESEND_FROM_EMAIL ? "https://prashn.io" : "http://localhost:3000"}/form/${data.formSlug}`;
     const subject = `"${data.formTitle}" is now live!`;
     const html = `
       <div style="font-family: 'Inter', sans-serif; max-width: 560px; margin: 0 auto; padding: 32px; background: #121319; color: #e4e1eb; border-radius: 12px;">
@@ -70,7 +70,7 @@ class EmailService {
           <p style="margin: 0; color: #bdc2ff; font-size: 14px; word-break: break-all;">${formUrl}</p>
         </div>
         <a href="${formUrl}" style="display: inline-block; background: #818cf8; color: #101b8a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">View Live Form</a>
-        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— CanvasForms</p>
+        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— Prashn</p>
       </div>
     `;
 
@@ -99,8 +99,8 @@ class EmailService {
       <div style="font-family: 'Inter', sans-serif; max-width: 560px; margin: 0 auto; padding: 32px; background: #121319; color: #e4e1eb; border-radius: 12px;">
         <h2 style="color: #f7bd3e; margin: 0 0 8px;">⚠️ Response Limit Reached</h2>
         <p style="color: #c6c5d5; margin: 0 0 24px;">Your form "${data.formTitle}" has reached its limit of <strong>${data.limit}</strong> responses and is no longer accepting submissions.</p>
-        <a href="${env.RESEND_FROM_EMAIL ? "https://canvasforms.io" : "http://localhost:3000"}/dashboard" style="display: inline-block; background: #818cf8; color: #101b8a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">Manage Form</a>
-        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— CanvasForms</p>
+        <a href="${env.RESEND_FROM_EMAIL ? "https://prashn.io" : "http://localhost:3000"}/dashboard" style="display: inline-block; background: #818cf8; color: #101b8a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">Manage Form</a>
+        <p style="color: #454653; font-size: 11px; margin-top: 32px;">— Prashn</p>
       </div>
     `;
 
