@@ -128,8 +128,8 @@ export default function AnalyticsPage() {
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1">
                     <div
-                      className="w-full bg-[#fca9d4]/20 hover:bg-[#fca9d4]/40 rounded-t transition-all cursor-pointer"
-                      style={{ height: `${Math.max(height, 4)}%` }}
+                      className="w-full bg-[#fca9d4] hover:bg-[#fca9d4] rounded-t transition-all cursor-pointer"
+                      style={{ height: `${Math.max(height, 4)}%`, opacity: 0.7 }}
                       title={`${day.completions} completions`}
                     />
                     <span className="text-[9px] text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
