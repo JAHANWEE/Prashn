@@ -79,6 +79,17 @@ export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave
             Responses
           </a>
         )}
+        {formId && (
+          <a
+            href={`/terminal-theme-preview?formId=${formId}`}
+            target="_blank"
+            className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#fca9d4] pb-1 transition-all flex items-center gap-1"
+            style={{ fontFamily: "var(--font-geist-mono)" }}
+          >
+            <span className="material-symbols-outlined text-[14px]">terminal</span>
+            IDE
+          </a>
+        )}
       </div>
 
       {/* Right: Actions */}

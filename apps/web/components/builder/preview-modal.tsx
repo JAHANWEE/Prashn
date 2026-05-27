@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { TerminalForm } from "~/app/terminal-theme-preview/components/terminal-form";
+import { THEMES } from "./theme-data";
 
 interface PreviewField {
   id: string;
@@ -33,6 +35,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
   const [currentStep, setCurrentStep] = useState(0);
   const [device, setDevice] = useState<Device>("desktop");
   const [zoom, setZoom] = useState<Zoom>(0.75);
+  const [theme, setTheme] = useState<string>("default");
 
   if (!open) return null;
 
@@ -81,6 +84,18 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
 
         {/* Right: controls */}
         <div className="flex items-center gap-2">
+          {/* Theme selector */}
+          <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-[#0a0a0f] border border-[#1e212d]">
+            {THEMES.slice(0, 6).map(t => (
+              <button
+                key={t.id}
+                onClick={() => setTheme(t.id)}
+                title={t.label}
+                className="w-4 h-4 rounded-full transition-all"
+                style={{ background: t.color, opacity: theme === t.id ? 1 : 0.35, transform: theme === t.id ? "scale(1.3)" : "scale(1)", border: theme === t.id ? "2px solid white" : "none" }}
+              />
+            ))}
+          </div>
           {/* Zoom */}
           <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#0a0a0f] border border-[#1e212d]">
             {([0.75, 1, 1.25] as Zoom[]).map(z => (
@@ -108,9 +123,19 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
       {/* Workspace */}
       <div className="flex-1 flex items-center justify-center overflow-hidden p-8">
         <div style={{ transform: `scale(${zoom})`, transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)" }}>
-          {device === "desktop" && <DesktopFrame progress={progress}><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></DesktopFrame>}
-          {device === "tablet" && <TabletFrame><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></TabletFrame>}
-          {device === "mobile" && <MobileFrame progress={progress}><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></MobileFrame>}
+          {theme === "terminal" ? (
+            <TerminalForm
+              formTitle={formTitle ?? "Untitled Form"}
+              fields={(fields ?? []).map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))}
+              onSubmit={() => {}}
+            />
+          ) : (
+            <>
+              {device === "desktop" && <DesktopFrame progress={progress}><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></DesktopFrame>}
+              {device === "tablet" && <TabletFrame><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></TabletFrame>}
+              {device === "mobile" && <MobileFrame progress={progress}><FormContent field={currentField} fields={fields} step={currentStep} total={totalSteps} onNext={handleNext} onBack={handleBack} /></MobileFrame>}
+            </>
+          )}
         </div>
       </div>
 
