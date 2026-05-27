@@ -1,12 +1,18 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { trpc } from "~/trpc/client";
 import { BuilderHeader } from "~/components/builder/header";
 import { BuilderToolbar } from "~/components/builder/toolbar";
 import { SortableFieldList } from "~/components/builder/sortable-field-list";
+import { ViewToggle, useBuilderView } from "~/components/builder/view-toggle";
+import { FlowCanvas } from "~/components/builder/flow-view";
+import { FormSettingsPanel } from "~/components/builder/form-settings-panel";
+import { PreviewModal } from "~/components/builder/preview-modal";
+import { useUndoRedo } from "~/components/builder/use-undo-redo";
+import { useKeyboardShortcuts } from "~/components/builder/use-keyboard-shortcuts";
 
 const FIELD_TYPES = [
   { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#bdc2ff]" },
@@ -24,6 +30,11 @@ export default function BuilderPage() {
   const searchParams = useSearchParams();
   const formId = searchParams.get("formId");
   const { isSignedIn } = useAuth();
+  const [builderView, setBuilderView] = useBuilderView();
+  const [previewOpen, setPreviewOpen] = useState(false);
+
+  // Undo/Redo
+  const { pushAction, undo, redo, canUndo, canRedo } = useUndoRedo();
 
   const { data: form } = trpc.forms.getById.useQuery(
     { formId: formId! },
@@ -37,7 +48,10 @@ export default function BuilderPage() {
 
   const utils = trpc.useUtils();
   const addField = trpc.fields.create.useMutation({
-    onSuccess: () => { refetchFields(); },
+    onSuccess: (data) => {
+      refetchFields();
+      pushAction({ type: "add", fieldId: data.id, formId: formId! });
+    },
   });
   const deleteField = trpc.fields.delete.useMutation({
     onSuccess: () => { refetchFields(); },
@@ -46,19 +60,30 @@ export default function BuilderPage() {
   const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
   const selectedField = fields?.find((f) => f.id === selectedFieldId);
 
-  const handleAddField = (fieldType: string) => {
+  const handleAddField = useCallback((fieldType: string) => {
     if (!formId) return;
     addField.mutate({
       formId,
       label: `New ${FIELD_TYPES.find((t) => t.type === fieldType)?.label ?? "Field"}`,
       fieldType: fieldType as any,
     });
-  };
+  }, [formId, addField]);
 
-  const handleDeleteField = (fieldId: string) => {
+  const handleDeleteField = useCallback((fieldId: string) => {
+    pushAction({ type: "delete", fieldId, formId: formId! });
     deleteField.mutate({ fieldId });
     if (selectedFieldId === fieldId) setSelectedFieldId(null);
-  };
+  }, [formId, deleteField, selectedFieldId, pushAction]);
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    onDelete: () => {
+      if (selectedFieldId) handleDeleteField(selectedFieldId);
+    },
+    onUndo: () => { undo(); refetchFields(); },
+    onRedo: () => { redo(); refetchFields(); },
+    onEscape: () => setSelectedFieldId(null),
+  });
 
   if (!formId) {
     return (
@@ -72,87 +97,129 @@ export default function BuilderPage() {
     <div className="h-screen flex flex-col bg-[#121319] text-[#e4e1eb] overflow-hidden">
       <BuilderHeader formTitle={form?.title} />
       <div className="flex flex-1 pt-16 h-full overflow-hidden">
-        <BuilderToolbar />
+        {/* Left toolbar */}
+        <BuilderToolbar
+          view={builderView}
+          onUndo={() => { undo(); refetchFields(); }}
+          onRedo={() => { redo(); refetchFields(); }}
+          canUndo={canUndo}
+          canRedo={canRedo}
+          onPreview={() => setPreviewOpen(true)}
+        />
 
         {/* Insert Panel */}
-        <aside className="w-[260px] h-full bg-[#121319] border-r border-[#454653] flex flex-col z-30">
-          <div className="p-4 border-b border-[#454653]">
-            <span className="text-[12px] font-bold uppercase tracking-wider text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        <aside className="w-[240px] h-full bg-[#121319] border-r border-[#454653] flex flex-col z-30">
+          {/* View Toggle */}
+          <div className="p-3 border-b border-[#454653] flex items-center justify-center">
+            <ViewToggle value={builderView} onChange={setBuilderView} />
+          </div>
+
+          <div className="p-3 border-b border-[#454653]">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
               Add Field
             </span>
           </div>
-          <div className="flex-1 overflow-y-auto p-3 space-y-1 [&::-webkit-scrollbar]:hidden">
+          <div className="flex-1 overflow-y-auto p-2 space-y-0.5 [&::-webkit-scrollbar]:hidden">
             {FIELD_TYPES.map((ft) => (
               <button
                 key={ft.type}
                 onClick={() => handleAddField(ft.type)}
                 disabled={addField.isPending}
-                className="w-full p-2.5 bg-[#1b1b22] border border-[#454653] rounded-lg hover:border-[#bdc2ff] flex items-center gap-3 transition-colors disabled:opacity-50 text-left"
+                className="w-full p-2 bg-[#0d0e14] border border-[#1f1f26] rounded-lg hover:border-[#454653] hover:bg-[#141418] flex items-center gap-2.5 transition-colors disabled:opacity-50 text-left group"
               >
-                <span className={`material-symbols-outlined text-[20px] ${ft.color}`}>{ft.icon}</span>
-                <span className="text-[12px] font-medium text-[#e4e1eb]">{ft.label}</span>
+                <span className={`material-symbols-outlined text-[18px] ${ft.color} opacity-70 group-hover:opacity-100 transition-opacity`}>{ft.icon}</span>
+                <span className="text-[11px] font-medium text-[#c6c5d5] group-hover:text-[#e4e1eb] transition-colors">{ft.label}</span>
               </button>
             ))}
           </div>
         </aside>
 
-        {/* Canvas — shows fields as nodes */}
-        <main
-          className="flex-1 relative overflow-auto p-8"
-          style={{
-            backgroundColor: "#121319",
-            backgroundImage: "radial-gradient(#292930 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        >
-          {isLoading && (
-            <div className="flex items-center justify-center h-full">
-              <p className="text-[#908f9e] text-sm">Loading fields...</p>
-            </div>
-          )}
+        {/* ─── Form View ─────────────────────────────────────────────────── */}
+        {builderView === "form" && (
+          <main
+            className="flex-1 relative overflow-auto p-8"
+            style={{
+              backgroundColor: "#121319",
+              backgroundImage: "radial-gradient(#1e1e28 1px, transparent 1px)",
+              backgroundSize: "24px 24px",
+            }}
+          >
+            {isLoading && (
+              <div className="flex items-center justify-center h-full">
+                <p className="text-[#908f9e] text-sm">Loading fields...</p>
+              </div>
+            )}
 
-          {fields && fields.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-full text-center">
-              <span className="material-symbols-outlined text-[64px] text-[#454653] mb-4">add_circle</span>
-              <p className="text-lg font-semibold text-[#e4e1eb] mb-1">No fields yet</p>
-              <p className="text-sm text-[#908f9e]">Click a field type on the left to add your first question.</p>
-            </div>
-          )}
+            {fields && fields.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full text-center">
+                <div
+                  className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center"
+                  style={{ background: "rgba(129, 140, 248, 0.06)", border: "1px solid rgba(53, 53, 64, 0.4)" }}
+                >
+                  <span className="material-symbols-outlined text-[28px] text-[#4a4a5a]">add_circle</span>
+                </div>
+                <p className="text-[15px] font-medium text-[#e4e1eb] mb-1" style={{ fontFamily: "var(--font-geist-sans)" }}>No fields yet</p>
+                <p className="text-[12px] text-[#5a5a6e]">Click a field type on the left to add your first question.</p>
+              </div>
+            )}
 
-          {fields && fields.length > 0 && (
-            <SortableFieldList
-              fields={fields}
-              formId={formId}
-              selectedFieldId={selectedFieldId}
-              onSelectField={setSelectedFieldId}
-              onDeleteField={handleDeleteField}
-            />
-          )}
-        </main>
+            {fields && fields.length > 0 && (
+              <SortableFieldList
+                fields={fields}
+                formId={formId}
+                selectedFieldId={selectedFieldId}
+                onSelectField={setSelectedFieldId}
+                onDeleteField={handleDeleteField}
+              />
+            )}
+          </main>
+        )}
+
+        {/* ─── Flow View ─────────────────────────────────────────────────── */}
+        {builderView === "flow" && (
+          <FlowCanvas
+            fields={fields}
+            formTitle={form?.title}
+            formId={formId}
+            onAddField={handleAddField}
+            onDeleteField={handleDeleteField}
+            onSelectField={setSelectedFieldId}
+            selectedFieldId={selectedFieldId}
+          />
+        )}
 
         {/* Inspector Panel */}
         <aside className="w-[280px] h-full bg-[#121319] border-l border-[#454653] flex flex-col z-30">
           <div className="p-4 border-b border-[#454653] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#bdc2ff]">settings</span>
-            <span className="text-[12px] font-bold uppercase tracking-widest text-[#e4e1eb]" style={{ fontFamily: "var(--font-geist-mono)" }}>
-              Inspector
+            <span className="material-symbols-outlined text-[16px] text-[#818cf8]">
+              {selectedField ? "edit_note" : "tune"}
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
+              {selectedField ? "Field Properties" : "Form Settings"}
             </span>
           </div>
-          <div className="flex-1 overflow-y-auto p-4">
+          <div className="flex-1 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden">
             {selectedField ? (
               <FieldInspector field={selectedField} formId={formId} />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center">
-                <span className="material-symbols-outlined text-[32px] text-[#454653] mb-2">touch_app</span>
-                <p className="text-[12px] text-[#908f9e]">Select a field to edit its properties</p>
-              </div>
+              <FormSettingsPanel formId={formId} />
             )}
           </div>
         </aside>
       </div>
+
+      {/* Preview Modal */}
+      <PreviewModal
+        open={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        formTitle={form?.title}
+        fields={fields as any}
+      />
     </div>
   );
 }
+
+// ─── Field Inspector ─────────────────────────────────────────────────────────
 
 function FieldInspector({ field, formId }: { field: any; formId: string }) {
   const utils = trpc.useUtils();
@@ -163,7 +230,9 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
   });
 
   const [label, setLabel] = useState(field.label);
+  const [description, setDescription] = useState(field.description ?? "");
   const [required, setRequired] = useState(field.required);
+  const [placeholder, setPlaceholder] = useState(field.placeholder ?? "");
   const [options, setOptions] = useState<Array<{ label: string; value: string }>>(
     (field.options as Array<{ label: string; value: string }>) ?? [],
   );
@@ -173,7 +242,9 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
   if (field.id !== trackedFieldId) {
     setTrackedFieldId(field.id);
     setLabel(field.label);
+    setDescription(field.description ?? "");
     setRequired(field.required);
+    setPlaceholder(field.placeholder ?? "");
     setOptions((field.options as Array<{ label: string; value: string }>) ?? []);
   }
 
@@ -183,7 +254,9 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
     updateField.mutate({
       fieldId: field.id,
       label,
+      description: description || null,
       required,
+      placeholder: placeholder || null,
       ...(hasOptions ? { options } : {}),
     });
   };
@@ -201,78 +274,130 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
   };
 
   return (
-    <div className="space-y-5">
-      <div className="space-y-1.5">
-        <label className="text-[10px] uppercase tracking-wider text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          Label
-        </label>
+    <div className="space-y-4">
+      {/* Field type badge */}
+      <div className="flex items-center gap-2 pb-2 border-b border-[#1f1f26]">
+        <span className="material-symbols-outlined text-[14px] text-[#818cf8]">
+          {getFieldTypeIcon(field.fieldType)}
+        </span>
+        <span className="text-[11px] text-[#bdc2ff] uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>
+          {field.fieldType.replace(/_/g, " ")}
+        </span>
+      </div>
+
+      {/* Label */}
+      <InspectorField label="Label">
         <input
           type="text"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[13px] text-[#e4e1eb] focus:ring-2 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
           style={{ fontFamily: "var(--font-geist-sans)" }}
         />
-      </div>
+      </InspectorField>
 
-      <div className="space-y-1.5">
-        <label className="text-[10px] uppercase tracking-wider text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          Type
-        </label>
-        <p className="text-[13px] text-[#bdc2ff] bg-[#1b1b22] border border-[#454653] rounded-lg px-3 py-2" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          {field.fieldType.replace("_", " ")}
-        </p>
-      </div>
+      {/* Description */}
+      <InspectorField label="Description">
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Optional helper text..."
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          style={{ fontFamily: "var(--font-geist-sans)" }}
+        />
+      </InspectorField>
 
-      {/* Options editor for select fields */}
+      {/* Placeholder */}
+      <InspectorField label="Placeholder">
+        <input
+          type="text"
+          value={placeholder}
+          onChange={(e) => setPlaceholder(e.target.value)}
+          placeholder="Input placeholder..."
+          className="w-full bg-[#0d0e14] border border-[#353540] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#4a4a5a] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+          style={{ fontFamily: "var(--font-geist-sans)" }}
+        />
+      </InspectorField>
+
+      {/* Options editor */}
       {hasOptions && (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-[10px] uppercase tracking-wider text-[#908f9e]" style={{ fontFamily: "var(--font-geist-mono)" }}>
-              Options
-            </label>
-            <button onClick={handleAddOption} className="text-[#bdc2ff] hover:text-white transition-colors">
-              <span className="material-symbols-outlined text-[18px]">add</span>
-            </button>
-          </div>
-          <div className="space-y-2 max-h-[200px] overflow-y-auto">
+        <InspectorField label="Options">
+          <div className="space-y-1.5">
             {options.map((opt, idx) => (
-              <div key={idx} className="flex items-center gap-2">
+              <div key={idx} className="flex items-center gap-1.5">
                 <input
                   type="text"
                   value={opt.label}
                   onChange={(e) => handleOptionChange(idx, e.target.value)}
-                  className="flex-1 bg-[#0d0e14] border border-[#454653] rounded-lg px-2.5 py-1.5 text-[12px] text-[#e4e1eb] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
+                  className="flex-1 bg-[#0d0e14] border border-[#353540] rounded-md px-2.5 py-1.5 text-[11px] text-[#e4e1eb] focus:ring-1 focus:ring-[#818cf8]/20 focus:border-[#818cf8] outline-none"
                 />
-                <button onClick={() => handleRemoveOption(idx)} className="text-[#908f9e] hover:text-[#ffb4ab] transition-colors">
-                  <span className="material-symbols-outlined text-[16px]">close</span>
+                <button onClick={() => handleRemoveOption(idx)} className="text-[#5a5a6e] hover:text-[#ffb4ab] transition-colors p-0.5">
+                  <span className="material-symbols-outlined text-[14px]">close</span>
                 </button>
               </div>
             ))}
-            {options.length === 0 && (
-              <p className="text-[11px] text-[#908f9e] text-center py-2">No options. Click + to add.</p>
-            )}
+            <button
+              onClick={handleAddOption}
+              className="w-full py-1.5 text-[10px] text-[#818cf8] hover:text-[#bdc2ff] border border-dashed border-[#353540] rounded-md hover:border-[#818cf8] transition-colors"
+              style={{ fontFamily: "var(--font-geist-mono)" }}
+            >
+              + Add Option
+            </button>
           </div>
-        </div>
+        </InspectorField>
       )}
 
+      {/* Required toggle */}
       <div className="flex items-center justify-between py-2">
-        <span className="text-[12px] font-medium text-[#e4e1eb]">Required</span>
+        <span className="text-[11px] font-medium text-[#c6c5d5]">Required</span>
         <button
           onClick={() => setRequired(!required)}
-          className={`w-10 h-5 rounded-full relative transition-colors ${required ? "bg-[#818cf8]" : "bg-[#454653]"}`}
+          className="w-9 h-5 rounded-full relative transition-colors"
+          style={{ background: required ? "#818cf8" : "rgba(53, 53, 64, 0.8)" }}
         >
-          <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-transform ${required ? "right-1" : "left-1"}`} />
+          <div
+            className="absolute top-[3px] w-3.5 h-3.5 bg-white rounded-full transition-all"
+            style={{ left: required ? "calc(100% - 17px)" : "3px" }}
+          />
         </button>
       </div>
 
+      {/* Save */}
       <button
         onClick={handleSave}
         disabled={updateField.isPending}
-        className="w-full bg-[#bdc2ff] text-[#131e8c] text-[12px] font-semibold py-2.5 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        className="w-full bg-[#bdc2ff] text-[#131e8c] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
       >
         {updateField.isPending ? "Saving..." : "Save Changes"}
       </button>
     </div>
   );
+}
+
+function InspectorField({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="space-y-1">
+      <label className="text-[9px] uppercase tracking-wider text-[#5a5a6e] font-medium" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function getFieldTypeIcon(fieldType: string): string {
+  switch (fieldType) {
+    case "short_text": return "short_text";
+    case "long_text": return "notes";
+    case "email": return "mail";
+    case "number": return "tag";
+    case "single_select": return "radio_button_checked";
+    case "multi_select": return "checklist";
+    case "rating": return "star";
+    case "checkbox": return "check_box";
+    case "date": return "calendar_today";
+    case "dropdown": return "arrow_drop_down_circle";
+    default: return "help";
+  }
 }
