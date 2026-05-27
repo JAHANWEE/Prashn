@@ -1,9 +1,9 @@
 const FOOTER_LINKS = [
   { label: "FEATURES", href: "#features" },
-  { label: "TEMPLATES", href: "#templates" },
-  { label: "PRICING", href: "#pricing" },
-  { label: "DOCS", href: "#" },
-  { label: "PRIVACY", href: "#" },
+  { label: "TEMPLATES", href: "/dashboard/templates" },
+  { label: "PRICING", href: "/pricing" },
+  { label: "DOCS", href: "/dashboard/api-docs" },
+  { label: "PRIVACY", href: "/pricing" },
 ] as const;
 
 export function LandingFooter() {

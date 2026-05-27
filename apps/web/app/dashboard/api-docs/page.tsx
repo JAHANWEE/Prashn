@@ -50,10 +50,10 @@ export default function ApiDocsPage() {
                   API Reference Overview
                 </h3>
               </div>
-              <button className="flex items-center gap-2 bg-[#818cf8] text-[#101b8a] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
+              <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#818cf8] text-[#101b8a] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
                 <span className="material-symbols-outlined text-sm">description</span>
                 Open Scalar Docs
-              </button>
+              </a>
             </div>
             <div className="space-y-4">
               {/* GET endpoint */}

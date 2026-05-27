@@ -45,7 +45,7 @@ export function LandingTemplates() {
             </p>
           </div>
           <a
-            href="#"
+            href="/dashboard/templates"
             className="text-xs font-medium tracking-widest flex items-center gap-1 text-[#bdc2ff] hover:gap-2 transition-all"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >

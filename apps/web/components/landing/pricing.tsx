@@ -117,12 +117,13 @@ function PricingCard({ plan }: { plan: Plan }) {
             </li>
           ))}
         </ul>
-        <button
-          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white text-[#bdc2ff] hover:opacity-90 transition-opacity shadow-sm"
+        <a
+          href="/register"
+          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white text-[#bdc2ff] hover:opacity-90 transition-opacity shadow-sm text-center block"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
           {cta}
-        </button>
+        </a>
       </div>
     );
   }
@@ -161,12 +162,13 @@ function PricingCard({ plan }: { plan: Plan }) {
           </li>
         ))}
       </ul>
-      <button
-        className="w-full border border-[#454653] py-2 rounded text-xs font-medium tracking-widest text-[#c6c5d5] hover:bg-[#292930] transition-colors"
+      <a
+        href="/register"
+        className="w-full border border-[#454653] py-2 rounded text-xs font-medium tracking-widest text-[#c6c5d5] hover:bg-[#292930] transition-colors text-center block"
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         {cta}
-      </button>
+      </a>
     </div>
   );
 }

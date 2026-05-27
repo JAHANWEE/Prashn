@@ -123,18 +123,20 @@ export function LandingHero() {
           finite screens your users can actually complete.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8]"
+          <a
+            href="/register"
+            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#bdc2ff] text-[#131e8c] hover:bg-[#818cf8] text-center"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             GET STARTED
-          </button>
-          <button
-            className="text-xs font-medium tracking-widest px-8 py-3 rounded transition-all w-full sm:w-auto border border-[#454653] bg-[#1b1b22] text-[#c6c5d5] hover:bg-[#1f1f26]"
+          </a>
+          <a
+            href="/dashboard/templates"
+            className="text-xs font-medium tracking-widest px-8 py-3 rounded transition-all w-full sm:w-auto border border-[#454653] bg-[#1b1b22] text-[#c6c5d5] hover:bg-[#1f1f26] text-center"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             EXPLORE TEMPLATES
-          </button>
+          </a>
         </div>
       </div>
 
