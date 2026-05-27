@@ -84,7 +84,7 @@ export async function LandingNav() {
               </SignInButton>
               <SignUpButton mode="redirect">
                 <button
-                  className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#fca9d4] text-[#ffffff] hover:bg-[#fca9d4] transition-all active:scale-95 shadow-sm"
+                  className="text-xs font-medium tracking-widest px-6 py-2 rounded bg-[#fca9d4] text-[#0a0a0f] hover:bg-[#fca9d4] transition-all active:scale-95 shadow-sm"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   START BUILDING

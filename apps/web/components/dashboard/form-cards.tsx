@@ -84,7 +84,7 @@ function FormCard({ form }: { form: any }) {
         <div className="h-32 bg-[#1b1b22] cf-canvas-grid-bg p-4 relative flex items-center justify-center overflow-hidden">
           <CanvasPreviewGeneric />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span className="bg-[#fca9d4] text-[#ffffff] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
+            <span className="bg-[#fca9d4] text-[#0a0a0f] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
               Open Canvas
             </span>
           </div>
@@ -141,7 +141,7 @@ function FormCard({ form }: { form: any }) {
               <button
                 onClick={() => unarchiveForm.mutate({ formId: form.id })}
                 disabled={unarchiveForm.isPending}
-                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#ffffff] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#0a0a0f] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[14px]">unarchive</span>
                 Unarchive
@@ -177,7 +177,7 @@ function FormCard({ form }: { form: any }) {
               <button
                 onClick={() => publishForm.mutate({ formId: form.id })}
                 disabled={publishForm.isPending}
-                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#ffffff] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-[11px] font-medium bg-[#fca9d4] text-[#0a0a0f] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[14px]">publish</span>
                 Publish

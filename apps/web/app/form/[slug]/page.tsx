@@ -147,7 +147,7 @@ export default function RespondentFormPage() {
           <button
             onClick={handleNext}
             disabled={submitResponse.isPending}
-            className="flex items-center gap-1 px-8 py-3 text-[13px] font-medium text-[#ffffff] bg-[#fca9d4] rounded-lg shadow-sm hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-1 px-8 py-3 text-[13px] font-medium text-[#0a0a0f] bg-[#fca9d4] rounded-lg shadow-sm hover:brightness-110 transition-all active:scale-95 disabled:opacity-50"
           >
             {submitResponse.isPending ? "Submitting..." : isLastStep ? "Submit" : "Next"}
             <span className="material-symbols-outlined text-[18px]">
@@ -288,7 +288,7 @@ function FieldRenderer({
                     onClick={() => onChange(String(i + 1))}
                     className={`w-12 h-12 rounded-full border text-lg font-semibold transition-all ${
                       i < currentRating
-                        ? "bg-[#fca9d4] text-[#ffffff] border-[#fca9d4]"
+                        ? "bg-[#fca9d4] text-[#0a0a0f] border-[#fca9d4]"
                         : "bg-[#0d0e14] text-[#908f9e] border-[#454653] hover:border-[#fca9d4]"
                     }`}
                   >

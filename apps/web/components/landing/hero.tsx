@@ -125,7 +125,7 @@ export function LandingHero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="/register"
-            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#fca9d4] text-[#ffffff] hover:bg-[#fca9d4] text-center"
+            className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#fca9d4] text-[#0a0a0f] hover:bg-[#fca9d4] text-center"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             GET STARTED

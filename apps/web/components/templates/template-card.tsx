@@ -69,7 +69,7 @@ export function TemplateCard({ template }: { template: TemplateData }) {
           <button
             onClick={handleUseTemplate}
             disabled={createForm.isPending}
-            className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#fca9d4] hover:text-[#ffffff] transition-all duration-200 active:scale-95 disabled:opacity-50"
+            className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#fca9d4] hover:text-[#0a0a0f] transition-all duration-200 active:scale-95 disabled:opacity-50"
           >
             {createForm.isPending ? "Creating..." : "Use Template"}
           </button>
@@ -147,7 +147,7 @@ function TemplatePreview({ type }: { type: TemplateData["previewType"] }) {
           <div className="w-3 h-3 bg-[#fca9d4] rounded-full" />
           <div className="w-3 h-3 bg-[#c08d00] rounded-full" />
         </div>
-        <div className="absolute -bottom-2 -right-2 bg-[#fca9d4] text-[#ffffff] rounded-full p-1">
+        <div className="absolute -bottom-2 -right-2 bg-[#fca9d4] text-[#0a0a0f] rounded-full p-1">
           <span className="material-symbols-outlined text-[16px]">hub</span>
         </div>
       </div>

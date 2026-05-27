@@ -57,7 +57,7 @@ export function LandingFeatures() {
           </div>
 
           {/* Small Feature: Analytics (4 cols) */}
-          <div className="md:col-span-4 rounded-2xl p-8 flex flex-col justify-between shadow-lg bg-[#fca9d4] text-[#ffffff]">
+          <div className="md:col-span-4 rounded-2xl p-8 flex flex-col justify-between shadow-lg bg-[#fca9d4] text-[#0a0a0f]">
             <div>
               <span className="material-symbols-outlined text-[48px] mb-4 block opacity-80">
                 analytics

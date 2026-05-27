@@ -233,7 +233,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
       <button
         onClick={handleSave}
         disabled={updateForm.isPending}
-        className="w-full bg-[#fca9d4] text-[#ffffff] text-[12px] font-semibold py-2.5 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        className="w-full bg-[#fca9d4] text-[#0a0a0f] text-[12px] font-semibold py-2.5 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
       >
         {updateForm.isPending ? "Saving..." : "Save Settings"}
       </button>

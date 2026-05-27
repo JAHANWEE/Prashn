@@ -156,7 +156,7 @@ export function PreviewModal({ open, onClose, formTitle, fields }: PreviewModalP
             <button
               onClick={handleNext}
               disabled={currentStep >= totalSteps - 1}
-              className="flex items-center gap-1 px-5 py-2 text-[11px] font-medium text-[#ffffff] bg-[#fca9d4] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+              className="flex items-center gap-1 px-5 py-2 text-[11px] font-medium text-[#0a0a0f] bg-[#fca9d4] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
             >
               Next
               <span className="material-symbols-outlined text-[14px]">arrow_forward</span>

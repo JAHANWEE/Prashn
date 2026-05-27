@@ -18,7 +18,7 @@ export function FormNavigation({
       ) : (
         <div />
       )}
-      <button className="flex items-center gap-1 px-8 py-4 text-[13px] font-medium text-[#ffffff] bg-[#fca9d4] rounded shadow-sm hover:brightness-110 transition-all active:scale-95">
+      <button className="flex items-center gap-1 px-8 py-4 text-[13px] font-medium text-[#0a0a0f] bg-[#fca9d4] rounded shadow-sm hover:brightness-110 transition-all active:scale-95">
         {nextLabel}
         <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
       </button>

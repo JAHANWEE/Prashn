@@ -76,7 +76,7 @@ function PricingCard({ plan }: { plan: Plan }) {
 
   if (highlighted) {
     return (
-      <div className="rounded-2xl p-8 flex flex-col shadow-2xl scale-105 relative z-10 bg-[#fca9d4] text-[#ffffff]">
+      <div className="rounded-2xl p-8 flex flex-col shadow-2xl scale-105 relative z-10 bg-[#fca9d4] text-[#0a0a0f]">
         {badge && (
           <div
             className="absolute top-0 right-4 -translate-y-1/2 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest bg-[#f7bd3e] text-[#402d00]"

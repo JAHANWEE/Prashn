@@ -21,7 +21,7 @@ export default function RegisterPage() {
               headerSubtitle: "text-[#908f9e]",
               formFieldLabel: "text-[#908f9e]",
               formFieldInput: "bg-[#121319] border-[#353540] text-[#e4e1eb] rounded-xl",
-              formButtonPrimary: "bg-[#fca9d4] hover:bg-[#fca9d4] text-[#ffffff] rounded-xl",
+              formButtonPrimary: "bg-[#fca9d4] hover:bg-[#fca9d4] text-[#0a0a0f] rounded-xl",
               footerActionLink: "text-[#fca9d4]",
               socialButtonsBlockButton: "bg-[#1f1f26] border-[#353540] text-[#e4e1eb] hover:bg-[#292930]",
               dividerLine: "bg-[#353540]",

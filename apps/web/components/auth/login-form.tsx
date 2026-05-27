@@ -117,7 +117,7 @@ export function LoginForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-[#fca9d4] text-[#ffffff] text-[13px] font-semibold py-3 rounded-xl hover:bg-[#fca9d4] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1"
+            className="w-full bg-[#fca9d4] text-[#0a0a0f] text-[13px] font-semibold py-3 rounded-xl hover:bg-[#fca9d4] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1"
             style={{ fontFamily: "var(--font-geist-sans)", boxShadow: "0 2px 12px rgba(252,169,212,0.3)" }}
           >
             <span>Sign In</span>

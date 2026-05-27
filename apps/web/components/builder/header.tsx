@@ -103,7 +103,7 @@ export function BuilderHeader({ formTitle }: { formTitle?: string }) {
           <button
             onClick={handlePublish}
             disabled={publishForm.isPending}
-            className="px-4 py-1.5 bg-[#fca9d4] text-[#ffffff] text-[12px] font-medium rounded hover:opacity-90 transition-all active:scale-95 disabled:opacity-50"
+            className="px-4 py-1.5 bg-[#fca9d4] text-[#0a0a0f] text-[12px] font-medium rounded hover:opacity-90 transition-all active:scale-95 disabled:opacity-50"
             style={{ fontFamily: "var(--font-geist-mono)", boxShadow: "0px 1px 3px rgba(0,0,0,0.3)" }}
           >
             {publishForm.isPending ? "Publishing..." : "Publish"}

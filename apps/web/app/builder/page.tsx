@@ -433,7 +433,7 @@ function FieldInspector({ field, formId, allFields }: { field: any; formId: stri
       <button
         onClick={handleSave}
         disabled={updateField.isPending}
-        className="w-full bg-[#fca9d4] text-[#ffffff] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+        className="w-full bg-[#fca9d4] text-[#0a0a0f] text-[11px] font-semibold py-2 rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
       >
         {updateField.isPending ? "Saving..." : "Save Changes"}
       </button>

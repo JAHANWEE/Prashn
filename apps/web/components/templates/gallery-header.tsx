@@ -48,7 +48,7 @@ export function TemplateGalleryHeader() {
             key={label}
             className={
               active
-                ? "px-4 py-1 bg-[#fca9d4] text-[#ffffff] rounded-full text-[13px] font-medium"
+                ? "px-4 py-1 bg-[#fca9d4] text-[#0a0a0f] rounded-full text-[13px] font-medium"
                 : "px-4 py-1 bg-[#1b1b22] text-[#c6c5d5] border border-[#454653]/50 rounded-full text-[13px] font-medium hover:border-[#fca9d4] hover:text-[#fca9d4] transition-all"
             }
             style={{ fontFamily: "var(--font-geist-sans)" }}

@@ -81,7 +81,7 @@ export default function PricingPage() {
               key={plan.name}
               className={`rounded-2xl p-8 flex flex-col h-full relative ${
                 plan.highlighted
-                  ? "bg-[#fca9d4] text-[#ffffff] shadow-2xl scale-105 z-10"
+                  ? "bg-[#fca9d4] text-[#0a0a0f] shadow-2xl scale-105 z-10"
                   : "bg-[#1b1b22] border border-[#454653]"
               }`}
             >
