@@ -146,36 +146,41 @@ function FormCard({ form }: { form: { id: string; title: string; description: st
   return (
     <a
       href={`/form/${form.slug}`}
-      className="group block rounded-2xl border border-[#1e212d] bg-[#0f111a] p-6 hover:border-[#fca9d4]/40 hover:bg-[#0f111a]/80 transition-all duration-200"
+      className="group block rounded-2xl border border-[#1e212d] bg-[#0f111a] overflow-hidden hover:border-[#fca9d4]/40 transition-all duration-200"
     >
-      {/* Icon */}
-      <div className="w-10 h-10 rounded-xl bg-[#fca9d4]/10 border border-[#fca9d4]/20 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-        <span className="material-symbols-outlined text-[20px] text-[#fca9d4]">description</span>
-      </div>
+      {/* Top accent bar */}
+      <div className="h-1 bg-gradient-to-r from-[#fca9d4]/40 via-[#fca9d4]/20 to-transparent group-hover:from-[#fca9d4]/70 group-hover:via-[#fca9d4]/40 transition-all" />
 
-      {/* Title */}
-      <h3
-        className="text-[15px] font-semibold text-[#e4e1eb] mb-1.5 group-hover:text-[#fca9d4] transition-colors line-clamp-1"
-        style={{ fontFamily: "var(--font-geist-sans)" }}
-      >
-        {form.title}
-      </h3>
+      <div className="p-6">
+        {/* Icon */}
+        <div className="w-10 h-10 rounded-xl bg-[#fca9d4]/10 border border-[#fca9d4]/20 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+          <span className="material-symbols-outlined text-[20px] text-[#fca9d4]">description</span>
+        </div>
 
-      {/* Description */}
-      <p className="text-[12px] text-[#908f9e] line-clamp-2 mb-4 min-h-[32px]">
-        {form.description || "No description"}
-      </p>
+        {/* Title */}
+        <h3
+          className="text-[15px] font-semibold text-[#e4e1eb] mb-1.5 group-hover:text-[#fca9d4] transition-colors line-clamp-1"
+          style={{ fontFamily: "var(--font-geist-sans)" }}
+        >
+          {form.title}
+        </h3>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] text-[#5a5a6e] flex items-center gap-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
-          <span className="material-symbols-outlined text-[12px]">link</span>
-          /{form.slug}
-        </span>
-        <span className="text-[10px] text-[#fca9d4] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 font-medium">
-          Fill out
-          <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
-        </span>
+        {/* Description */}
+        <p className="text-[12px] text-[#908f9e] line-clamp-2 mb-4 min-h-[32px]">
+          {form.description || "No description"}
+        </p>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] text-[#5a5a6e] flex items-center gap-1" style={{ fontFamily: "var(--font-geist-mono)" }}>
+            <span className="material-symbols-outlined text-[12px]">link</span>
+            /{form.slug}
+          </span>
+          <span className="text-[11px] text-[#fca9d4] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 font-medium">
+            Fill out
+            <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </span>
+        </div>
       </div>
     </a>
   );

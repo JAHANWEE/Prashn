@@ -321,11 +321,11 @@ function FieldInspector({ field, formId, allFields, autoSave }: { field: any; fo
   return (
     <div className="space-y-4">
       {/* Field type badge */}
-      <div className="flex items-center gap-2 pb-2 border-b border-[#1f1f26]">
-        <span className="material-symbols-outlined text-[14px] text-[#fca9d4]">
+      <div className="flex items-center gap-2 pb-3 border-b border-[#1f1f26]">
+        <span className="material-symbols-outlined text-[16px] text-[#fca9d4]">
           {getFieldTypeIcon(field.fieldType)}
         </span>
-        <span className="text-[11px] text-[#fca9d4] uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>
+        <span className="text-[12px] text-[#fca9d4] uppercase font-semibold" style={{ fontFamily: "var(--font-geist-mono)" }}>
           {field.fieldType.replace(/_/g, " ")}
         </span>
       </div>
@@ -483,8 +483,8 @@ function FieldInspector({ field, formId, allFields, autoSave }: { field: any; fo
 
 function InspectorField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-1">
-      <label className="text-[9px] uppercase tracking-wider text-[#5a5a6e] font-medium" style={{ fontFamily: "var(--font-geist-mono)" }}>
+    <div className="space-y-1.5">
+      <label className="text-[11px] uppercase tracking-wider text-[#908f9e] font-medium" style={{ fontFamily: "var(--font-geist-mono)" }}>
         {label}
       </label>
       {children}

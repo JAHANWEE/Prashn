@@ -51,7 +51,9 @@ export function BuilderHeader({ formTitle, onPreview, autoSave, onToggleAutoSave
           </span>
         </a>
         <div className="h-5 w-[1px] bg-[#454653]" />
-        <nav className="flex items-center gap-1 text-[12px] text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
+        <nav className="flex items-center gap-2 text-[12px] text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
+          <a href="/dashboard" className="text-[#908f9e] hover:text-[#fca9d4] transition-colors">Dashboard</a>
+          <span className="text-[#454653]">/</span>
           <span className="text-[#e4e1eb] font-medium">{formTitle ?? "Loading..."}</span>
         </nav>
       </div>
