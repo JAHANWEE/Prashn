@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import { trpc } from "~/trpc/client";
 
 interface FormSettingsPanelProps {
@@ -111,6 +112,25 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           </button>
         </div>
       </Section>
+
+      {/* QR Code (only for published forms) */}
+      {form.status === "published" && formUrl && (
+        <Section label="QR Code">
+          <div className="flex flex-col items-center gap-2 p-3 bg-white rounded-xl">
+            <QRCodeSVG
+              value={formUrl}
+              size={140}
+              bgColor="#ffffff"
+              fgColor="#0a0a0f"
+              level="M"
+              includeMargin={false}
+            />
+          </div>
+          <p className="text-[9px] text-[#5a5a6e] text-center mt-1.5" style={{ fontFamily: "var(--font-geist-mono)" }}>
+            Scan to open form
+          </p>
+        </Section>
+      )}
 
       {/* Visibility */}
       <Section label="Visibility">
