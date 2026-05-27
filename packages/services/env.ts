@@ -15,7 +15,7 @@ const envSchema = z.object({
 
   // Resend
   RESEND_API_KEY: z.string().optional(),
-  RESEND_FROM_EMAIL: z.string().default("noreply@canvasforms.io"),
+  RESEND_FROM_EMAIL: z.string().default("noreply@prashn.io"),
 });
 
 function createEnv(env: NodeJS.ProcessEnv) {

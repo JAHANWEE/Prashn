@@ -1,4 +1,4 @@
-# CanvasForms — Backend Implementation Plan
+# Prashn — Backend Implementation Plan
 
 ## Overview
 
@@ -458,7 +458,7 @@ CLERK_WEBHOOK_SECRET=whsec_***
 //
 // Uses Resend SDK
 // Logs to email_notifications table
-// Templates: HTML email templates with CanvasForms branding
+// Templates: HTML email templates with Prashn branding
 ```
 
 ### File: `packages/services/clients/resend.ts`
@@ -475,7 +475,7 @@ CLERK_WEBHOOK_SECRET=whsec_***
 ```typescript
 // Run with: pnpm db:seed
 // Creates:
-//   1. Demo user (admin@canvasforms.io, clerk synced)
+//   1. Demo user (admin@prashn.io, clerk synced)
 //   2. 4 system themes
 //   3. 3 sample forms with fields:
 //      - "Startup Feedback Flow" (public, 7 fields, 432 responses)
@@ -491,7 +491,7 @@ CLERK_WEBHOOK_SECRET=whsec_***
 ## Step 14: OpenAPI + Scalar Docs
 
 ### Updates to `apps/api/src/server.ts`:
-- Update title to "CanvasForms API"
+- Update title to "Prashn API"
 - Add proper description, version, tags
 - Group endpoints by tag: Forms, Fields, Responses, Analytics, Themes, API Keys, Public
 - Scalar UI at `/docs`
@@ -507,8 +507,8 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: canvasforms
-      POSTGRES_USER: canvasforms
+      POSTGRES_DB: prashn
+      POSTGRES_USER: prashn
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -525,7 +525,7 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     environment:
-      - DATABASE_URL=postgresql://canvasforms:${DB_PASSWORD}@postgres:5432/canvasforms
+      - DATABASE_URL=postgresql://prashn:${DB_PASSWORD}@postgres:5432/prashn
       - REDIS_URL=redis://redis:6379
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
       - RESEND_API_KEY=${RESEND_API_KEY}

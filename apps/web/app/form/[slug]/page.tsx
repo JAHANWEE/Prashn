@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { trpc } from "~/trpc/client";
 import { FormShell, FormCard } from "~/components/respondent";
+import { TerminalForm } from "~/app/terminal-theme-preview/components/terminal-form";
+import { ChatForm } from "~/app/chat-theme-preview/components/chat-form";
 
 export default function RespondentFormPage() {
   const params = useParams();
@@ -46,6 +48,45 @@ export default function RespondentFormPage() {
           </p>
         </div>
       </FormShell>
+    );
+  }
+
+  // Theme-based rendering: Terminal or Chat experience
+  const visualTheme = (form.settings as any)?.visualTheme;
+
+  if (visualTheme === "terminal") {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "#0a0a0f" }}>
+        <TerminalForm
+          formTitle={form.title}
+          fields={form.fields.map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))}
+          onSubmit={() => {
+            submitResponse.mutate({
+              slug,
+              answers: Object.entries(answers).map(([fieldId, value]) => ({ fieldId, value: value || null })),
+              respondentEmail: respondentEmail.trim() || undefined,
+            });
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (visualTheme === "chat") {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "#0a0a0f" }}>
+        <ChatForm
+          formTitle={form.title}
+          fields={form.fields.map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))}
+          onSubmit={() => {
+            submitResponse.mutate({
+              slug,
+              answers: Object.entries(answers).map(([fieldId, value]) => ({ fieldId, value: value || null })),
+              respondentEmail: respondentEmail.trim() || undefined,
+            });
+          }}
+        />
+      </div>
     );
   }
 

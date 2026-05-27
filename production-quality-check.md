@@ -1,4 +1,4 @@
-# CanvasForms — Production Quality Checklist
+# Prashn — Production Quality Checklist
 
 Use this document to verify every aspect of the implementation meets production standards before deployment.
 
@@ -102,7 +102,7 @@ Use this document to verify every aspect of the implementation meets production 
 | Email status tracked in DB | ☐ | pending → sent / failed |
 | Resend message ID stored for debugging | ☐ | |
 | Email sending is non-blocking | ☐ | Fire-and-forget, errors logged |
-| HTML templates are branded | ☐ | CanvasForms styling |
+| HTML templates are branded | ☐ | Prashn styling |
 
 ---
 
@@ -177,7 +177,7 @@ Use this document to verify every aspect of the implementation meets production 
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| Demo credentials in README | ☐ | admin@canvasforms.io / canvas_demo_2024 |
+| Demo credentials in README | ☐ | admin@prashn.io / canvas_demo_2024 |
 | 3+ themed sample forms seeded | ☐ | Startup, Anime, Gaming |
 | Each form has 50+ responses | ☐ | Realistic data |
 | Analytics data for 30 days | ☐ | |

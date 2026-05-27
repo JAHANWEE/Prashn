@@ -77,6 +77,33 @@ export default function ExplorePage() {
         </div>
       </section>
 
+      {/* Featured Experiences */}
+      <section className="max-w-6xl mx-auto px-6 pb-8">
+        <p className="text-[11px] uppercase tracking-wider text-[#908f9e] font-medium mb-3" style={{ fontFamily: "var(--font-geist-mono)" }}>Featured Experiences</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a href="/terminal-theme-preview" className="group flex items-center gap-4 p-5 rounded-2xl border border-[#1e212d] bg-[#0f111a] hover:border-[#22c55e]/40 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-[#22c55e]/10 border border-[#22c55e]/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-[24px] text-[#22c55e]">terminal</span>
+            </div>
+            <div>
+              <h3 className="text-[14px] font-semibold text-[#e4e1eb] group-hover:text-[#22c55e] transition-colors" style={{ fontFamily: "var(--font-geist-sans)" }}>IDE Form Experience</h3>
+              <p className="text-[11px] text-[#908f9e]">Fill a form like you're using a terminal. Keyboard-first.</p>
+            </div>
+            <span className="material-symbols-outlined text-[18px] text-[#5a5a6e] ml-auto group-hover:text-[#22c55e] transition-colors">arrow_forward</span>
+          </a>
+          <a href="/chat-theme-preview" className="group flex items-center gap-4 p-5 rounded-2xl border border-[#1e212d] bg-[#0f111a] hover:border-[#60a5fa]/40 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-[#60a5fa]/10 border border-[#60a5fa]/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-[24px] text-[#60a5fa]">chat</span>
+            </div>
+            <div>
+              <h3 className="text-[14px] font-semibold text-[#e4e1eb] group-hover:text-[#60a5fa] transition-colors" style={{ fontFamily: "var(--font-geist-sans)" }}>Chat Form Experience</h3>
+              <p className="text-[11px] text-[#908f9e]">Fill a form like you're chatting with an assistant.</p>
+            </div>
+            <span className="material-symbols-outlined text-[18px] text-[#5a5a6e] ml-auto group-hover:text-[#60a5fa] transition-colors">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+
       {/* Grid */}
       <section className="max-w-6xl mx-auto px-6 pb-20">
         {isLoading ? (

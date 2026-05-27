@@ -61,7 +61,7 @@ export function LandingHero() {
           <span className="italic text-[#fca9d4]">flows</span>.
         </h1>
         <p className="text-base leading-relaxed max-w-2xl mx-auto mb-8 text-[#c6c5d5]" style={{ fontFamily: "var(--font-geist-sans)" }}>
-          Build dynamic forms on an infinite canvas, then publish them as clean finite screens your users can actually complete.
+          Every great response starts with a great question.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="/register" className="text-xs font-medium tracking-widest px-8 py-3 rounded shadow-sm transition-all w-full sm:w-auto active:scale-95 bg-[#fca9d4] text-[#0a0a0f] hover:brightness-110 text-center" style={{ fontFamily: "var(--font-geist-mono)" }}>

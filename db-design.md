@@ -1,4 +1,4 @@
-# CanvasForms — Database Design
+# Prashn — Database Design
 
 ## Architecture Decisions
 
@@ -303,7 +303,7 @@ CREATE INDEX idx_api_keys_hash ON api_keys(key_hash);
 
 For demo-readiness, seed the following:
 
-1. **Demo User**: `admin@canvasforms.io` / `canvas_demo_2024` (Pro plan)
+1. **Demo User**: `admin@prashn.io` / `canvas_demo_2024` (Pro plan)
 2. **3 Themed Forms**:
    - "Startup Feedback Flow" (public, published, 7 fields, ~400 responses)
    - "Anime Convention RSVP" (public, published, 5 fields, ~200 responses)
@@ -338,11 +338,11 @@ Docker Compose on VM:
 └── nginx (reverse proxy, SSL termination)
 
 Environment:
-  - DATABASE_URL=postgresql://canvasforms:***@postgres:5432/canvasforms
+  - DATABASE_URL=postgresql://prashn:***@postgres:5432/prashn
   - REDIS_URL=redis://redis:6379
   - CLERK_SECRET_KEY=sk_live_***
   - CLERK_PUBLISHABLE_KEY=pk_live_***
   - RESEND_API_KEY=re_***
   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_***
-  - NEXT_PUBLIC_API_URL=https://api.canvasforms.io
+  - NEXT_PUBLIC_API_URL=https://api.prashn.io
 ```

@@ -128,10 +128,22 @@ pnpm dev
 - Form preview with device frames (Desktop/Tablet/Mobile) and theme switching
 - Undo/redo stack
 
+### Form Experiences
+
+Three unique ways respondents can fill forms:
+
+| Experience | Route | Description |
+|-----------|-------|-------------|
+| **Default** | `/form/{slug}` | Card-based step-by-step form |
+| **IDE / Terminal** | `/terminal-theme-preview` | Terminal-style keyboard-first experience |
+| **Chat** | `/chat-theme-preview` | Messaging app conversation experience |
+
+Creators can set the form theme in Form Settings to control which experience respondents see. Demo versions are accessible from the Explore page.
+
 ### Form Themes
 
-10 visual themes that transform the respondent experience:
-Default, Terminal, Anime, Cyberpunk, Studio, Gaming, Retro, Space, Nature, Minimal
+Visual themes that transform the respondent experience:
+Default, Terminal, Chat, Anime, Cyberpunk, Studio, Gaming, Retro, Space, Nature, Minimal
 
 ### Templates
 
@@ -142,7 +154,7 @@ Customer Feedback, Job Application, Event RSVP, Contact Form, Newsletter Signup,
 
 - Landing page with interactive canvas demo
 - Pricing page
-- Explore page (browse public forms with category filters)
+- Explore page (browse public forms + featured IDE/Chat experiences)
 - Public form filling with step-by-step experience, progress bar, Enter key navigation, confetti on submit
 
 ### API
@@ -197,6 +209,27 @@ http://localhost:8000/openapi.json
 - CSS sanitization on custom themes
 - Svix webhook signature verification
 - Graceful shutdown handling
+- Database transactions for multi-step writes
+
+## Bonus Features Implemented
+
+- ✅ Form preview before publishing (device frames)
+- ✅ Conditional logic between questions
+- ✅ Form expiry and response limit
+- ✅ CSV export for responses
+- ✅ Custom form slugs
+- ✅ QR code sharing
+- ✅ Password-protected forms
+- ✅ Public explore page for public forms
+- ✅ Form templates and theme gallery
+- ✅ Form clone/archive support
+- ✅ Canvas Flow View (infinite canvas with detachable connections)
+- ✅ IDE Terminal form experience
+- ✅ Chat messaging form experience
+- ✅ Auto-save in builder
+- ✅ Keyboard shortcuts
+- ✅ Toast notifications
+- ✅ Confetti on submission
 
 ## Scripts
 

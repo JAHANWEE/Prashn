@@ -21,17 +21,18 @@ export default function TerminalThemePreviewPage() {
   // Load real form data if formId is provided
   const { data: form, isLoading: formLoading } = trpc.forms.getById.useQuery(
     { formId: formId! },
-    { enabled: !!formId && !!isSignedIn },
+    { enabled: !!formId && isSignedIn === true },
   );
   const { data: fields, isLoading: fieldsLoading } = trpc.fields.list.useQuery(
     { formId: formId! },
-    { enabled: !!formId && !!isSignedIn },
+    { enabled: !!formId && isSignedIn === true },
   );
 
-  const isLoading = formId && (formLoading || fieldsLoading || !isSignedIn);
+  // Only show loading if we have a formId AND data hasn't arrived yet AND user is signed in
+  const isLoading = formId && isSignedIn && (formLoading || fieldsLoading);
 
   // If formId provided, wait for real data. Otherwise use demo.
-  const formFields = formId && fields
+  const formFields = formId && fields && fields.length > 0
     ? fields.map(f => ({ id: f.id, label: f.label, fieldType: f.fieldType, required: f.required, placeholder: f.placeholder ?? "", options: f.options as Array<{ label: string; value: string }> | undefined }))
     : !formId ? DEMO_FIELDS : [];
 
