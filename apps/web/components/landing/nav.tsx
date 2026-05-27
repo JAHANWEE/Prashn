@@ -51,6 +51,13 @@ export async function LandingNav() {
               {label}
             </a>
           ))}
+          <a
+            href="/explore"
+            className="text-xs font-medium tracking-widest text-[#c6c5d5] hover:text-[#fca9d4] transition-colors"
+            style={{ fontFamily: "var(--font-geist-mono)" }}
+          >
+            EXPLORE
+          </a>
         </div>
 
         {/* Auth buttons */}
