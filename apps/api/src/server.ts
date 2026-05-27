@@ -1,6 +1,7 @@
 import express from "express";
 import { logger } from "@repo/logger";
 import cors from "cors";
+import helmet from "helmet";
 
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { generateOpenApiDocument, createOpenApiExpressMiddleware } from "trpc-to-openapi";
@@ -13,14 +14,20 @@ import { env } from "./env";
 
 export const app = express();
 
+// Security headers
+app.use(helmet({
+  contentSecurityPolicy: false, // Disabled for Scalar docs
+  crossOriginEmbedderPolicy: false,
+}));
+
 // CORS — open in dev, restricted in production
 if (env.NODE_ENV !== "prod") {
   app.use(cors({ origin: "*" }));
 } else {
-  app.use(cors({ origin: env.BASE_URL }));
+  app.use(cors({ origin: env.BASE_URL, credentials: true }));
 }
 
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 
 // Clerk webhooks (must be registered before auth middleware)
 app.use("/webhooks", clerkWebhookRouter);

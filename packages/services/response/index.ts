@@ -37,57 +37,62 @@ class ResponseService {
    */
   async submit(input: SubmitResponseInput): Promise<SelectResponse> {
     const now = new Date();
-
-    // Create response
-    const [response] = await db
-      .insert(responsesTable)
-      .values({
-        formId: input.formId,
-        respondentEmail: input.respondentEmail ?? null,
-        respondentName: input.respondentName ?? null,
-        status: "completed",
-        startedAt: now,
-        completedAt: now,
-        durationSeconds: 0,
-        metadata: input.metadata ?? null,
-      })
-      .returning();
-
-    if (!response) {
-      throw new Error("Failed to create response");
-    }
-
-    // Insert answers
-    if (input.answers.length > 0) {
-      await db.insert(responseAnswersTable).values(
-        input.answers.map((a) => ({
-          responseId: response.id,
-          fieldId: a.fieldId,
-          value: a.value,
-        })),
-      );
-    }
-
-    // Update daily analytics (upsert)
     const today = now.toISOString().split("T")[0]!;
-    await db
-      .insert(formAnalyticsTable)
-      .values({
-        formId: input.formId,
-        date: today,
-        completions: 1,
-        starts: 1,
-      })
-      .onConflictDoUpdate({
-        target: [formAnalyticsTable.formId, formAnalyticsTable.date],
-        set: {
-          completions: sql`${formAnalyticsTable.completions} + 1`,
-          starts: sql`${formAnalyticsTable.starts} + 1`,
-        },
-      });
 
-    logger.info("Response submitted", { responseId: response.id, formId: input.formId });
-    return response;
+    // Wrap in transaction for atomicity
+    const result = await db.transaction(async (tx) => {
+      // Create response
+      const [response] = await tx
+        .insert(responsesTable)
+        .values({
+          formId: input.formId,
+          respondentEmail: input.respondentEmail ?? null,
+          respondentName: input.respondentName ?? null,
+          status: "completed",
+          startedAt: now,
+          completedAt: now,
+          durationSeconds: 0,
+          metadata: input.metadata ?? null,
+        })
+        .returning();
+
+      if (!response) {
+        throw new Error("Failed to create response");
+      }
+
+      // Insert answers
+      if (input.answers.length > 0) {
+        await tx.insert(responseAnswersTable).values(
+          input.answers.map((a) => ({
+            responseId: response.id,
+            fieldId: a.fieldId,
+            value: a.value,
+          })),
+        );
+      }
+
+      // Update daily analytics (upsert)
+      await tx
+        .insert(formAnalyticsTable)
+        .values({
+          formId: input.formId,
+          date: today,
+          completions: 1,
+          starts: 1,
+        })
+        .onConflictDoUpdate({
+          target: [formAnalyticsTable.formId, formAnalyticsTable.date],
+          set: {
+            completions: sql`${formAnalyticsTable.completions} + 1`,
+            starts: sql`${formAnalyticsTable.starts} + 1`,
+          },
+        });
+
+      return response;
+    });
+
+    logger.info("Response submitted", { responseId: result.id, formId: input.formId });
+    return result;
   }
 
   /**

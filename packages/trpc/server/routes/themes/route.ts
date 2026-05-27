@@ -54,7 +54,16 @@ export const themesRouter = router({
         borderRadius: z.string().max(10).optional(),
         logoUrl: z.string().url().optional(),
         coverImageUrl: z.string().url().optional(),
-        customCss: z.string().max(5000).optional(),
+        customCss: z.string().max(5000).optional().transform(val => {
+          if (!val) return val;
+          // Strip dangerous CSS patterns (expression, url with javascript, @import)
+          return val
+            .replace(/expression\s*\(/gi, "/* blocked */")
+            .replace(/javascript\s*:/gi, "/* blocked */")
+            .replace(/@import/gi, "/* blocked */")
+            .replace(/behavior\s*:/gi, "/* blocked */")
+            .replace(/-moz-binding/gi, "/* blocked */");
+        }),
       }),
     )
     .output(themeOutputSchema)

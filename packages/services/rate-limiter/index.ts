@@ -111,16 +111,16 @@ export async function checkRateLimit(
       resetAt,
     };
   } catch (err) {
-    // Graceful degradation: if Redis is down, allow the request but log warning
-    logger.warn("Rate limiter Redis error — allowing request", {
+    // Fail closed: if Redis is down, deny the request to prevent abuse
+    logger.error("Rate limiter Redis error — denying request for safety", {
       identifier,
       endpoint,
       error: err instanceof Error ? err.message : "unknown",
     });
 
     return {
-      allowed: true,
-      remaining: config.limit,
+      allowed: false,
+      remaining: 0,
       limit: config.limit,
       resetAt: new Date(now + config.windowMs),
     };

@@ -6,7 +6,7 @@ import FormService from "@repo/services/form";
 import FieldService from "@repo/services/field";
 import ResponseService from "@repo/services/response";
 import { db, eq, and, sql, like } from "@repo/database";
-import { formsTable } from "@repo/database/schema";
+import { formsTable, formAnalyticsTable } from "@repo/database/schema";
 
 const formService = new FormService();
 const fieldService = new FieldService();
@@ -19,7 +19,7 @@ export const publicRouter = router({
    */
   getFormBySlug: publicProcedure
     .meta({ openapi: { method: "GET", path: "/public/forms/{slug}", tags: ["Public"] } })
-    .input(z.object({ slug: z.string() }))
+    .input(z.object({ slug: z.string().max(100).regex(/^[a-z0-9-]+$/, "Invalid slug format") }))
     .output(
       z.object({
         id: z.string(),
@@ -108,13 +108,13 @@ export const publicRouter = router({
     .meta({ openapi: { method: "POST", path: "/public/forms/{slug}/responses", tags: ["Public"] } })
     .input(
       z.object({
-        slug: z.string(),
+        slug: z.string().max(100),
         answers: z.array(
           z.object({
             fieldId: z.string().uuid(),
             value: z.string().nullable(),
           }),
-        ),
+        ).max(200),
         respondentEmail: z.string().email().optional(),
         respondentName: z.string().max(100).optional(),
       }),
@@ -161,8 +161,18 @@ export const publicRouter = router({
 
       // Validate required fields
       const fields = await fieldService.listByFormIdPublic(form.id);
+      const validFieldIds = new Set(fields.map((f) => f.id));
       const requiredFieldIds = fields.filter((f) => f.required).map((f) => f.id);
       const answeredFieldIds = input.answers.filter((a) => a.value !== null && a.value !== "").map((a) => a.fieldId);
+
+      // Verify all submitted fieldIds belong to this form
+      const invalidFieldIds = input.answers.filter((a) => !validFieldIds.has(a.fieldId)).map((a) => a.fieldId);
+      if (invalidFieldIds.length > 0) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid field IDs submitted.",
+        });
+      }
 
       const missingRequired = requiredFieldIds.filter((id) => !answeredFieldIds.includes(id));
       if (missingRequired.length > 0) {
@@ -261,8 +271,9 @@ export const publicRouter = router({
    * Record a form view (for analytics).
    */
   recordView: publicProcedure
+    .use(rateLimitPublicSubmission)
     .meta({ openapi: { method: "POST", path: "/public/forms/{slug}/view", tags: ["Public"] } })
-    .input(z.object({ slug: z.string() }))
+    .input(z.object({ slug: z.string().max(100) }))
     .output(z.object({ success: z.boolean() }))
     .mutation(async ({ input }) => {
       const form = await formService.getBySlug(input.slug);
