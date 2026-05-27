@@ -1,135 +1,240 @@
-# Turborepo starter
+# CanvasForms
 
-This Turborepo starter is maintained by the Turborepo core team.
+A production-style form builder SaaS where creators design dynamic forms on an infinite canvas, publish shareable links, and collect responses — built with Turborepo, tRPC, Zod, Drizzle ORM, and Scalar.
 
-## Using this example
+## Demo Credentials
 
-Run the following command:
+- **Email:** admin@canvasforms.io
+- **Plan:** Pro
+- **API Docs:** http://localhost:8000/docs
 
-```sh
-npx create-turbo@latest
-```
+## Tech Stack
 
-## What's inside?
+| Layer | Technology |
+|-------|-----------|
+| Monorepo | Turborepo + pnpm workspaces |
+| Frontend | Next.js 16 (App Router), React 19, Tailwind CSS 4 |
+| Backend | Express.js, tRPC v11, trpc-to-openapi |
+| Database | PostgreSQL 16, Drizzle ORM |
+| Auth | Clerk (JWT + Webhooks) |
+| Cache/Rate Limit | Redis 7 (sliding window) |
+| Email | Resend |
+| API Docs | Scalar (OpenAPI 3.0) |
+| Validation | Zod |
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+trpc-monorepo/
+├── apps/
+│   ├── api/          → Express API server (port 8000)
+│   └── web/          → Next.js frontend (port 3000)
+├── packages/
+│   ├── database/     → Drizzle schema, migrations, seed
+│   ├── trpc/         → Shared tRPC router, context, client types
+│   ├── services/     → Business logic (form, field, response, analytics, email, rate-limiter)
+│   ├── logger/       → Winston logger
+│   ├── eslint-config/
+│   └── typescript-config/
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## Setup Instructions
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+### Prerequisites
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+- Node.js 18+
+- pnpm 9+
+- Docker (for PostgreSQL + Redis)
 
-### Develop
+### 1. Clone and install
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+git clone <repo-url>
+cd trpc-monorepo
+pnpm install
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### 2. Start infrastructure
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+docker compose -f docker-compose.dev.yml up -d
 ```
 
-### Remote Caching
+This starts PostgreSQL (port 5432) and Redis (port 6379).
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### 3. Configure environment
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+```bash
+cp .env.example .env
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Fill in your Clerk keys and Resend API key in `.env`.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+### 4. Run database migrations
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+```bash
+pnpm db:migrate
 ```
 
-## Useful Links
+### 5. Seed demo data
 
-Learn more about the power of Turborepo:
+```bash
+cd packages/database
+pnpm db:seed
+```
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+This creates:
+- 1 demo user (admin@canvasforms.io, Pro plan)
+- 4 system themes
+- 3 themed forms with fields
+- 700+ randomized responses
+- 30 days of analytics data
+- 1 API key
+
+### 6. Start development
+
+```bash
+pnpm dev
+```
+
+- Frontend: http://localhost:3000
+- API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+
+## Features
+
+### Core
+
+- User authentication (Clerk) with protected dashboard
+- Create, edit, publish, unpublish, archive, clone forms
+- Dynamic fields with validations and required/optional settings
+- 10 field types: short text, long text, email, number, single select, multi select, checkbox, dropdown, rating, date
+- Public and unlisted form visibility modes
+- Public form submission without login (with mandatory email collection)
+- Response analytics and management
+- CSV export for responses
+- Email notifications for creators (new response, form published, response limit reached)
+
+### Builder
+
+- **Form View** — drag-and-drop field reordering with @dnd-kit
+- **Canvas Flow View** — infinite canvas with detachable string connections, node dragging, auto-connect/disconnect, pan/zoom
+- Field inspector with label, description, placeholder, options, required toggle
+- Conditional logic (show field if another field equals/contains/greater than a value)
+- Form settings panel (title, description, visibility, theme, response limit, expiry, password protection)
+- QR code generation for published forms
+- Auto-save toggle (debounced 1.2s)
+- Keyboard shortcuts (Delete, ⌘Z undo, ⌘⇧Z redo, Escape deselect)
+- Form preview with device frames (Desktop/Tablet/Mobile) and theme switching
+- Undo/redo stack
+
+### Form Themes
+
+10 visual themes that transform the respondent experience:
+Default, Terminal, Anime, Cyberpunk, Studio, Gaming, Retro, Space, Nature, Minimal
+
+### Templates
+
+8 pre-built form templates with real field definitions:
+Customer Feedback, Job Application, Event RSVP, Contact Form, Newsletter Signup, Bug Report, NPS Survey, Meeting Request
+
+### Public Pages
+
+- Landing page with interactive canvas demo
+- Pricing page
+- Explore page (browse public forms with category filters)
+- Public form filling with step-by-step experience, progress bar, Enter key navigation, confetti on submit
+
+### API
+
+- Full REST API via trpc-to-openapi
+- Interactive Scalar documentation at /docs
+- API key management (create, revoke, delete)
+- Rate limiting: 60 req/min public submission, 10 req/min auth endpoints
+
+## API Documentation
+
+Interactive API docs are available at:
+
+```
+http://localhost:8000/docs
+```
+
+OpenAPI spec:
+```
+http://localhost:8000/openapi.json
+```
+
+### Key Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/forms | List creator's forms |
+| POST | /api/forms | Create a form |
+| POST | /api/forms/{formId}/publish | Publish a form |
+| GET | /api/public/forms/{slug} | Get published form (public) |
+| POST | /api/public/forms/{slug}/responses | Submit response (public, rate-limited) |
+| GET | /api/forms/{formId}/responses | List responses |
+| GET | /api/forms/{formId}/analytics/overview | Analytics KPIs |
+
+## Seeded Forms
+
+| Form | Visibility | Slug | Responses |
+|------|-----------|------|-----------|
+| Startup Feedback Flow | Public | startup-feedback-flow | 432 |
+| Anime Convention RSVP | Public | anime-convention-rsvp | 218 |
+| Game Dev Community Survey | Unlisted | gamedev-community-survey | 89 |
+
+## Security
+
+- Clerk JWT verification on all protected routes
+- API key hashing (SHA-256, never stored in plaintext)
+- Rate limiting with Redis sliding window (fails closed)
+- Helmet security headers
+- Request body size limit (1MB)
+- Input validation with Zod on all endpoints
+- Field ID validation on form submission
+- CSS sanitization on custom themes
+- Svix webhook signature verification
+- Graceful shutdown handling
+
+## Scripts
+
+```bash
+pnpm dev          # Start all apps in development
+pnpm build        # Build all apps
+pnpm lint         # Lint all packages
+pnpm db:generate  # Generate Drizzle migrations
+pnpm db:migrate   # Run migrations
+```
+
+## Environment Variables
+
+See `.env.example` for all required variables:
+
+- `DATABASE_URL` — PostgreSQL connection string
+- `REDIS_URL` — Redis connection string
+- `CLERK_SECRET_KEY` — Clerk backend secret
+- `CLERK_PUBLISHABLE_KEY` — Clerk frontend key
+- `CLERK_WEBHOOK_SECRET` — Svix webhook secret
+- `RESEND_API_KEY` — Resend email API key
+- `PORT` — API server port (default: 8000)
+- `BASE_URL` — API base URL
+- `NEXT_PUBLIC_API_URL` — API URL for frontend
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` — Clerk key for frontend
+
+## Deployment
+
+Both apps include Dockerfiles for containerized deployment:
+
+```bash
+# Build API
+docker build -f apps/api/Dockerfile -t canvasforms-api .
+
+# Build Web
+docker build -f apps/web/Dockerfile -t canvasforms-web .
+```
+
+## License
+
+MIT
