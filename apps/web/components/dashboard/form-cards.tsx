@@ -11,7 +11,7 @@ import { toast } from "sonner";
 export function DashboardFormCards() {
   const { isSignedIn } = useAuth();
   const { data, isLoading } = trpc.forms.list.useQuery(
-    { page: 1, limit: 6 },
+    { page: 1, limit: 50 },
     { enabled: !!isSignedIn },
   );
   const createForm = trpc.forms.create.useMutation();
