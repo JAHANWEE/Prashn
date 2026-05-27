@@ -141,11 +141,6 @@ Three unique ways respondents can fill forms:
 
 Creators can set the form theme in Form Settings to control which experience respondents see. Demo versions are accessible from the Explore page.
 
-### Form Themes
-
-Visual themes that transform the respondent experience:
-Default, Terminal, Chat, Anime, Cyberpunk, Studio, Gaming, Retro, Space, Nature, Minimal
-
 ### Templates
 
 8 pre-built form templates with real field definitions:
