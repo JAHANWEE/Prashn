@@ -5,6 +5,7 @@ import { cn } from "~/lib/utils";
 import { trpc } from "~/trpc/client";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export function DashboardFormCards() {
   const { isSignedIn } = useAuth();
@@ -49,12 +50,12 @@ export function DashboardFormCards() {
 function FormCard({ form }: { form: any }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const utils = trpc.useUtils();
-  const publishForm = trpc.forms.publish.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
-  const unpublishForm = trpc.forms.unpublish.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
-  const archiveForm = trpc.forms.archive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
-  const unarchiveForm = trpc.forms.unarchive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
-  const cloneForm = trpc.forms.clone.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
-  const deleteForm = trpc.forms.delete.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const publishForm = trpc.forms.publish.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast.success("Form published"); } });
+  const unpublishForm = trpc.forms.unpublish.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast("Form unpublished"); } });
+  const archiveForm = trpc.forms.archive.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast("Form archived"); } });
+  const unarchiveForm = trpc.forms.unarchive.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast("Form unarchived"); } });
+  const cloneForm = trpc.forms.clone.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast.success("Form duplicated"); } });
+  const deleteForm = trpc.forms.delete.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast("Form deleted"); } });
 
   const isPublished = form.status === "published";
   const isDraft = form.status === "draft";
@@ -71,6 +72,7 @@ function FormCard({ form }: { form: any }) {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(formUrl);
+    toast.success("Link copied to clipboard");
     setMenuOpen(false);
   };
 
@@ -132,6 +134,12 @@ function FormCard({ form }: { form: any }) {
             <span className="material-symbols-outlined text-[14px]">history</span>
             {timeAgo}
           </span>
+          {isPublished && (
+            <span className="flex items-center gap-1 text-[#fca9d4]">
+              <span className="material-symbols-outlined text-[14px]">chat_bubble</span>
+              Live
+            </span>
+          )}
         </div>
 
         {/* Action buttons */}
@@ -254,7 +262,7 @@ function CreateNewCard({ onClick, loading }: { onClick: () => void; loading: boo
         {loading ? "hourglass_empty" : "add_circle"}
       </span>
       <p className="text-lg font-semibold" style={{ fontFamily: "var(--font-geist-sans)" }}>
-        {loading ? "Creating..." : "Create New Flow"}
+        {loading ? "Creating..." : "Create New Form"}
       </p>
       <p className="text-[11px] opacity-70">Start with a blank canvas</p>
     </button>

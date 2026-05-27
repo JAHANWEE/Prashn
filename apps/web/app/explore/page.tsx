@@ -45,7 +45,7 @@ export default function ExplorePage() {
         </p>
 
         {/* Search */}
-        <div className="relative max-w-md">
+        <div className="relative max-w-md mb-4">
           <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-[#5a5a6e]">search</span>
           <input
             type="text"
@@ -55,6 +55,25 @@ export default function ExplorePage() {
             className="w-full pl-10 pr-4 py-2.5 bg-[#0f111a] border border-[#1e212d] rounded-xl text-[13px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4]/40 outline-none transition-all"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           />
+        </div>
+
+        {/* Category filters */}
+        <div className="flex flex-wrap gap-2">
+          {["All", "Startup", "Events", "Hiring", "Feedback", "Survey"].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => { setSearch(cat === "All" ? "" : cat); setPage(1); }}
+              className="px-3 py-1 rounded-full text-[11px] font-medium transition-all"
+              style={{
+                background: (cat === "All" && !search) || search === cat ? "#fca9d4" : "#0f111a",
+                color: (cat === "All" && !search) || search === cat ? "#0a0a0f" : "#908f9e",
+                border: `1px solid ${(cat === "All" && !search) || search === cat ? "#fca9d4" : "#1e212d"}`,
+                fontFamily: "var(--font-geist-mono)",
+              }}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </section>
 

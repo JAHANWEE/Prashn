@@ -13,6 +13,7 @@ import { FormSettingsPanel } from "~/components/builder/form-settings-panel";
 import { PreviewModal } from "~/components/builder/preview-modal";
 import { useUndoRedo } from "~/components/builder/use-undo-redo";
 import { useKeyboardShortcuts } from "~/components/builder/use-keyboard-shortcuts";
+import { toast } from "sonner";
 
 const FIELD_TYPES = [
   { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#fca9d4]" },
@@ -51,10 +52,12 @@ export default function BuilderPage() {
     onSuccess: (data) => {
       refetchFields();
       pushAction({ type: "add", fieldId: data.id, formId: formId! });
+      setSelectedFieldId(data.id); // Auto-select new field
+      toast.success("Field added");
     },
   });
   const deleteField = trpc.fields.delete.useMutation({
-    onSuccess: () => { refetchFields(); },
+    onSuccess: () => { refetchFields(); toast("Field deleted"); },
   });
 
   const [selectedFieldId, setSelectedFieldId] = useState<string | null>(null);
@@ -226,6 +229,7 @@ function FieldInspector({ field, formId, allFields }: { field: any; formId: stri
   const updateField = trpc.fields.update.useMutation({
     onSuccess: () => {
       utils.fields.list.invalidate();
+      toast.success("Field saved");
     },
   });
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { trpc } from "~/trpc/client";
 import { FormShell, FormCard } from "~/components/respondent";
+import confetti from "canvas-confetti";
 
 export default function RespondentFormPage() {
   const params = useParams();
@@ -97,6 +98,7 @@ export default function RespondentFormPage() {
           })),
         });
         setSubmitted(true);
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
       } catch (err: any) {
         setErrorMsg(err.message ?? "Submission failed. Please try again.");
       }
@@ -113,15 +115,26 @@ export default function RespondentFormPage() {
     setAnswers((prev) => ({ ...prev, [fieldId]: value }));
   };
 
+  // Enter key to advance
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleNext();
+    }
+  };
+
   return (
     <FormShell progress={progress}>
+      <div onKeyDown={handleKeyDown}>
       <FormCard step={currentStep + 1} totalSteps={totalSteps} formTitle={form.title}>
         {currentField && (
+          <div key={currentField.id} style={{ animation: "fadeSlideIn 0.2s ease-out" }}>
           <FieldRenderer
             field={currentField}
             value={answers[currentField.id] ?? ""}
             onChange={(val) => handleAnswerChange(currentField.id, val)}
           />
+          </div>
         )}
 
         {/* Error message */}
@@ -156,6 +169,7 @@ export default function RespondentFormPage() {
           </button>
         </div>
       </FormCard>
+      </div>
     </FormShell>
   );
 }

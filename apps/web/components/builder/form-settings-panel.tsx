@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { trpc } from "~/trpc/client";
+import { toast } from "sonner";
 
 interface FormSettingsPanelProps {
   formId: string;
@@ -20,12 +21,14 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
   const updateForm = trpc.forms.update.useMutation({
     onSuccess: () => {
       utils.forms.getById.invalidate();
+      toast.success("Settings saved");
     },
   });
 
   const updateVisibility = trpc.forms.updateVisibility.useMutation({
     onSuccess: () => {
       utils.forms.getById.invalidate();
+      toast.success("Visibility updated");
     },
   });
 
