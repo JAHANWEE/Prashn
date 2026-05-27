@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 import { trpc } from "~/trpc/client";
 import { BuilderHeader } from "~/components/builder/header";
 import { BuilderToolbar } from "~/components/builder/toolbar";
+import { SortableFieldList } from "~/components/builder/sortable-field-list";
 
 const FIELD_TYPES = [
   { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#bdc2ff]" },
@@ -119,43 +120,13 @@ export default function BuilderPage() {
           )}
 
           {fields && fields.length > 0 && (
-            <div className="space-y-4 max-w-2xl mx-auto">
-              {fields.map((field, idx) => (
-                <div
-                  key={field.id}
-                  onClick={() => setSelectedFieldId(field.id)}
-                  className={`bg-[#1f1f26] border rounded-xl p-4 cursor-pointer transition-all ${
-                    selectedFieldId === field.id
-                      ? "border-[#818cf8] shadow-[0_0_0_2px_rgba(129,140,248,0.2)]"
-                      : "border-[#454653] hover:border-[#bdc2ff]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] text-[#908f9e] bg-[#292930] px-2 py-0.5 rounded" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                        {idx + 1}
-                      </span>
-                      <span className="text-[12px] text-[#bdc2ff] uppercase" style={{ fontFamily: "var(--font-geist-mono)" }}>
-                        {field.fieldType.replace("_", " ")}
-                      </span>
-                      {field.required && (
-                        <span className="text-[10px] text-[#ffb4ab]">*required</span>
-                      )}
-                    </div>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); handleDeleteField(field.id); }}
-                      className="text-[#908f9e] hover:text-[#ffb4ab] transition-colors p-1"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">close</span>
-                    </button>
-                  </div>
-                  <p className="text-[14px] text-[#e4e1eb] font-medium">{field.label}</p>
-                  {field.description && (
-                    <p className="text-[12px] text-[#908f9e] mt-1">{field.description}</p>
-                  )}
-                </div>
-              ))}
-            </div>
+            <SortableFieldList
+              fields={fields}
+              formId={formId}
+              selectedFieldId={selectedFieldId}
+              onSelectField={setSelectedFieldId}
+              onDeleteField={handleDeleteField}
+            />
           )}
         </main>
 

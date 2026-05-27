@@ -19,11 +19,11 @@ export function DashboardSidebar() {
   return (
     <aside className="fixed left-0 top-0 h-full w-[280px] bg-[#0d0e14] border-r border-[#454653] shadow-sm z-50 flex flex-col py-6 px-4">
       {/* Logo */}
-      <div className="flex items-center gap-2 mb-8">
-        <div className="w-10 h-10 rounded-lg bg-[#818cf8] flex items-center justify-center">
+      <a href="/" className="flex items-center gap-2 mb-8">
+        <div className="w-8 h-8 rounded flex items-center justify-center bg-[#818cf8]">
           <svg
-            width="22"
-            height="22"
+            width="18"
+            height="18"
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export function DashboardSidebar() {
         </div>
         <div>
           <h1
-            className="text-lg font-bold text-[#e4e1eb]"
+            className="text-lg font-bold tracking-tight text-[#bdc2ff]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
             CanvasForms
@@ -49,7 +49,7 @@ export function DashboardSidebar() {
             Form Builder
           </p>
         </div>
-      </div>
+      </a>
 
       {/* New Form button */}
       <CreateFormButton />
