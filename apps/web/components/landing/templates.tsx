@@ -3,21 +3,25 @@ const TEMPLATES = [
     icon: "description",
     title: "USER ONBOARDING",
     meta: "5 screens • Conditional logic",
+    image: "/pink_1.jpeg",
   },
   {
     icon: "rate_review",
     title: "PRODUCT FEEDBACK",
     meta: "8 screens • Multi-choice",
+    image: "/pink_2.jpeg",
   },
   {
     icon: "event",
     title: "EVENT REGISTRATION",
     meta: "4 screens • RSVP Logic",
+    image: "/pink_3.jpeg",
   },
   {
     icon: "contact_support",
     title: "SUPPORT TICKET",
     meta: "3 screens • Dynamic routing",
+    image: "/pink_4.gif",
   },
 ] as const;
 
@@ -56,8 +60,8 @@ export function LandingTemplates() {
 
         {/* Template grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {TEMPLATES.map(({ icon, title, meta }) => (
-            <TemplateCard key={title} icon={icon} title={title} meta={meta} />
+          {TEMPLATES.map(({ icon, title, meta, image }) => (
+            <TemplateCard key={title} icon={icon} title={title} meta={meta} image={image} />
           ))}
         </div>
       </div>
@@ -69,17 +73,21 @@ function TemplateCard({
   icon,
   title,
   meta,
+  image,
 }: {
   icon: string;
   title: string;
   meta: string;
+  image: string;
 }) {
   return (
     <div className="group cursor-pointer">
-      <div className="aspect-[4/3] border border-[#454653] rounded-xl overflow-hidden mb-4 flex items-center justify-center transition-colors bg-[#1f1f26] group-hover:border-[#fca9d4]">
-        <span className="material-symbols-outlined text-[48px] text-[#908f9e] group-hover:text-[#fca9d4] transition-colors">
-          {icon}
-        </span>
+      <div className="aspect-[4/3] border border-[#454653] rounded-xl overflow-hidden mb-4 transition-colors bg-[#1f1f26] group-hover:border-[#fca9d4] relative">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
       <h4
         className="text-xs font-bold tracking-widest mb-1 text-[#e4e1eb]"
