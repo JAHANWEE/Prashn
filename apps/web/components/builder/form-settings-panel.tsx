@@ -34,6 +34,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
   const [visibility, setVisibility] = useState<"public" | "unlisted">("public");
   const [responseLimit, setResponseLimit] = useState<string>("");
   const [expiresAt, setExpiresAt] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   // Sync form data into local state
   useEffect(() => {
@@ -43,6 +44,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
       setVisibility(form.visibility as "public" | "unlisted");
       setResponseLimit(form.responseLimit?.toString() ?? "");
       setExpiresAt(form.expiresAt ? form.expiresAt.split("T")[0] ?? "" : "");
+      setPassword("");
     }
   }, [form]);
 
@@ -61,6 +63,7 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
       description: description.trim() || null,
       responseLimit: responseLimit ? parseInt(responseLimit) : null,
       expiresAt: expiresAt ? new Date(expiresAt).toISOString() : null,
+      settings: { ...(form.settings as Record<string, unknown> ?? {}), password: password || undefined },
     });
   };
 
@@ -195,6 +198,19 @@ export function FormSettingsPanel({ formId }: FormSettingsPanelProps) {
           className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         />
+      </Section>
+
+      {/* Password Protection */}
+      <Section label="Password Protection">
+        <input
+          type="text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Leave empty for no password"
+          className="w-full bg-[#0d0e14] border border-[#454653] rounded-lg px-3 py-2 text-[12px] text-[#e4e1eb] placeholder:text-[#5a5a6e] focus:ring-2 focus:ring-[#fca9d4]/20 focus:border-[#fca9d4] outline-none"
+          style={{ fontFamily: "var(--font-geist-mono)" }}
+        />
+        <p className="text-[9px] text-[#5a5a6e] mt-1">Respondents must enter this password to access the form.</p>
       </Section>
 
       {/* Status badge */}

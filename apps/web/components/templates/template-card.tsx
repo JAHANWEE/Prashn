@@ -1,4 +1,8 @@
+"use client";
+
 import { cn } from "~/lib/utils";
+import { trpc } from "~/trpc/client";
+import { useRouter } from "next/navigation";
 
 export type TemplateData = {
   title: string;
@@ -17,6 +21,17 @@ const CATEGORY_STYLES = {
 } as const;
 
 export function TemplateCard({ template }: { template: TemplateData }) {
+  const createForm = trpc.forms.create.useMutation();
+  const router = useRouter();
+
+  const handleUseTemplate = async () => {
+    const form = await createForm.mutateAsync({
+      title: template.title,
+      description: template.description,
+    });
+    router.push(`/builder?formId=${form.id}`);
+  };
+
   return (
     <div className="group bg-[#0d0e14] border border-[#454653] rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col">
       {/* Preview area */}
@@ -51,8 +66,12 @@ export function TemplateCard({ template }: { template: TemplateData }) {
             <span className="material-symbols-outlined text-[18px]">list_alt</span>
             <span className="text-[13px] font-medium">{template.questionCount} Questions</span>
           </div>
-          <button className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#fca9d4] hover:text-[#ffffff] transition-all duration-200 active:scale-95">
-            Use Template
+          <button
+            onClick={handleUseTemplate}
+            disabled={createForm.isPending}
+            className="px-4 py-2 bg-[#292930] text-[#e4e1eb] font-bold text-[13px] rounded-lg hover:bg-[#fca9d4] hover:text-[#ffffff] transition-all duration-200 active:scale-95 disabled:opacity-50"
+          >
+            {createForm.isPending ? "Creating..." : "Use Template"}
           </button>
         </div>
       </div>

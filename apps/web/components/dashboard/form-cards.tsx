@@ -53,6 +53,7 @@ function FormCard({ form }: { form: any }) {
   const unpublishForm = trpc.forms.unpublish.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
   const archiveForm = trpc.forms.archive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
   const unarchiveForm = trpc.forms.unarchive.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
+  const cloneForm = trpc.forms.clone.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
   const deleteForm = trpc.forms.delete.useMutation({ onSuccess: () => utils.forms.list.invalidate() });
 
   const isPublished = form.status === "published";
@@ -204,6 +205,12 @@ function FormCard({ form }: { form: any }) {
               <span className="material-symbols-outlined text-[16px]">open_in_new</span> View Live
             </a>
           )}
+          <button
+            onClick={() => { cloneForm.mutate({ formId: form.id }); setMenuOpen(false); }}
+            className="w-full text-left px-4 py-2 text-[12px] text-[#e4e1eb] hover:bg-[#292930] flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[16px]">content_copy</span> Duplicate
+          </button>
           <button
             onClick={() => { archiveForm.mutate({ formId: form.id }); setMenuOpen(false); }}
             className="w-full text-left px-4 py-2 text-[12px] text-[#f7bd3e] hover:bg-[#292930] flex items-center gap-2"

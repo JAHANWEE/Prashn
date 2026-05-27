@@ -200,7 +200,7 @@ export default function BuilderPage() {
           </div>
           <div className="flex-1 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden">
             {selectedField ? (
-              <FieldInspector field={selectedField} formId={formId} />
+              <FieldInspector field={selectedField} formId={formId} allFields={fields} />
             ) : (
               <FormSettingsPanel formId={formId} />
             )}
@@ -221,7 +221,7 @@ export default function BuilderPage() {
 
 // ─── Field Inspector ─────────────────────────────────────────────────────────
 
-function FieldInspector({ field, formId }: { field: any; formId: string }) {
+function FieldInspector({ field, formId, allFields }: { field: any; formId: string; allFields?: any[] }) {
   const utils = trpc.useUtils();
   const updateField = trpc.fields.update.useMutation({
     onSuccess: () => {
@@ -236,6 +236,10 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
   const [options, setOptions] = useState<Array<{ label: string; value: string }>>(
     (field.options as Array<{ label: string; value: string }>) ?? [],
   );
+  const [condEnabled, setCondEnabled] = useState(!!field.conditionalLogic);
+  const [condFieldId, setCondFieldId] = useState((field.conditionalLogic as any)?.showIf?.fieldId ?? "");
+  const [condOperator, setCondOperator] = useState((field.conditionalLogic as any)?.showIf?.operator ?? "equals");
+  const [condValue, setCondValue] = useState((field.conditionalLogic as any)?.showIf?.value ?? "");
   const [trackedFieldId, setTrackedFieldId] = useState(field.id);
 
   // Reset state when a different field is selected
@@ -246,9 +250,14 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
     setRequired(field.required);
     setPlaceholder(field.placeholder ?? "");
     setOptions((field.options as Array<{ label: string; value: string }>) ?? []);
+    setCondEnabled(!!field.conditionalLogic);
+    setCondFieldId((field.conditionalLogic as any)?.showIf?.fieldId ?? "");
+    setCondOperator((field.conditionalLogic as any)?.showIf?.operator ?? "equals");
+    setCondValue((field.conditionalLogic as any)?.showIf?.value ?? "");
   }
 
   const hasOptions = ["single_select", "multi_select", "dropdown"].includes(field.fieldType);
+  const otherFields = (allFields ?? []).filter((f: any) => f.id !== field.id);
 
   const handleSave = () => {
     updateField.mutate({
@@ -258,6 +267,9 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
       required,
       placeholder: placeholder || null,
       ...(hasOptions ? { options } : {}),
+      conditionalLogic: condEnabled && condFieldId
+        ? { showIf: { fieldId: condFieldId, operator: condOperator as any, value: condValue } }
+        : null,
     });
   };
 
@@ -361,6 +373,60 @@ function FieldInspector({ field, formId }: { field: any; formId: string }) {
             style={{ left: required ? "calc(100% - 17px)" : "3px" }}
           />
         </button>
+      </div>
+
+      {/* Conditional Logic */}
+      <div className="border-t border-[#1f1f26] pt-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] font-medium text-[#c6c5d5]">Conditional Logic</span>
+          <button
+            onClick={() => setCondEnabled(!condEnabled)}
+            className="w-9 h-5 rounded-full relative transition-colors"
+            style={{ background: condEnabled ? "#fca9d4" : "rgba(53, 53, 64, 0.8)" }}
+          >
+            <div className="absolute top-[3px] w-3.5 h-3.5 bg-white rounded-full transition-all" style={{ left: condEnabled ? "calc(100% - 17px)" : "3px" }} />
+          </button>
+        </div>
+
+        {condEnabled && (
+          <div className="space-y-2 p-2.5 bg-[#0d0e14] rounded-lg border border-[#1f1f26]">
+            <p className="text-[9px] text-[#5a5a6e] uppercase tracking-wider" style={{ fontFamily: "var(--font-geist-mono)" }}>Show this field only if</p>
+
+            {/* Field selector */}
+            <select
+              value={condFieldId}
+              onChange={(e) => setCondFieldId(e.target.value)}
+              className="w-full bg-[#121319] border border-[#353540] rounded-md px-2 py-1.5 text-[11px] text-[#e4e1eb] outline-none focus:border-[#fca9d4]/40"
+            >
+              <option value="">Select a field...</option>
+              {otherFields.map((f: any) => (
+                <option key={f.id} value={f.id}>{f.label}</option>
+              ))}
+            </select>
+
+            {/* Operator */}
+            <select
+              value={condOperator}
+              onChange={(e) => setCondOperator(e.target.value)}
+              className="w-full bg-[#121319] border border-[#353540] rounded-md px-2 py-1.5 text-[11px] text-[#e4e1eb] outline-none focus:border-[#fca9d4]/40"
+            >
+              <option value="equals">equals</option>
+              <option value="not_equals">does not equal</option>
+              <option value="contains">contains</option>
+              <option value="greater_than">greater than</option>
+              <option value="less_than">less than</option>
+            </select>
+
+            {/* Value */}
+            <input
+              type="text"
+              value={condValue}
+              onChange={(e) => setCondValue(e.target.value)}
+              placeholder="Value..."
+              className="w-full bg-[#121319] border border-[#353540] rounded-md px-2 py-1.5 text-[11px] text-[#e4e1eb] placeholder:text-[#4a4a5a] outline-none focus:border-[#fca9d4]/40"
+            />
+          </div>
+        )}
       </div>
 
       {/* Save */}
