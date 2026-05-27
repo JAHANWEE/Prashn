@@ -13,7 +13,7 @@ const PLANS = [
       "Basic analytics",
       "Community support",
     ],
-    cta: "Get Started",
+    cta: "Coming Soon",
     highlighted: false,
   },
   {
@@ -31,7 +31,7 @@ const PLANS = [
       "Priority support",
       "Custom themes",
     ],
-    cta: "Start 14-Day Trial",
+    cta: "Coming Soon",
     highlighted: true,
     badge: "Most Popular",
   },
@@ -50,7 +50,7 @@ const PLANS = [
       "Dedicated support",
       "SLA guarantee",
     ],
-    cta: "Contact Sales",
+    cta: "Coming Soon",
     highlighted: false,
   },
 ];
@@ -120,10 +120,11 @@ export default function PricingPage() {
               </ul>
 
               <button
-                className={`w-full py-3 rounded-xl text-[13px] font-semibold transition-all ${
+                disabled
+                className={`w-full py-3 rounded-xl text-[13px] font-semibold transition-all opacity-50 cursor-not-allowed ${
                   plan.highlighted
-                    ? "bg-white text-[#ffffff] hover:opacity-90 shadow-sm"
-                    : "border border-[#454653] text-[#c6c5d5] hover:bg-[#292930]"
+                    ? "bg-white text-[#0a0a0f] shadow-sm"
+                    : "border border-[#454653] text-[#c6c5d5]"
                 }`}
                 style={{ fontFamily: "var(--font-geist-sans)" }}
               >

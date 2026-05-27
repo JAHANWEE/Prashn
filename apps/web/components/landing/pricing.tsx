@@ -5,7 +5,7 @@ const PLANS = [
     price: "$0",
     period: "/MONTH",
     features: ["100 responses/mo", "3 forms", "Infinite Canvas"],
-    cta: "GET STARTED",
+    cta: "COMING SOON",
     highlighted: false,
   },
   {
@@ -19,7 +19,7 @@ const PLANS = [
       "Custom domains",
       "Logic branching",
     ],
-    cta: "START 14-DAY TRIAL",
+    cta: "COMING SOON",
     highlighted: true,
     badge: "RECOMMENDED",
   },
@@ -29,7 +29,7 @@ const PLANS = [
     price: "$99",
     period: "/MONTH",
     features: ["50,000 responses/mo", "Shared workspaces", "Advanced API access"],
-    cta: "CONTACT SALES",
+    cta: "COMING SOON",
     highlighted: false,
   },
 ] as const;
@@ -117,13 +117,12 @@ function PricingCard({ plan }: { plan: Plan }) {
             </li>
           ))}
         </ul>
-        <a
-          href="/register"
-          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white text-[#fca9d4] hover:opacity-90 transition-opacity shadow-sm text-center block"
+        <span
+          className="w-full py-2 rounded text-xs font-medium tracking-widest bg-white/50 text-[#0a0a0f] text-center block opacity-50 cursor-not-allowed"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
           {cta}
-        </a>
+        </span>
       </div>
     );
   }
@@ -157,18 +156,17 @@ function PricingCard({ plan }: { plan: Plan }) {
             className="flex items-center gap-3 text-sm text-[#c6c5d5]"
             style={{ fontFamily: "var(--font-geist-sans)" }}
           >
-            <span className="material-symbols-outlined text-[18px] text-[#fca9d4]">check</span>
+            <span className="material-symbols-outlined text-[18px] text-[#0a0a0f]">check</span>
             {f}
           </li>
         ))}
       </ul>
-      <a
-        href="/register"
-        className="w-full border border-[#454653] py-2 rounded text-xs font-medium tracking-widest text-[#c6c5d5] hover:bg-[#292930] transition-colors text-center block"
+      <span
+        className="w-full border border-[#454653] py-2 rounded text-xs font-medium tracking-widest text-[#c6c5d5] text-center block opacity-50 cursor-not-allowed"
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         {cta}
-      </a>
+      </span>
     </div>
   );
 }
