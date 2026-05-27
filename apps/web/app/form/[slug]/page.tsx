@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { trpc } from "~/trpc/client";
 import { FormShell, FormCard } from "~/components/respondent";
-import confetti from "canvas-confetti";
 
 export default function RespondentFormPage() {
   const params = useParams();
@@ -98,7 +97,7 @@ export default function RespondentFormPage() {
           })),
         });
         setSubmitted(true);
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        import("canvas-confetti").then(m => m.default({ particleCount: 100, spread: 70, origin: { y: 0.6 } }));
       } catch (err: any) {
         setErrorMsg(err.message ?? "Submission failed. Please try again.");
       }

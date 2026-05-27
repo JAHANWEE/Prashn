@@ -9,20 +9,23 @@ import { httpLink } from "@repo/trpc/client";
 
 import { trpc } from "~/trpc/client";
 
-const API_URL = "http://localhost:8000/trpc";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnMount: true,
-      staleTime: 30_000,
-      retry: 1,
-    },
-  },
-});
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL}/trpc`
+  : "http://localhost:8000/trpc";
 
 export const GlobalProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { getToken } = useAuth();
+
+  // QueryClient inside component state — prevents data leaking between SSR requests
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnMount: true,
+        staleTime: 30_000,
+        retry: 1,
+      },
+    },
+  }));
 
   const [trpcClient] = useState(() =>
     trpc.createClient({

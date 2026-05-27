@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { cn } from "~/lib/utils";
 import { trpc } from "~/trpc/client";
 import { useRouter } from "next/navigation";
@@ -85,10 +86,12 @@ function FormCard({ form, index }: { form: any; index: number }) {
       {/* Canvas preview area */}
       <a href={`/builder?formId=${form.id}`} className="block">
         <div className="h-32 bg-[#1b1b22] relative overflow-hidden">
-          <img
-            src={CAT_IMAGES[index % CAT_IMAGES.length]}
+          <Image
+            src={CAT_IMAGES[index % CAT_IMAGES.length]!}
             alt=""
-            className="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
           />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
             <span className="bg-[#fca9d4] text-[#0a0a0f] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">

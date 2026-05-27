@@ -8,12 +8,18 @@ import { BuilderHeader } from "~/components/builder/header";
 import { BuilderToolbar } from "~/components/builder/toolbar";
 import { SortableFieldList } from "~/components/builder/sortable-field-list";
 import { ViewToggle, useBuilderView } from "~/components/builder/view-toggle";
-import { FlowCanvas } from "~/components/builder/flow-view";
 import { FormSettingsPanel } from "~/components/builder/form-settings-panel";
-import { PreviewModal } from "~/components/builder/preview-modal";
 import { useUndoRedo } from "~/components/builder/use-undo-redo";
 import { useKeyboardShortcuts } from "~/components/builder/use-keyboard-shortcuts";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
+
+const FlowCanvas = dynamic(() => import("~/components/builder/flow-view").then(m => ({ default: m.FlowCanvas })), {
+  loading: () => <div className="flex-1 bg-[#0a0a0f]" />,
+});
+const PreviewModal = dynamic(() => import("~/components/builder/preview-modal").then(m => ({ default: m.PreviewModal })), {
+  ssr: false,
+});
 
 const FIELD_TYPES = [
   { type: "short_text", label: "Short Text", icon: "short_text", color: "text-[#fca9d4]" },
