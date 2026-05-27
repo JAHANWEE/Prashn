@@ -4,7 +4,8 @@ A production-style form builder SaaS where creators design dynamic forms on an i
 
 ## Demo Credentials
 
-- **Email:** admin@prashn.io
+- **Email:** demo-login@gmail.com
+- **Password:** demo@prashn.fun
 - **Plan:** Pro
 - **API Docs:** http://localhost:8000/docs
 
