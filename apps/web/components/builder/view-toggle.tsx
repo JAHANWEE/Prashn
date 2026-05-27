@@ -9,78 +9,69 @@ interface ViewToggleProps {
   onChange: (view: BuilderView) => void;
 }
 
-/**
- * Toggle between Form View and Flow View.
- * Persists selection to localStorage.
- */
 export function ViewToggle({ value, onChange }: ViewToggleProps) {
   return (
-    <div
-      className="flex items-center p-[3px] gap-[2px]"
-      style={{
-        background: "rgba(13, 14, 20, 0.8)",
-        border: "1px solid rgba(53, 53, 64, 0.6)",
-        borderRadius: "10px",
-      }}
-      role="tablist"
-      aria-label="Builder view mode"
-    >
-      <ToggleButton
-        active={value === "form"}
+    <div className="w-full space-y-2">
+      {/* Form button */}
+      <button
         onClick={() => onChange("form")}
-        icon="view_list"
-        label="Form"
-        ariaLabel="Switch to Form View"
-      />
-      <ToggleButton
-        active={value === "flow"}
+        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[12px] font-semibold transition-all"
+        style={{
+          fontFamily: "var(--font-geist-mono)",
+          background: value === "form" ? "#1b1b22" : "transparent",
+          color: value === "form" ? "#e4e1eb" : "#5a5a6e",
+          border: value === "form" ? "1px solid #454653" : "1px solid transparent",
+        }}
+      >
+        <span className="material-symbols-outlined text-[18px]">view_list</span>
+        Form View
+      </button>
+
+      {/* Canvas Flow button — highlighted */}
+      <button
         onClick={() => onChange("flow")}
-        icon="timeline"
-        label="Journey"
-        ariaLabel="Switch to Journey View"
-      />
+        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[12px] font-semibold transition-all relative overflow-hidden"
+        style={{
+          fontFamily: "var(--font-geist-mono)",
+          background: value === "flow"
+            ? "linear-gradient(135deg, rgba(252,169,212,0.15) 0%, rgba(252,169,212,0.05) 100%)"
+            : "linear-gradient(135deg, rgba(252,169,212,0.06) 0%, rgba(252,169,212,0.02) 100%)",
+          color: value === "flow" ? "#fca9d4" : "#fca9d4",
+          border: value === "flow" ? "1px solid rgba(252,169,212,0.5)" : "1px solid rgba(252,169,212,0.2)",
+          boxShadow: value === "flow"
+            ? "0 0 20px rgba(252,169,212,0.15), inset 0 1px 0 rgba(252,169,212,0.1)"
+            : "0 0 8px rgba(252,169,212,0.05)",
+        }}
+      >
+        <span className="material-symbols-outlined text-[18px]">timeline</span>
+        Canvas View
+        {/* Badge */}
+        <span
+          className="ml-auto px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider"
+          style={{ background: "#fca9d4", color: "#0a0a0f" }}
+        >
+          NEW
+        </span>
+        {/* Animated shimmer */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(90deg, transparent 0%, rgba(252,169,212,0.08) 50%, transparent 100%)",
+            animation: "shimmer 3s ease-in-out infinite",
+          }}
+        />
+      </button>
+
+      <style>{`
+        @keyframes shimmer {
+          0%, 100% { transform: translateX(-100%); }
+          50% { transform: translateX(100%); }
+        }
+      `}</style>
     </div>
   );
 }
 
-function ToggleButton({
-  active,
-  onClick,
-  icon,
-  label,
-  ariaLabel,
-}: {
-  active: boolean;
-  onClick: () => void;
-  icon: string;
-  label: string;
-  ariaLabel: string;
-}) {
-  return (
-    <button
-      role="tab"
-      aria-selected={active}
-      aria-label={ariaLabel}
-      onClick={onClick}
-      className="flex items-center gap-1.5 px-3 py-[5px] rounded-[7px] text-[11px] font-medium"
-      style={{
-        fontFamily: "var(--font-geist-mono)",
-        background: active ? "rgba(31, 31, 38, 0.9)" : "transparent",
-        color: active ? "#fca9d4" : "rgba(144, 143, 158, 0.7)",
-        border: active ? "1px solid rgba(69, 70, 83, 0.6)" : "1px solid transparent",
-        boxShadow: active ? "0 1px 4px rgba(0, 0, 0, 0.2)" : "none",
-        transition: "all 0.15s ease",
-      }}
-    >
-      <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>{icon}</span>
-      <span>{label}</span>
-    </button>
-  );
-}
-
-/**
- * Hook to persist builder view preference.
- */
 export function useBuilderView(): [BuilderView, (v: BuilderView) => void] {
   const [view, setView] = useState<BuilderView>("form");
 

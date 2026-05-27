@@ -38,8 +38,8 @@ export function DashboardFormCards() {
             <FormCardSkeleton />
           </>
         )}
-        {data?.forms.map((form) => (
-          <FormCard key={form.id} form={form} />
+        {data?.forms.map((form, idx) => (
+          <FormCard key={form.id} form={form} index={idx} />
         ))}
         <CreateNewCard onClick={handleCreateForm} loading={createForm.isPending} />
       </div>
@@ -47,8 +47,9 @@ export function DashboardFormCards() {
   );
 }
 
-function FormCard({ form }: { form: any }) {
+function FormCard({ form, index }: { form: any; index: number }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const utils = trpc.useUtils();
   const publishForm = trpc.forms.publish.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast.success("Form published"); } });
   const unpublishForm = trpc.forms.unpublish.useMutation({ onSuccess: () => { utils.forms.list.invalidate(); toast("Form unpublished"); } });
@@ -83,8 +84,12 @@ function FormCard({ form }: { form: any }) {
     >
       {/* Canvas preview area */}
       <a href={`/builder?formId=${form.id}`} className="block">
-        <div className="h-32 bg-[#1b1b22] cf-canvas-grid-bg p-4 relative flex items-center justify-center overflow-hidden">
-          <CanvasPreviewGeneric />
+        <div className="h-32 bg-[#1b1b22] relative overflow-hidden">
+          <img
+            src={CAT_IMAGES[index % CAT_IMAGES.length]}
+            alt=""
+            className="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+          />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
             <span className="bg-[#fca9d4] text-[#0a0a0f] px-6 py-2 rounded-lg text-[13px] font-medium shadow-lg">
               Open Canvas
@@ -191,7 +196,7 @@ function FormCard({ form }: { form: any }) {
                 Publish
               </button>
               <button
-                onClick={() => { if (confirm("Delete this form?")) deleteForm.mutate({ formId: form.id }); }}
+                onClick={() => setConfirmDelete(true)}
                 disabled={deleteForm.isPending}
                 className="flex items-center justify-center px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#ffb4ab] hover:border-[#ffb4ab] transition-all disabled:opacity-50"
               >
@@ -226,30 +231,49 @@ function FormCard({ form }: { form: any }) {
             <span className="material-symbols-outlined text-[16px]">archive</span> Archive
           </button>
           <button
-            onClick={() => { if (confirm("Permanently delete?")) { deleteForm.mutate({ formId: form.id }); setMenuOpen(false); } }}
+            onClick={() => { setConfirmDelete(true); setMenuOpen(false); }}
             className="w-full text-left px-4 py-2 text-[12px] text-[#ffb4ab] hover:bg-[#292930] flex items-center gap-2"
           >
             <span className="material-symbols-outlined text-[16px]">delete_forever</span> Delete
           </button>
         </div>
       )}
+
+      {/* Delete confirmation overlay */}
+      {confirmDelete && (
+        <div className="absolute inset-0 z-[60] bg-[#0d0e14]/95 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center gap-3 p-6">
+          <span className="material-symbols-outlined text-[28px] text-[#ffb4ab]">warning</span>
+          <p className="text-[13px] font-medium text-[#e4e1eb] text-center">Delete this form?</p>
+          <p className="text-[11px] text-[#908f9e] text-center">This action cannot be undone.</p>
+          <div className="flex gap-2 mt-2">
+            <button
+              onClick={() => setConfirmDelete(false)}
+              className="px-4 py-1.5 text-[11px] font-medium text-[#c6c5d5] border border-[#454653] rounded-lg hover:bg-[#1f1f26] transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => { deleteForm.mutate({ formId: form.id }); setConfirmDelete(false); }}
+              disabled={deleteForm.isPending}
+              className="px-4 py-1.5 text-[11px] font-medium text-[#0a0a0f] bg-[#ffb4ab] rounded-lg hover:brightness-110 transition-all disabled:opacity-50"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function CanvasPreviewGeneric() {
-  return (
-    <div className="flex gap-4 items-center z-10">
-      <div className="w-14 h-9 bg-[#0d0e14] border border-[#454653] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-        <div className="w-8 h-1 bg-[#454653] rounded-full" />
-      </div>
-      <div className="w-3 h-[1.5px] bg-[#454653]" />
-      <div className="w-14 h-9 bg-[#0d0e14] border border-[#fca9d4] rounded-sm flex items-center justify-center" style={{ boxShadow: "0px 1px 3px rgba(0,0,0,0.2)" }}>
-        <div className="w-8 h-1 bg-[#fca9d4]/20 rounded-full" />
-      </div>
-    </div>
-  );
-}
+const CAT_IMAGES = [
+  "/cat_canvas.jpeg",
+  "/cat_2_canvas.jpeg",
+  "/cat_3_canvas.jpeg",
+  "/cat_4_canvas.jpeg",
+  "/cat_5_canvas.jpeg",
+  "/cat_6_canvas.jpeg",
+];
 
 function CreateNewCard({ onClick, loading }: { onClick: () => void; loading: boolean }) {
   return (
