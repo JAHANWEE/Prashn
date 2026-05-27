@@ -146,7 +146,7 @@ function FormCard({ form }: { form: any }) {
                 Unarchive
               </button>
               <button
-                onClick={() => { if (confirm("Permanently delete?")) deleteForm.mutate({ formId: form.id }); }}
+                onClick={() => deleteForm.mutate({ formId: form.id })}
                 disabled={deleteForm.isPending}
                 className="flex items-center justify-center px-3 py-1.5 text-[11px] font-medium bg-[#1b1b22] border border-[#454653] rounded-lg text-[#ffb4ab] hover:border-[#ffb4ab] transition-all disabled:opacity-50"
               >

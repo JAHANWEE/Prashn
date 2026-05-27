@@ -5,26 +5,13 @@ export default function ApiDocsPage() {
       <header className="sticky top-0 bg-[#121319]/80 backdrop-blur-md border-b border-[#454653] z-40 h-16 flex items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <span className="text-lg font-bold text-[#bdc2ff]" style={{ fontFamily: "var(--font-geist-sans)" }}>
-            API Access
+            API Documentation
           </span>
-          <nav className="flex items-center gap-6">
-            {["Canvas", "Preview", "Responses"].map((tab) => (
-              <a key={tab} href="#" className="text-[12px] font-medium text-[#c6c5d5] hover:text-[#bdc2ff] transition-all pb-1" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
-                {tab}
-              </a>
-            ))}
-            <a href="#" className="text-[12px] font-medium text-[#bdc2ff] border-b-2 border-[#bdc2ff] pb-1" style={{ fontFamily: "var(--font-geist-mono)", letterSpacing: "0.05em" }}>
-              Analytics
-            </a>
-          </nav>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="material-symbols-outlined text-[#c6c5d5] hover:text-[#bdc2ff] transition-all p-1">save</button>
-          <button className="material-symbols-outlined text-[#c6c5d5] hover:text-[#bdc2ff] transition-all p-1">cloud_done</button>
-          <div className="h-6 w-px bg-[#454653] mx-1" />
-          <button className="bg-[#1f1f26] border border-[#454653] text-[#c6c5d5] px-4 py-2 rounded-lg text-[12px] font-medium hover:bg-[#292930] transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>Share</button>
-          <button className="bg-[#bdc2ff] text-[#131e8c] px-4 py-2 rounded-lg text-[12px] font-medium hover:opacity-90 transition-all shadow-sm" style={{ fontFamily: "var(--font-geist-mono)" }}>Publish</button>
-        </div>
+        <a href="http://localhost:8000/docs" target="_blank" className="flex items-center gap-2 bg-[#818cf8] text-[#101b8a] px-4 py-2 rounded-lg text-[12px] font-medium hover:brightness-110 transition-all" style={{ fontFamily: "var(--font-geist-mono)" }}>
+          <span className="material-symbols-outlined text-sm">open_in_new</span>
+          Interactive Docs
+        </a>
       </header>
 
       {/* Content */}

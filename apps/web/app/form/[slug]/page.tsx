@@ -15,6 +15,7 @@ export default function RespondentFormPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -79,9 +80,11 @@ export default function RespondentFormPage() {
   const handleNext = async () => {
     // Validate required
     if (currentField?.required && !answers[currentField.id]?.trim()) {
-      alert("This field is required.");
+      setErrorMsg("This field is required.");
       return;
     }
+
+    setErrorMsg(null);
 
     if (isLastStep) {
       // Submit
@@ -95,7 +98,7 @@ export default function RespondentFormPage() {
         });
         setSubmitted(true);
       } catch (err: any) {
-        alert(err.message ?? "Submission failed. Please try again.");
+        setErrorMsg(err.message ?? "Submission failed. Please try again.");
       }
     } else {
       setCurrentStep((s) => s + 1);
@@ -119,6 +122,13 @@ export default function RespondentFormPage() {
             value={answers[currentField.id] ?? ""}
             onChange={(val) => handleAnswerChange(currentField.id, val)}
           />
+        )}
+
+        {/* Error message */}
+        {errorMsg && (
+          <p className="text-[13px] text-[#ffb4ab] bg-[#ffb4ab]/10 border border-[#ffb4ab]/20 rounded-lg px-4 py-2 mt-4">
+            {errorMsg}
+          </p>
         )}
 
         {/* Navigation */}

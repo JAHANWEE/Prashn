@@ -40,8 +40,7 @@ export default function AnalyticsPage() {
     if (result.data) {
       const { rows, filename } = result.data;
       if (rows.length === 0) {
-        alert("No responses to export.");
-        return;
+        return; // No data to export
       }
       // Convert to CSV
       const headers = Object.keys(rows[0]!);

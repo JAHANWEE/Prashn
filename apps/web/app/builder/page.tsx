@@ -55,10 +55,8 @@ export default function BuilderPage() {
   };
 
   const handleDeleteField = (fieldId: string) => {
-    if (confirm("Delete this field?")) {
-      deleteField.mutate({ fieldId });
-      if (selectedFieldId === fieldId) setSelectedFieldId(null);
-    }
+    deleteField.mutate({ fieldId });
+    if (selectedFieldId === fieldId) setSelectedFieldId(null);
   };
 
   if (!formId) {

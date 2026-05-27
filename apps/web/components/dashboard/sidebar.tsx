@@ -1,18 +1,21 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { cn } from "~/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import { CreateFormButton } from "./create-form-button";
 
 const NAV_ITEMS = [
-  { icon: "dashboard", label: "Dashboard", href: "/dashboard", active: true },
-  { icon: "description", label: "Forms", href: "/dashboard", active: false },
-  { icon: "style", label: "Templates", href: "/dashboard/templates", active: false },
-  { icon: "analytics", label: "Responses", href: "/dashboard/responses", active: false },
-  { icon: "query_stats", label: "Analytics", href: "/dashboard/analytics", active: false },
-  { icon: "api", label: "API Docs", href: "/dashboard/api-docs", active: false },
-  { icon: "settings", label: "Settings", href: "/dashboard", active: false },
+  { icon: "dashboard", label: "Dashboard", href: "/dashboard" },
+  { icon: "style", label: "Templates", href: "/dashboard/templates" },
+  { icon: "analytics", label: "Responses", href: "/dashboard/responses" },
+  { icon: "query_stats", label: "Analytics", href: "/dashboard/analytics" },
+  { icon: "api", label: "API Docs", href: "/dashboard/api-docs" },
 ] as const;
 
 export function DashboardSidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="fixed left-0 top-0 h-full w-[280px] bg-[#0d0e14] border-r border-[#454653] shadow-sm z-50 flex flex-col py-6 px-4">
       {/* Logo */}
@@ -53,21 +56,24 @@ export function DashboardSidebar() {
 
       {/* Navigation */}
       <nav className="flex-grow space-y-1">
-        {NAV_ITEMS.map(({ icon, label, href, active }) => (
-          <a
-            key={label}
-            href={href}
-            className={cn(
-              "flex items-center gap-4 pl-4 py-2 transition-colors text-sm",
-              active
-                ? "text-[#bdc2ff] border-l-2 border-[#bdc2ff] font-bold bg-[#1b1b22]"
-                : "text-[#c6c5d5] hover:bg-[#1b1b22]",
-            )}
-          >
-            <span className="material-symbols-outlined text-[20px]">{icon}</span>
-            <span>{label}</span>
-          </a>
-        ))}
+        {NAV_ITEMS.map(({ icon, label, href }) => {
+          const isActive = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+          return (
+            <a
+              key={label}
+              href={href}
+              className={cn(
+                "flex items-center gap-4 pl-4 py-2 transition-colors text-sm",
+                isActive
+                  ? "text-[#bdc2ff] border-l-2 border-[#bdc2ff] font-bold bg-[#1b1b22]"
+                  : "text-[#c6c5d5] hover:bg-[#1b1b22]",
+              )}
+            >
+              <span className="material-symbols-outlined text-[20px]">{icon}</span>
+              <span>{label}</span>
+            </a>
+          );
+        })}
       </nav>
 
       {/* User profile */}
