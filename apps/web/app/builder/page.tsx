@@ -108,7 +108,7 @@ export default function BuilderPage() {
         />
 
         {/* Insert Panel */}
-        <aside className="w-[240px] h-full bg-[#121319] border-r border-[#454653] flex flex-col z-30">
+        <aside className="w-[240px] h-full bg-[#121319] border-r border-[#454653] flex flex-col z-30" style={{ opacity: builderView === "flow" ? 0.85 : 1, transition: "opacity 0.2s ease" }}>
           {/* View Toggle */}
           <div className="p-3 border-b border-[#454653] flex items-center justify-center">
             <ViewToggle value={builderView} onChange={setBuilderView} />
@@ -189,7 +189,7 @@ export default function BuilderPage() {
         )}
 
         {/* Inspector Panel */}
-        <aside className="w-[280px] h-full bg-[#121319] border-l border-[#454653] flex flex-col z-30">
+        <aside className="w-[280px] h-full bg-[#121319] border-l border-[#454653] flex flex-col z-30" style={{ opacity: builderView === "flow" ? 0.85 : 1, transition: "opacity 0.2s ease" }}>
           <div className="p-4 border-b border-[#454653] flex items-center gap-2">
             <span className="material-symbols-outlined text-[16px] text-[#818cf8]">
               {selectedField ? "edit_note" : "tune"}

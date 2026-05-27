@@ -35,9 +35,9 @@ export function ViewToggle({ value, onChange }: ViewToggleProps) {
       <ToggleButton
         active={value === "flow"}
         onClick={() => onChange("flow")}
-        icon="account_tree"
-        label="Flow"
-        ariaLabel="Switch to Flow View"
+        icon="timeline"
+        label="Journey"
+        ariaLabel="Switch to Journey View"
       />
     </div>
   );
